@@ -15,7 +15,7 @@ namespace Table
 	{
 		while (true)
 		{
-			//TABLE_CORE_INFO("Run");
+			TABLE_CORE_INFO("Run");
 		}
 	}
 }
