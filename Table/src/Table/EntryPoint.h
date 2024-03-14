@@ -6,6 +6,10 @@ extern Table::Application* Table::CreateApplication();
 
 int main()
 {
+	Table::Log::Init();
+	TABLE_CORE_WARN("Initialized Table log!");
+	TABLE_INFO("Initialized Client log!");
+
 	//printf("Hello Table Engine!")
 	auto app = Table::CreateApplication();
 	app->Run();

@@ -1,5 +1,5 @@
 #include "Application.h"
-
+#include "Log.h"
 namespace Table
 {
 	Application::Application()
@@ -15,7 +15,7 @@ namespace Table
 	{
 		while (true)
 		{
-
+			//TABLE_CORE_INFO("Run");
 		}
 	}
 }
