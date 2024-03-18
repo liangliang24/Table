@@ -4,6 +4,9 @@
     <Filter Include="Table">
       <UniqueIdentifier>{6DEA250E-D9FE-4DBF-A280-F11E0E544AF0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Table\Events">
+      <UniqueIdentifier>{B1F997A2-9D5C-2747-46E2-5FFD3224F3C9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Table.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\Table\EntryPoint.h">
       <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Events\ApplicationEvent.h">
+      <Filter>Table\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Events\Event.h">
+      <Filter>Table\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Events\KeyEvent.h">
+      <Filter>Table\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Events\MouseEvent.h">
+      <Filter>Table\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Log.h">
       <Filter>Table</Filter>

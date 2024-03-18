@@ -10,3 +10,5 @@
 #else
 #error Table only support Windows!
 #endif // TABLE_PLATFORM_WINDOWS
+
+#define BIT(x) (1 << x)
