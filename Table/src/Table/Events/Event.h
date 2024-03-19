@@ -1,9 +1,7 @@
 #pragma once
 
+#include "tpch.h"
 #include "Table/Core.h"
-
-#include <functional>
-#include <string>
 
 namespace Table
 {

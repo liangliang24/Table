@@ -19,6 +19,9 @@ project "Table"
 	targetdir ("bin/".. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/".. outputdir .. "/%{prj.name}")
 	
+	pchheader "tpch.h"
+	pchsource "Table/src/tpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Table {
 
 	class TABLE_API MouseMovedEvent : public Event

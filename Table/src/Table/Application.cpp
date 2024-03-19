@@ -1,3 +1,4 @@
+#include "tpch.h"
 #include "Application.h"
 #include "Events/ApplicationEvent.h"
 #include "Table/Log.h"
