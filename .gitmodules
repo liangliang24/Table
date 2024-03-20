@@ -1,6 +1,3 @@
 [submodule "Table/vendor/spdlog"]
 	path = Table/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "Table/vendor/GLFW"]
-	path = Table/vendor/GLFW
-	url = https://github.com/liangliang24/glfw
