@@ -1,5 +1,6 @@
 workspace "Table"
 	architecture "x64"
+	startproject "Card"
 
 	configurations
 	{
@@ -9,6 +10,11 @@ workspace "Table"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+IncludeDir = {}
+IncludeDir["GLFW"] = "Table/vendor/GLFW/include"
+
+include "Table/vendor/GLFW"
 
 project "Table"
 	location "Table"
@@ -31,7 +37,15 @@ project "Table"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib",
+		"dwmapi.lib"
 	}
 
 	filter "system:windows"

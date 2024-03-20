@@ -7,6 +7,12 @@
     <Filter Include="Table\Events">
       <UniqueIdentifier>{B1F997A2-9D5C-2747-46E2-5FFD3224F3C9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Table\Platform">
+      <UniqueIdentifier>{61319BC4-4DFF-8ECA-3693-FFF022006B2F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table\Platform\Windows">
+      <UniqueIdentifier>{9BAC70AA-87A6-99FC-7013-300D5CACFF68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Table.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\Table\Log.h">
       <Filter>Table</Filter>
     </ClInclude>
+    <ClInclude Include="src\Table\Platform\Windows\WindowsWindow.h">
+      <Filter>Table\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Window.h">
+      <Filter>Table</Filter>
+    </ClInclude>
     <ClInclude Include="src\tpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\Table\Log.cpp">
       <Filter>Table</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Table\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\tpch.cpp" />
   </ItemGroup>
