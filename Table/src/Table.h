@@ -2,6 +2,7 @@
 
 //For use by Table application
 #include "Table/Application.h"
+#include "Table/Layer.h"
 #include "Table/Log.h"
 
 

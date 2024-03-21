@@ -37,6 +37,12 @@
     <ClInclude Include="src\Table\Events\MouseEvent.h">
       <Filter>Table\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Table\Layer.h">
+      <Filter>Table</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\LayerStack.h">
+      <Filter>Table</Filter>
+    </ClInclude>
     <ClInclude Include="src\Table\Log.h">
       <Filter>Table</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Table\Application.cpp">
+      <Filter>Table</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Layer.cpp">
+      <Filter>Table</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\LayerStack.cpp">
       <Filter>Table</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\Log.cpp">

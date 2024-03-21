@@ -66,14 +66,17 @@ project "Table"
 
 	filter "configurations:Debug"
 		defines "TABLE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TABLE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "TABLE_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 	--使用多线程运行库
@@ -118,12 +121,15 @@ project "Card"
 
 	filter "configurations:Debug"
 		defines "TABLE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TABLE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "TABLE_DIST"
+		buildoptions "/MD"
 		optimize "On"
