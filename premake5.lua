@@ -13,8 +13,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Table/vendor/GLFW/include"
+IncludeDir["GLAD"] = "Table/vendor/GLAD/include"
 
 include "Table/vendor/GLFW"
+include "Table/vendor/GLAD"
 
 project "Table"
 	location "Table"
@@ -38,12 +40,14 @@ project "Table"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLAD}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib",
 		"dwmapi.lib"
 	}
@@ -56,7 +60,8 @@ project "Table"
 		defines
 		{
 			"TABLE_PLATFORM_WINDOWS",
-			"TABLE_BUILD_DLL"
+			"TABLE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
