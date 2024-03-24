@@ -4,3 +4,6 @@
 [submodule "Table/vendor/GLFW"]
 	path = Table/vendor/GLFW
 	url = https://github.com/liangliang24/glfw
+[submodule "Table/vendor/imgui"]
+	path = Table/vendor/imgui
+	url = https://github.com/liangliang24/imgui
