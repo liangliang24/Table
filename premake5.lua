@@ -18,6 +18,7 @@ IncludeDir["ImGui"] = "Table/vendor/imgui"
 
 include "Table/vendor/GLFW"
 include "Table/vendor/GLAD"
+include "Table/vendor/imgui"
 
 project "Table"
 	location "Table"
