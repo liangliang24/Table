@@ -163,12 +163,16 @@
     <ClInclude Include="src\Table\Events\KeyEvent.h" />
     <ClInclude Include="src\Table\Events\MouseEvent.h" />
     <ClInclude Include="src\Table\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Table\Input.h" />
+    <ClInclude Include="src\Table\KeyCodes.h" />
     <ClInclude Include="src\Table\Layer.h" />
     <ClInclude Include="src\Table\LayerStack.h" />
     <ClInclude Include="src\Table\Log.h" />
+    <ClInclude Include="src\Table\MouseButtonCodes.h" />
     <ClInclude Include="src\Table\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Table\Window.h" />
     <ClInclude Include="src\tpch.h" />
+    <ClInclude Include="src\Table\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
@@ -181,6 +185,7 @@
     <ClCompile Include="src\tpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Table\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

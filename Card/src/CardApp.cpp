@@ -11,12 +11,23 @@ public:
 
 	void OnUpdate() override
 	{
-		TABLE_INFO("ExampleLayerUpdate");
+		if (Table::Input::IsKeyPressed(TABLE_KEY_TAB))
+		{
+			TABLE_TRACE("Tab key is pressed(poll)");
+		}
 	}
 
 	void OnEvent(Table::Event& event) override
 	{
-		TABLE_TRACE("{0}", event);
+		if (event.GetEventType() ==  Table::EventType::KeyPressed)
+		{
+			Table::KeyPressedEvent& e = (Table::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == TABLE_KEY_TAB)
+			{
+				TABLE_TRACE("Tab key is pressed(event)");
+			}
+			TABLE_TRACE("{0}", e.GetKeyCode());
+		}
 	}
 };
 

@@ -1,0 +1,15 @@
+#pragma once
+
+// From glfw3.h
+#define TABLE_MOUSE_BUTTON_1         0
+#define TABLE_MOUSE_BUTTON_2         1
+#define TABLE_MOUSE_BUTTON_3         2
+#define TABLE_MOUSE_BUTTON_4         3
+#define TABLE_MOUSE_BUTTON_5         4
+#define TABLE_MOUSE_BUTTON_6         5
+#define TABLE_MOUSE_BUTTON_7         6
+#define TABLE_MOUSE_BUTTON_8         7
+#define TABLE_MOUSE_BUTTON_LAST      TABLE_MOUSE_BUTTON_8
+#define TABLE_MOUSE_BUTTON_LEFT      TABLE_MOUSE_BUTTON_1
+#define TABLE_MOUSE_BUTTON_RIGHT     TABLE_MOUSE_BUTTON_2
+#define TABLE_MOUSE_BUTTON_MIDDLE    TABLE_MOUSE_BUTTON_3
