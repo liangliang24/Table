@@ -19,6 +19,11 @@
 #define TABLE_CORE_ASSERT(x, ...)
 #endif
 
+#ifdef TABLE_DEBUG
+	#define TABLE_ENABLE_DEBUG
+#endif // TABLE_DEBUG
+
+
 #define BIT(x) (1 << x)
 
 #define  TABLE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

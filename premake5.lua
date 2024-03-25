@@ -16,15 +16,18 @@ IncludeDir["GLFW"] = "Table/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Table/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Table/vendor/imgui"
 
-include "Table/vendor/GLFW"
-include "Table/vendor/GLAD"
-include "Table/vendor/imgui"
+group "Dependencies"
+	include "Table/vendor/GLFW"
+	include "Table/vendor/GLAD"
+	include "Table/vendor/imgui"
+
+group ""
 
 project "Table"
 	location "Table"
 	kind "SharedLib"
-
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/".. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/".. outputdir .. "/%{prj.name}")
@@ -58,7 +61,6 @@ project "Table"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -70,22 +72,25 @@ project "Table"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/".. outputdir .."/Card")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Card/\"")
 		}
 
 	filter "configurations:Debug"
 		defines "TABLE_DEBUG"
-		buildoptions "/MDd"
+		--buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TABLE_RELEASE"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "TABLE_DIST"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	--使用多线程运行库
@@ -95,8 +100,8 @@ project "Table"
 project "Card"
 	location "Card"
 	kind "ConsoleApp"
-
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/".. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/".. outputdir .. "/%{prj.name}")
@@ -120,7 +125,6 @@ project "Card"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -130,15 +134,18 @@ project "Card"
 
 	filter "configurations:Debug"
 		defines "TABLE_DEBUG"
-		buildoptions "/MDd"
+		--buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TABLE_RELEASE"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "TABLE_DIST"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
