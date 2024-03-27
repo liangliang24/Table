@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Table/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Table/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Table/vendor/imgui"
+IncludeDir["glm"] = "Table/vendor/glm"
 
 group "Dependencies"
 	include "Table/vendor/GLFW"
@@ -38,7 +39,9 @@ project "Table"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -47,7 +50,8 @@ project "Table"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -115,7 +119,8 @@ project "Card"
 	includedirs
 	{
 		"Table/vendor/spdlog/include",
-		"Table/src"
+		"Table/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links

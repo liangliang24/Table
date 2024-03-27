@@ -7,3 +7,6 @@
 [submodule "Table/vendor/imgui"]
 	path = Table/vendor/imgui
 	url = https://github.com/liangliang24/imgui
+[submodule "Table/vendor/glm"]
+	path = Table/vendor/glm
+	url = https://github.com/g-truc/glm
