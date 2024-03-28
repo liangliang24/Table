@@ -152,8 +152,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Table.h" />
     <ClInclude Include="src\Table\Application.h" />
     <ClInclude Include="src\Table\Core.h" />
@@ -591,8 +589,8 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Table\Application.cpp" />
+    <ClCompile Include="src\Table\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Table\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Table\Layer.cpp" />
     <ClCompile Include="src\Table\LayerStack.cpp" />

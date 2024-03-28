@@ -7,6 +7,8 @@
 #include "Events/Event.h"
 #include "Table/Events/ApplicationEvent.h"
 
+#include "Table/ImGui/ImGuiLayer.h"
+
 
 namespace Table 
 {
@@ -30,6 +32,7 @@ namespace Table
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImguiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

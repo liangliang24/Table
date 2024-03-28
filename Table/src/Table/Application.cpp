@@ -19,6 +19,9 @@ namespace Table
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
+		m_ImguiLayer = new ImGuiLayer();
+		PushOverLay(m_ImguiLayer);
 	}
 
 	Application::~Application()
@@ -47,7 +50,12 @@ namespace Table
 			{
 				layer->OnUpdate();
 			}
-
+			m_ImguiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->OnImGuiRender();
+			}
+			m_ImguiLayer->End();
 			m_Window->OnUpdate();
 		}
 	}

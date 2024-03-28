@@ -37,7 +37,6 @@ public:
 	Card()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverLay(new Table::ImGuiLayer());
 	}
 
 	~Card()
