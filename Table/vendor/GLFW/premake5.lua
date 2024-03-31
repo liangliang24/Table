@@ -1,7 +1,7 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
-	-- staticruntime "off"
+	staticruntime "on"
 	-- warnings "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -76,9 +76,9 @@ project "GLFW"
 		}
 
 	filter "system:windows"
-		buildoptions {"-std=c11", "-lgdi32"}
+		--buildoptions {"-std=c11", "-lgdi32"}
 		systemversion "latest"
-		staticruntime "On"
+		staticruntime "on"
 
 		files
 		{
@@ -100,11 +100,8 @@ project "GLFW"
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 
-		filter 
-		{
-			"system:windows", "configurations:Release"
-		}
-		buildoptions "/MT"
+		-- filter {"system:windows", "configurations:Release"}
+		-- 	buildoptions "/MT"
 
 	filter "configurations:Debug"
 		runtime "Debug"
@@ -118,7 +115,7 @@ project "GLFW"
 
 	filter "configurations:Release"
 		runtime "Release"
-		optimize "speed"
+		optimize "on"
 
     filter "configurations:Dist"
 		runtime "Release"
