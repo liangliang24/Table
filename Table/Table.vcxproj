@@ -143,6 +143,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Table.h" />
     <ClInclude Include="src\Table\Application.h" />
     <ClInclude Include="src\Table\Core.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="src\Table\MouseButtonCodes.h" />
     <ClInclude Include="src\Table\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Table\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\Table\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Table\Window.h" />
     <ClInclude Include="src\tpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -580,6 +582,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Table\Application.cpp" />
     <ClCompile Include="src\Table\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Table\ImGui\ImGuiLayer.cpp" />

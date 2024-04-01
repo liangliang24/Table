@@ -3,6 +3,7 @@
 #include "Table/Window.h"
 
 #include <GLFW/glfw3.h>
+#include <Table/Renderer/GraphicsContext.h>
 
 namespace Table
 {
@@ -29,7 +30,9 @@ namespace Table
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
+		
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
