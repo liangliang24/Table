@@ -4,6 +4,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Platform">
+      <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Table">
       <UniqueIdentifier>{C4F8E2B3-3063-972A-79A1-48D0E54A757F}</UniqueIdentifier>
     </Filter>
@@ -18,6 +24,9 @@
     </Filter>
     <Filter Include="src\Table\Platform\Windows">
       <UniqueIdentifier>{D2133141-BE23-DD11-27DD-4130130CCCAA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Table\Renderer">
+      <UniqueIdentifier>{EA585CFD-D63C-1D53-3F9D-17A62BA007D5}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -42,6 +51,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Table.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -92,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="src\Table\Platform\Windows\WindowsWindow.h">
       <Filter>src\Table\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\GraphicsContext.h">
+      <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Window.h">
       <Filter>src\Table</Filter>
@@ -1349,6 +1364,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Table\Application.cpp">
       <Filter>src\Table</Filter>
     </ClCompile>
