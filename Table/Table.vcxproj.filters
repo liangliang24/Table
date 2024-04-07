@@ -51,6 +51,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -105,7 +108,16 @@
     <ClInclude Include="src\Table\Platform\Windows\WindowsWindow.h">
       <Filter>src\Table\Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Table\Renderer\Buffer.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Table\Renderer\GraphicsContext.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\Renderer.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\Shader.h">
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Window.h">
@@ -1364,6 +1376,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1390,6 +1405,15 @@
     </ClCompile>
     <ClCompile Include="src\Table\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Table\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Renderer\Buffer.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Renderer\Renderer.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Renderer\Shader.cpp">
+      <Filter>src\Table\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\tpch.cpp">
       <Filter>src</Filter>
