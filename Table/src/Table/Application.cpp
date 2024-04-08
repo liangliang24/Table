@@ -5,6 +5,7 @@
 #include "Table/Log.h"
 #include <glad/glad.h>
 #include "Input.h"
+#include <GLFW/glfw3.h>
 
 namespace Table
 {
@@ -114,9 +115,10 @@ namespace Table
 			
 			layout(location = 0) out vec4 color;
 			in vec3 v_Position;
+			uniform float sinColor;
 			void main()
 			{
-				color = vec4(1.0, 0.3, 0.8, 1.0);
+				color = vec4(sinColor, 0.3, 0.8, 1.0);
 			}
 		)";
 
@@ -146,6 +148,10 @@ namespace Table
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_BlueShader->Bind();
+			double timeValue = glfwGetTime();
+			float ColorOffsetVal = static_cast<float>(sin(timeValue));
+			std::clamp(ColorOffsetVal, 0.0f, 1.0f);
+			m_BlueShader->SetFloat("sinColor", ColorOffsetVal);
 			m_SquareVA->Bind();
 			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
