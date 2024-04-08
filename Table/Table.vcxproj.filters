@@ -57,6 +57,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Table.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -118,6 +121,9 @@
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\Shader.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\VertexArray.h">
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Window.h">
@@ -1382,6 +1388,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Table\Application.cpp">
       <Filter>src\Table</Filter>
     </ClCompile>
@@ -1413,6 +1422,9 @@
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\Renderer\Shader.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Renderer\VertexArray.cpp">
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\tpch.cpp">
