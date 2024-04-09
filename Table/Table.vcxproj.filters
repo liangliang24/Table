@@ -57,6 +57,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -117,7 +120,13 @@
     <ClInclude Include="src\Table\Renderer\GraphicsContext.h">
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Table\Renderer\RenderCommand.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Table\Renderer\Renderer.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\RendererAPI.h">
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\Shader.h">
@@ -1388,6 +1397,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1418,7 +1430,13 @@
     <ClCompile Include="src\Table\Renderer\Buffer.cpp">
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Table\Renderer\RenderCommand.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Table\Renderer\Renderer.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Renderer\RendererAPI.cpp">
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\Renderer\Shader.cpp">

@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 #include "Input.h"
 #include <GLFW/glfw3.h>
+#include "Renderer/Renderer.h"
 
 namespace Table
 {
@@ -140,20 +141,24 @@ namespace Table
 		}
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.1f,0.1f,0.1f,1 });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			m_BlueShader->Bind();
 			double timeValue = glfwGetTime();
 			float ColorOffsetVal = static_cast<float>(sin(timeValue));
 			ColorOffsetVal = std::clamp(ColorOffsetVal, 0.0f, 1.0f);
 			m_BlueShader->SetFloat("sinColor", ColorOffsetVal);
-			m_SquareVA->Bind();
+			Renderer::Submit(m_SquareVA);
 			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			m_Shader->Bind();
-			m_VertexArray->Bind();
+			Renderer::Submit(m_VertexArray);
 			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)
 			{

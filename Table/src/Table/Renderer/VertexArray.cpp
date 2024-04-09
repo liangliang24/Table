@@ -10,9 +10,9 @@ namespace Table
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not suppported!"); return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexArray();
 		default:
 			break;
