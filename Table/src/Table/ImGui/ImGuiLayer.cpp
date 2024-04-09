@@ -18,11 +18,6 @@ namespace Table
 
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-
-	}
-
 	void ImGuiLayer::OnAttach()
 	{
 		IMGUI_CHECKVERSION();
@@ -33,7 +28,7 @@ namespace Table
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-
+		
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
 

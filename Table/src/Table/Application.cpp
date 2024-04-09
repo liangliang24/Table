@@ -125,10 +125,6 @@ namespace Table
 		m_BlueShader.reset(new Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
-	Application::~Application()
-	{
-	}
-
 
 	void Application::Run()
 	{	
@@ -150,7 +146,7 @@ namespace Table
 			m_BlueShader->Bind();
 			double timeValue = glfwGetTime();
 			float ColorOffsetVal = static_cast<float>(sin(timeValue));
-			std::clamp(ColorOffsetVal, 0.0f, 1.0f);
+			ColorOffsetVal = std::clamp(ColorOffsetVal, 0.0f, 1.0f);
 			m_BlueShader->SetFloat("sinColor", ColorOffsetVal);
 			m_SquareVA->Bind();
 			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
@@ -191,13 +187,11 @@ namespace Table
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
 	}
 
 	void Application::PushOverLay(Layer* layer)
 	{
 		m_LayerStack.PushOverLay(layer);
-		layer->OnAttach();
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)

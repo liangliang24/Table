@@ -9,9 +9,4 @@ namespace Table
 	{
 
 	}
-
-	Layer::~Layer()
-	{
-
-	}
 }
