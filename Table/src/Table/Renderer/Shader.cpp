@@ -2,6 +2,8 @@
 #include "Shader.h"
 
 #include "glad/glad.h"
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Table
 {
 
@@ -105,5 +107,10 @@ namespace Table
 	void Shader::SetInt(const std::string& name, int value)
 	{
 		glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
+	}
+	void Shader::UploadeUniformMat4(const std::string& name, const glm::mat4& matrix)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 }

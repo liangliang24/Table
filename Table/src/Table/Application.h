@@ -13,6 +13,8 @@
 #include "Table/Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
 
+#include "Table/Renderer/OrthographicCamera.h"
+
 namespace Table 
 {
 	class TABLE_API Application
@@ -44,6 +46,8 @@ namespace Table
 		std::shared_ptr<VertexArray> m_VertexArray;
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 		static Application* s_Instance;
 	};
 
