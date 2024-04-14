@@ -19,6 +19,7 @@
 
 #include "Table/Renderer/Shader.h"
 #include "Table/Renderer/Buffer.h"
+#include "Table/Renderer/Texture.h"
 #include "Table/Renderer/VertexArray.h"
 
 #include "Table/Renderer/OrthographicCamera.h"

@@ -7,13 +7,12 @@
 #include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer:public Table::Layer
-{
+{	
 public:
 	ExampleLayer()
 		: Layer("Example"),m_Camera(-1.6f, 1.6f, -0.9f, 0.9f),m_CameraPosition(0.0f)
 	{
 		m_VertexArray.reset(Table::VertexArray::Create());
-
 		float vertices[3 * 3] =
 		{
 			-0.5f,	-0.5f,	0.0f,
@@ -33,15 +32,15 @@ public:
 		std::shared_ptr<Table::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Table::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
+
+
 		m_SquareVA.reset(Table::VertexArray::Create());
-
-
 		float squareVertices[3 * 4] =
 		{
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			0.0f, -1.0f, 0.0f,
+			1.0f, -1.0f, 0.0f,
+			1.0f,  0.0f, 0.0f,
+			0.0f,  0.0f, 0.0f
 		};
 		std::shared_ptr<Table::VertexBuffer> squareVB;
 		squareVB.reset(Table::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -56,6 +55,26 @@ public:
 		squareIB.reset(Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
+		m_TextureVA.reset(Table::VertexArray::Create());
+		float textureVertices[5 * 4] =
+		{
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+		};
+		std::shared_ptr<Table::VertexBuffer> textureVB;
+		textureVB.reset(Table::VertexBuffer::Create(textureVertices, sizeof(textureVertices)));
+		textureVB->SetLayout
+		({
+			{Table::ShaderDataType::Float3,"a_Position"},
+			{Table::ShaderDataType::Float2,"a_TexCoord"}
+			});
+		m_TextureVA->AddVertexBuffer(textureVB);
+		uint32_t textureIndices[6] = { 0,1,2,2,3,0 };
+		std::shared_ptr<Table::IndexBuffer> textureIB;
+		textureIB.reset(Table::IndexBuffer::Create(textureIndices, sizeof(textureIndices) / sizeof(uint32_t)));
+		m_TextureVA->SetIndexBuffer(textureIB);
 		std::string vertexSrc = R"(
 			#version 330 core
 			
@@ -112,6 +131,40 @@ public:
 		)";
 
 		m_BlueShader.reset(Table::Shader::create(blueShaderVertexSrc, blueShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+			out vec2 v_TexCoord;
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Table::Shader::create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		m_Texture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<Table::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Table::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Table::TimeStep ts) override
@@ -174,6 +227,10 @@ public:
 				Table::Renderer::Submit(m_Shader, m_VertexArray, transform);
 			}
 		}
+
+		m_Texture->Bind();
+		Table::Renderer::Submit(m_TextureShader, m_TextureVA);
+
 		//Table::Renderer::Submit(m_Shader, m_VertexArray);
 		//glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
@@ -209,6 +266,10 @@ private:
 	std::shared_ptr<Table::VertexArray> m_VertexArray;
 	std::shared_ptr<Table::Shader> m_BlueShader;
 	std::shared_ptr<Table::VertexArray> m_SquareVA;
+	std::shared_ptr<Table::Shader> m_TextureShader;
+	std::shared_ptr<Table::VertexArray> m_TextureVA;
+
+	Table::Ref<Table::Texture2D> m_Texture;
 
 	Table::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
