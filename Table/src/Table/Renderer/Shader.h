@@ -8,16 +8,12 @@ namespace Table
 	class Shader
 	{
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		~Shader();
+		~Shader() = default;
 
-		void Bind() const;
-		void UnBind() const;
+		virtual void Bind() const = 0;
+		virtual void UnBind() const = 0;
 
-		void SetFloat(const std::string& name, float value);
-		void SetInt(const std::string& name, int value);
-
-		void UploadeUniformMat4(const std::string& name, const glm::mat4& matrix);
+		static Shader* create(const std::string& vertexSrc, const std::string fragmentSrc);
 	private:
 		uint32_t m_RendererID;
 	};

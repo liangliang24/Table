@@ -3,6 +3,8 @@
 #include "imgui/imgui.h"
 #include <GLFW/include/GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <Platform/OpenGL/OpenGLShader.h>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer:public Table::Layer
 {
@@ -86,7 +88,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(new Table::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Table::Shader::create(vertexSrc, fragmentSrc));
 
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
@@ -116,27 +118,27 @@ public:
 			}
 		)";
 
-		m_BlueShader.reset(new Table::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_BlueShader.reset(Table::Shader::create(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
 	void OnUpdate(Table::TimeStep ts) override
 	{
 		if (Table::Input::IsKeyPressed(TABLE_KEY_LEFT))
 		{
-			m_CameraPosition.x += m_CameraMovedSpeed * ts;
+			m_CameraPosition.x -= m_CameraMovedSpeed * ts;
 		}
 		else if (Table::Input::IsKeyPressed(TABLE_KEY_RIGHT))
 		{
-			m_CameraPosition.x -= m_CameraMovedSpeed * ts;
+			m_CameraPosition.x += m_CameraMovedSpeed * ts;
 		}
 
 		if (Table::Input::IsKeyPressed(TABLE_KEY_UP))
 		{
-			m_CameraPosition.y -= m_CameraMovedSpeed * ts;
+			m_CameraPosition.y += m_CameraMovedSpeed * ts;
 		}
 		else if (Table::Input::IsKeyPressed(TABLE_KEY_DOWN))
 		{
-			m_CameraPosition.y += m_CameraMovedSpeed * ts;
+			m_CameraPosition.y -= m_CameraMovedSpeed * ts;
 		}
 
 		if (Table::Input::IsKeyPressed(TABLE_KEY_A))
@@ -162,7 +164,7 @@ public:
 		double timeValue = glfwGetTime();
 		float ColorOffsetVal = static_cast<float>(sin(timeValue));
 		ColorOffsetVal = std::clamp(ColorOffsetVal, 0.0f, 1.0f);
-		m_BlueShader->SetFloat("sinColor", ColorOffsetVal);
+		std::dynamic_pointer_cast<Table::OpenGLShader>(m_BlueShader)->UploadUniformFloat("sinColor", ColorOffsetVal);
 		glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 		//m_Shader->Bind();
@@ -188,11 +190,11 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World");
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color",glm::value_ptr(m_SquareColor));
 		ImGui::End();
 	}
-
+	
 	void OnEvent(Table::Event& event) override
 	{
 		if (event.GetEventType() ==  Table::EventType::KeyPressed)
@@ -218,6 +220,8 @@ private:
 
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 180.0f;
+
+	glm::vec3 m_SquareColor = { 0.2f,0.3f,0.8f };
 };
 
 class Card : public Table::Application

@@ -13,6 +13,9 @@
     <Filter Include="src\Table">
       <UniqueIdentifier>{C4F8E2B3-3063-972A-79A1-48D0E54A757F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Table\Core">
+      <UniqueIdentifier>{9C372ABD-8805-1EC3-7199-8EE95D06FA27}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Table\Events">
       <UniqueIdentifier>{28A0B8B5-1499-D707-3DCB-BC8C2923B713}</UniqueIdentifier>
     </Filter>
@@ -60,6 +63,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -71,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="src\Table\Core.h">
       <Filter>src\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\TimeStep.h">
+      <Filter>src\Table\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\EntryPoint.h">
       <Filter>src\Table</Filter>
@@ -118,6 +127,9 @@
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\GraphicsContext.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\OrthographicCamera.h">
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\RenderCommand.h">
@@ -1389,8 +1401,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Table\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="src\Table\Core\TimeStep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1400,6 +1410,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
@@ -1432,6 +1445,9 @@
     <ClCompile Include="src\Table\Renderer\Buffer.cpp">
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Table\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Table\Renderer\RenderCommand.cpp">
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
@@ -1450,6 +1466,5 @@
     <ClCompile Include="src\tpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Table\Renderer\OrthographicCamera.cpp" />
   </ItemGroup>
 </Project>

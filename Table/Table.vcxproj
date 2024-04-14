@@ -143,15 +143,15 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Table\Core\TimeStep.h" />
-    <ClInclude Include="src\Table\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Table.h" />
     <ClInclude Include="src\Table\Application.h" />
     <ClInclude Include="src\Table\Core.h" />
+    <ClInclude Include="src\Table\Core\TimeStep.h" />
     <ClInclude Include="src\Table\EntryPoint.h" />
     <ClInclude Include="src\Table\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Table\Events\Event.h" />
@@ -168,6 +168,7 @@
     <ClInclude Include="src\Table\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Table\Renderer\Buffer.h" />
     <ClInclude Include="src\Table\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Table\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Table\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Table\Renderer\Renderer.h" />
     <ClInclude Include="src\Table\Renderer\RendererAPI.h" />
@@ -593,10 +594,10 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Table\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Table\Application.cpp" />
     <ClCompile Include="src\Table\ImGui\ImGuiBuild.cpp" />
@@ -607,6 +608,7 @@
     <ClCompile Include="src\Table\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Table\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Table\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Table\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Table\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Table\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Table\Renderer\RendererAPI.cpp" />
