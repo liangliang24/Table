@@ -20,7 +20,7 @@ public:
 			0.0f,	0.5f,	0.0f,
 		};
 
-		std::shared_ptr<Table::VertexBuffer> vertexBuffer;
+		Table::Ref<Table::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Table::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Table::BufferLayout layout = {
 			{Table::ShaderDataType::Float3, "a_Position"}
@@ -29,7 +29,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0,1,2 };
-		std::shared_ptr<Table::IndexBuffer> indexBuffer;
+		Table::Ref<Table::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Table::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -42,7 +42,7 @@ public:
 			1.0f,  0.0f, 0.0f,
 			0.0f,  0.0f, 0.0f
 		};
-		std::shared_ptr<Table::VertexBuffer> squareVB;
+		Table::Ref<Table::VertexBuffer> squareVB;
 		squareVB.reset(Table::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout
 		({
@@ -51,7 +51,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0,1,2,2,3,0 };
-		std::shared_ptr<Table::IndexBuffer> squareIB;
+		Table::Ref<Table::IndexBuffer> squareIB;
 		squareIB.reset(Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -63,7 +63,7 @@ public:
 			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
-		std::shared_ptr<Table::VertexBuffer> textureVB;
+		Table::Ref<Table::VertexBuffer> textureVB;
 		textureVB.reset(Table::VertexBuffer::Create(textureVertices, sizeof(textureVertices)));
 		textureVB->SetLayout
 		({
@@ -72,7 +72,7 @@ public:
 			});
 		m_TextureVA->AddVertexBuffer(textureVB);
 		uint32_t textureIndices[6] = { 0,1,2,2,3,0 };
-		std::shared_ptr<Table::IndexBuffer> textureIB;
+		Table::Ref<Table::IndexBuffer> textureIB;
 		textureIB.reset(Table::IndexBuffer::Create(textureIndices, sizeof(textureIndices) / sizeof(uint32_t)));
 		m_TextureVA->SetIndexBuffer(textureIB);
 		std::string vertexSrc = R"(
@@ -262,12 +262,12 @@ public:
 	}
 
 private:
-	std::shared_ptr<Table::Shader> m_Shader;
-	std::shared_ptr<Table::VertexArray> m_VertexArray;
-	std::shared_ptr<Table::Shader> m_BlueShader;
-	std::shared_ptr<Table::VertexArray> m_SquareVA;
-	std::shared_ptr<Table::Shader> m_TextureShader;
-	std::shared_ptr<Table::VertexArray> m_TextureVA;
+	Table::Ref<Table::Shader> m_Shader;
+	Table::Ref<Table::VertexArray> m_VertexArray;
+	Table::Ref<Table::Shader> m_BlueShader;
+	Table::Ref<Table::VertexArray> m_SquareVA;
+	Table::Ref<Table::Shader> m_TextureShader;
+	Table::Ref<Table::VertexArray> m_TextureVA;
 
 	Table::Ref<Table::Texture2D> m_Texture;
 
