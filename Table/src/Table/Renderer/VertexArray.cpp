@@ -14,9 +14,10 @@ namespace Table
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not suppported!"); return nullptr;
 		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexArray();
-		default:
-			break;
 		}
+
+		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
 	}
 
 }

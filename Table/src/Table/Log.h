@@ -39,4 +39,4 @@ namespace Table
 #define TABLE_INFO(...) ::Table::Log::GetCientLogger()->info(__VA_ARGS__)
 #define TABLE_WARN(...) ::Table::Log::GetCientLogger()->warn(__VA_ARGS__)
 #define TABLE_ERROR(...) ::Table::Log::GetCientLogger()->error(__VA_ARGS__)
-#define TABLE_CORE_CRITICAL(...) ::Table::Log::GetCientLogger()->critical(__VA_ARGS__)
+#define TABLE_CRITICAL(...) ::Table::Log::GetCientLogger()->critical(__VA_ARGS__)

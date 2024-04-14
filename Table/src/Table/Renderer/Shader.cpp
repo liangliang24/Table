@@ -16,9 +16,9 @@ namespace Table
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 			return new OpenGLShader(vertexSrc, fragmentSrc);
-		default:
-			break;
 		}
+		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
 	}
 
 }

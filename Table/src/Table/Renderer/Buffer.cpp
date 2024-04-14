@@ -16,9 +16,9 @@ namespace Table
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexBuffer(vertices, size);
-		default:
-			break;
 		}
+		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
 	}
 
 	Table::IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
@@ -30,9 +30,9 @@ namespace Table
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 			return new OpenGLIndexBuffer(indices, size);
-		default:
-			break;
 		}
+		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
 	}
 
 }
