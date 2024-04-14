@@ -14,18 +14,17 @@ public:
 	{
 		m_VertexArray.reset(Table::VertexArray::Create());
 
-		float vertices[3 * 7] =
+		float vertices[3 * 3] =
 		{
-			-0.5f,	-0.5f,	0.0f,	0.0f,	0.2f,	0.8f,	1.0f,
-			0.5f,	-0.5f,	0.0f,	0.2f,	0.3f,	0.8f,	1.0f,
-			0.0f,	0.5f,	0.0f,	0.8f,	0.8f,	0.2f,	1.0f
+			-0.5f,	-0.5f,	0.0f,
+			0.5f,	-0.5f,	0.0f,
+			0.0f,	0.5f,	0.0f,
 		};
 
 		std::shared_ptr<Table::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Table::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Table::BufferLayout layout = {
-			{Table::ShaderDataType::Float3, "a_Position"},
-			{Table::ShaderDataType::Float4, "a_Color"}
+			{Table::ShaderDataType::Float3, "a_Position"}
 		};
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
@@ -61,17 +60,12 @@ public:
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
 
-			out vec3 v_Position;
-			out vec4 v_Color;
 			void main()
 			{
-				v_Position = a_Position;
-				v_Color = a_Color;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
@@ -79,12 +73,11 @@ public:
 		std::string fragmentSrc = R"(
 			#version 330 core
 			
+			uniform vec3 u_Color;
 			out vec4 color;
-			in vec3 v_Position;
-			in vec4 v_Color;
 			void main()
 			{
-				color = v_Color;
+				color =vec4(u_Color,1.0f);
 			}
 		)";
 
@@ -166,6 +159,9 @@ public:
 		ColorOffsetVal = std::clamp(ColorOffsetVal, 0.0f, 1.0f);
 		std::dynamic_pointer_cast<Table::OpenGLShader>(m_BlueShader)->UploadUniformFloat("sinColor", ColorOffsetVal);
 		glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+		std::dynamic_pointer_cast<Table::OpenGLShader>(m_Shader)->Bind();
+		std::dynamic_pointer_cast<Table::OpenGLShader>(m_Shader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
 		//m_Shader->Bind();
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
