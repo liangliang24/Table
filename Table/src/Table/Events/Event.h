@@ -59,8 +59,8 @@ namespace Table
 
 	class EventDispatcher
 	{
-		template<typename T>
-		using EventFn = std::function<bool(T&)>;
+		/*template<typename T>
+		using EventFn = std::function<bool(T&)>;*/
 	public:
 		EventDispatcher(Event& event)
 			:  m_Event(event)
@@ -68,12 +68,12 @@ namespace Table
 
 		}
 
-		template<typename T>
-		bool Dispatch(EventFn<T> func)
+		template<typename T,typename F>
+		bool Dispatch(const F& func)
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(static_cast<T&>(m_Event));
 				return true;
 			}
 			return false;
