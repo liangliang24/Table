@@ -162,6 +162,7 @@ public:
 
 		m_TextureShader.reset(Table::Shader::create(textureShaderVertexSrc, textureShaderFragmentSrc));
 		m_Texture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
+		m_FF0Texture = Table::Texture2D::Create("asset/textures/FF0Suki.png");
 
 		std::dynamic_pointer_cast<Table::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Table::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -230,7 +231,8 @@ public:
 
 		m_Texture->Bind();
 		Table::Renderer::Submit(m_TextureShader, m_TextureVA);
-
+		m_FF0Texture->Bind();
+		Table::Renderer::Submit(m_TextureShader, m_TextureVA);
 		//Table::Renderer::Submit(m_Shader, m_VertexArray);
 		//glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
@@ -269,7 +271,7 @@ private:
 	Table::Ref<Table::Shader> m_TextureShader;
 	Table::Ref<Table::VertexArray> m_TextureVA;
 
-	Table::Ref<Table::Texture2D> m_Texture;
+	Table::Ref<Table::Texture2D> m_Texture, m_FF0Texture;
 
 	Table::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;

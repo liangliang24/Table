@@ -22,6 +22,8 @@ namespace Table
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
+		Renderer::Init();
+
 		m_ImguiLayer = new ImGuiLayer();
 		PushOverLay(m_ImguiLayer);
 
