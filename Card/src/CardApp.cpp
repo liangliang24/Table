@@ -198,15 +198,15 @@ public:
 	
 	void OnEvent(Table::Event& e) override
 	{
-		/*if (e.GetEventType() ==  Table::EventType::KeyPressed)
+		if (e.GetEventType() == Table::EventType::KeyPressed)
 		{
-			Table::KeyPressedEvent& e = (Table::KeyPressedEvent&)e;
-			if (e.GetKeyCode() == TABLE_KEY_TAB)
+			Table::KeyPressedEvent& event = (Table::KeyPressedEvent&)e;
+			if (event.GetKeyCode() == TABLE_KEY_TAB)
 			{
 				TABLE_TRACE("Tab key is pressed(e)");
 			}
-			TABLE_TRACE("{0}", e.GetKeyCode());
-		}*/
+			TABLE_TRACE("{0}", event.GetKeyCode());
+		}
 
 		m_CameraController.OnEvent(e);
 	}
