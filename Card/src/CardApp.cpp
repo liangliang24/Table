@@ -100,7 +100,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Table::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Table::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
@@ -130,15 +130,15 @@ public:
 			}
 		)";
 
-		m_BlueShader.reset(Table::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_BlueShader = Table::Shader::Create("m_BlueColor", blueShaderVertexSrc, blueShaderFragmentSrc);
 
+		auto textureShader = m_ShaderLibrary.Load("asset/shaders/Texture.glsl");
 
-		m_TextureShader.reset(Table::Shader::Create("asset/shaders/Texture.glsl"));
 		m_Texture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
 		m_FF0Texture = Table::Texture2D::Create("asset/textures/FF0Suki.png");
 
-		std::dynamic_pointer_cast<Table::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Table::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Table::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Table::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Table::TimeStep ts) override
@@ -202,10 +202,12 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Table::Renderer::Submit(m_TextureShader, m_TextureVA);
+		Table::Renderer::Submit(textureShader, m_TextureVA);
 		m_FF0Texture->Bind();
-		Table::Renderer::Submit(m_TextureShader, m_TextureVA);
+		Table::Renderer::Submit(textureShader, m_TextureVA);
 		//Table::Renderer::Submit(m_Shader, m_VertexArray);
 		//glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
@@ -237,11 +239,11 @@ public:
 	}
 
 private:
+	Table::ShaderLibrary  m_ShaderLibrary;
 	Table::Ref<Table::Shader> m_Shader;
 	Table::Ref<Table::VertexArray> m_VertexArray;
 	Table::Ref<Table::Shader> m_BlueShader;
 	Table::Ref<Table::VertexArray> m_SquareVA;
-	Table::Ref<Table::Shader> m_TextureShader;
 	Table::Ref<Table::VertexArray> m_TextureVA;
 
 	Table::Ref<Table::Texture2D> m_Texture, m_FF0Texture;
