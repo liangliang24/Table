@@ -10,6 +10,7 @@
 #include "Table/Input.h"
 #include "Table/KeyCodes.h"
 #include "Table/MouseButtonCodes.h"
+#include "Table/OrthographicCameraController.h"
 
 #include "Table/ImGui/ImGuiLayer.h"
 
