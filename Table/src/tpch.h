@@ -13,8 +13,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Table/Log.h"
+#include "Table/Core/Log.h"
 
-#ifdef HZ_PLATFORM_WINDOWS
+#ifdef TABLE_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

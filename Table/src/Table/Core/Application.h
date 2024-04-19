@@ -3,15 +3,15 @@
 #include "Core.h"
 
 #include "Window.h"
-#include "Table/LayerStack.h"
-#include "Events/Event.h"
+#include "Table/Core/LayerStack.h"
+#include "Table/Events/Event.h"
 #include "Table/Events/ApplicationEvent.h"
 
 #include "Table/ImGui/ImGuiLayer.h"
 
 #include "Table/Renderer/Shader.h"
 #include "Table/Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
+#include "Table/Renderer/VertexArray.h"
 
 #include "Table/Renderer/OrthographicCamera.h"
 

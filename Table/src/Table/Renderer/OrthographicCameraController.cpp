@@ -1,7 +1,7 @@
 #include "tpch.h"
 #include "OrthographicCameraController.h"
-#include "Table/Input.h"
-#include "Table/KeyCodes.h"
+#include "Table/Core/Input.h"
+#include "Table/Core/KeyCodes.h"
 namespace Table
 {
 

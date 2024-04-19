@@ -6,7 +6,7 @@
 #include "backends/imgui_impl_opengl3.h"
 #include "GLFW/glfw3.h"
 
-#include "Table/Application.h"
+#include "Table/Core/Application.h"
 
 
 namespace Table

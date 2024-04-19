@@ -2,11 +2,11 @@
 
 
 #include "Application.h"
-#include "Table/Log.h"
+#include "Table/Core/Log.h"
 #include <glad/glad.h>
 #include "Input.h"
 #include <GLFW/glfw3.h>
-#include "Renderer/Renderer.h"
+#include "Table/Renderer/Renderer.h"
 
 namespace Table
 {

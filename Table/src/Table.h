@@ -1,16 +1,16 @@
 #pragma once
 
 //For use by Table application
-#include "Table/Application.h"
-#include "Table/Layer.h"
-#include "Table/Log.h"
+#include "Table/Core/Application.h"
+#include "Table/Core/Layer.h"
+#include "Table/Core/Log.h"
 
 #include "Table/Core/TimeStep.h"
 
-#include "Table/Input.h"
-#include "Table/KeyCodes.h"
-#include "Table/MouseButtonCodes.h"
-#include "Table/OrthographicCameraController.h"
+#include "Table/Core/Input.h"
+#include "Table/Core/KeyCodes.h"
+#include "Table/Core/MouseButtonCodes.h"
+#include "Table/Renderer/OrthographicCameraController.h"
 
 #include "Table/ImGui/ImGuiLayer.h"
 
@@ -27,5 +27,5 @@
 
 
 //--Entry Point
-#include "Table/EntryPoint.h"
+#include "Table/Core/EntryPoint.h"
 //

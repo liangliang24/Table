@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Table/Core.h"
+#include "Table/Core/Core.h"
 
 namespace Table
 {

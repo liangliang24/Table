@@ -2,7 +2,7 @@
 
 #include "tpch.h"
 
-#include "Table/Core.h"
+#include "Table/Core/Core.h"
 #include "Table/Events/Event.h"
 
 namespace Table

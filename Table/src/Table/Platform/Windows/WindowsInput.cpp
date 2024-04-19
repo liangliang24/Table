@@ -1,7 +1,7 @@
 #include "tpch.h"
 #include "WindowsInput.h"
 
-#include "Table/Application.h"
+#include "Table/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Table

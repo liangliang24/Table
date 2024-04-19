@@ -1,7 +1,7 @@
 #pragma once
-#include "Table/Core.h"
-#include "Events/Event.h"
-#include "Core/TimeStep.h"
+#include "Table/Core/Core.h"
+#include "Table/Events/Event.h"
+#include "Table/Core/TimeStep.h"
 
 
 namespace Table{

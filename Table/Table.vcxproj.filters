@@ -78,17 +78,38 @@
     <ClInclude Include="src\Table.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Table\Application.h">
-      <Filter>src\Table</Filter>
+    <ClInclude Include="src\Table\Core\Application.h">
+      <Filter>src\Table\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Table\Core.h">
-      <Filter>src\Table</Filter>
+    <ClInclude Include="src\Table\Core\Core.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\EntryPoint.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\Input.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\KeyCodes.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\Layer.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\LayerStack.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\Log.h">
+      <Filter>src\Table\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Core\MouseButtonCodes.h">
+      <Filter>src\Table\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Core\TimeStep.h">
       <Filter>src\Table\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Table\EntryPoint.h">
-      <Filter>src\Table</Filter>
+    <ClInclude Include="src\Table\Core\Window.h">
+      <Filter>src\Table\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Events\ApplicationEvent.h">
       <Filter>src\Table\Events</Filter>
@@ -105,24 +126,6 @@
     <ClInclude Include="src\Table\ImGui\ImGuiLayer.h">
       <Filter>src\Table\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Table\Input.h">
-      <Filter>src\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Table\KeyCodes.h">
-      <Filter>src\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Table\Layer.h">
-      <Filter>src\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Table\LayerStack.h">
-      <Filter>src\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Table\Log.h">
-      <Filter>src\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Table\MouseButtonCodes.h">
-      <Filter>src\Table</Filter>
-    </ClInclude>
     <ClInclude Include="src\Table\Platform\Windows\WindowsInput.h">
       <Filter>src\Table\Platform\Windows</Filter>
     </ClInclude>
@@ -136,6 +139,9 @@
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\OrthographicCamera.h">
+      <Filter>src\Table\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Table\Renderer\OrthographicCameraController.h">
       <Filter>src\Table\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\RenderCommand.h">
@@ -155,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="src\Table\Renderer\VertexArray.h">
       <Filter>src\Table\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Table\Window.h">
-      <Filter>src\Table</Filter>
     </ClInclude>
     <ClInclude Include="src\tpch.h">
       <Filter>src</Filter>
@@ -1433,23 +1436,23 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Table\Application.cpp">
-      <Filter>src\Table</Filter>
+    <ClCompile Include="src\Table\Core\Application.cpp">
+      <Filter>src\Table\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Core\Layer.cpp">
+      <Filter>src\Table\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Core\LayerStack.cpp">
+      <Filter>src\Table\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Core\Log.cpp">
+      <Filter>src\Table\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\ImGui\ImGuiBuild.cpp">
       <Filter>src\Table\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\ImGui\ImGuiLayer.cpp">
       <Filter>src\Table\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Table\Layer.cpp">
-      <Filter>src\Table</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Table\LayerStack.cpp">
-      <Filter>src\Table</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Table\Log.cpp">
-      <Filter>src\Table</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Table\Platform\Windows</Filter>
@@ -1461,6 +1464,9 @@
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Table\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Table\Renderer\OrthographicCameraController.cpp">
       <Filter>src\Table\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Table\Renderer\RenderCommand.cpp">
