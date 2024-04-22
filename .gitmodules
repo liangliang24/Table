@@ -1,12 +1,16 @@
 [submodule "Table/vendor/spdlog"]
 	path = Table/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 [submodule "Table/vendor/GLFW"]
 	path = Table/vendor/GLFW
 	url = https://github.com/liangliang24/glfw
+	branch = master
 [submodule "Table/vendor/imgui"]
 	path = Table/vendor/imgui
 	url = https://github.com/liangliang24/imgui
+	branch = docking
 [submodule "Table/vendor/glm"]
 	path = Table/vendor/glm
 	url = https://github.com/g-truc/glm
+	branch = master
