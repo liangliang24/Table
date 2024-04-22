@@ -83,7 +83,6 @@ project "Table"
 
 		defines
 		{
-			"TABLE_PLATFORM_WINDOWS",
 			"TABLE_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
@@ -141,11 +140,6 @@ project "Card"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines
-		{
-			"TABLE_PLATFORM_WINDOWS"
-		}
 
 	filter "configurations:Debug"
 		defines "TABLE_DEBUG"
