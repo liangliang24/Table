@@ -12,7 +12,7 @@ Card2D::Card2D()
 
 void Card2D::OnAttach()
 {
-	
+	m_CheckerboardTexture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
 }
 
 void Card2D::OnDetach()
@@ -28,7 +28,9 @@ void Card2D::OnUpdate(Table::TimeStep ts)
 	Table::RenderCommand::Clear();
 
 	Table::Renderer2D::BeginScene(m_CameraController.GetCamera());
-	Table::Renderer2D::DrawQuad({ 0.0f,0.0f }, { 1.0f,1.0f }, { 0.8f,0.2f,1.0f,1.0f });
+	Table::Renderer2D::DrawQuad({ -1.0f,0.0f }, { 0.8f, 0.8f }, { 0.2f,0.2f,1.0f,1.0f });
+	Table::Renderer2D::DrawQuad({ 0.5f,-0.5f }, { 0.75, 0.75f }, { 0.8f,0.2f,1.0f,1.0f });
+	Table::Renderer2D::DrawQuad({ 0.0f,0.0f,-0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
 	Table::Renderer2D::EndScene();
 }
 
