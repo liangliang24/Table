@@ -25,9 +25,9 @@ namespace Table
 			RecalclateViewMatrix();
 		}
 
-		const glm::mat4 getProjectionMatrix() const { return m_ProjectionMatrix; }
-		const glm::mat4 getVIewMatrix() const { return m_ViewMatrix; }
-		const glm::mat4 getViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+		const glm::mat4 GetProjectionMatrix() const { return m_ProjectionMatrix; }
+		const glm::mat4 GetVIewMatrix() const { return m_ViewMatrix; }
+		const glm::mat4 GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
 		void RecalclateViewMatrix();
 

@@ -23,7 +23,7 @@ public:
 		};
 
 		Table::Ref<Table::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Table::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer = Table::VertexBuffer::Create(vertices, sizeof(vertices));
 		Table::BufferLayout layout = {
 			{Table::ShaderDataType::Float3, "a_Position"}
 		};
@@ -32,7 +32,7 @@ public:
 
 		uint32_t indices[3] = { 0,1,2 };
 		Table::Ref<Table::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Table::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		indexBuffer = Table::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 
@@ -45,7 +45,7 @@ public:
 			0.0f,  0.0f, 0.0f
 		};
 		Table::Ref<Table::VertexBuffer> squareVB;
-		squareVB.reset(Table::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB = Table::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout
 		({
 			{ Table::ShaderDataType::Float3,"a_Position" }
@@ -54,7 +54,7 @@ public:
 
 		uint32_t squareIndices[6] = { 0,1,2,2,3,0 };
 		Table::Ref<Table::IndexBuffer> squareIB;
-		squareIB.reset(Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIB = Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		m_TextureVA = Table::VertexArray::Create();
@@ -66,7 +66,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 		Table::Ref<Table::VertexBuffer> textureVB;
-		textureVB.reset(Table::VertexBuffer::Create(textureVertices, sizeof(textureVertices)));
+		textureVB = Table::VertexBuffer::Create(textureVertices, sizeof(textureVertices));
 		textureVB->SetLayout
 		({
 			{Table::ShaderDataType::Float3,"a_Position"},
@@ -75,7 +75,7 @@ public:
 		m_TextureVA->AddVertexBuffer(textureVB);
 		uint32_t textureIndices[6] = { 0,1,2,2,3,0 };
 		Table::Ref<Table::IndexBuffer> textureIB;
-		textureIB.reset(Table::IndexBuffer::Create(textureIndices, sizeof(textureIndices) / sizeof(uint32_t)));
+		textureIB = Table::IndexBuffer::Create(textureIndices, sizeof(textureIndices) / sizeof(uint32_t));
 		m_TextureVA->SetIndexBuffer(textureIB);
 		std::string vertexSrc = R"(
 			#version 330 core

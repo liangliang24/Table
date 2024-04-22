@@ -16,6 +16,7 @@
 
 //--Renderer----------
 #include "Table/Renderer/Renderer.h"
+#include "Table/Renderer/Renderer2D.h"
 #include "Table/Renderer/RenderCommand.h"
 
 #include "Table/Renderer/Shader.h"
