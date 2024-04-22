@@ -32,7 +32,7 @@ namespace Table
 		virtual void Shutdown();
 		
 		GLFWwindow* m_Window;
-		GraphicsContext* m_Context;
+		Scope<GraphicsContext> m_Context;
 
 		struct WindowData
 		{
