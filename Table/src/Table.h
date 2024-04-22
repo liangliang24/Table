@@ -27,5 +27,5 @@
 
 
 //--Entry Point
-#include "Table/Core/EntryPoint.h"
+//#include "Table/Core/EntryPoint.h"
 //

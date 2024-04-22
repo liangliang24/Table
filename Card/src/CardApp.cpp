@@ -1,10 +1,12 @@
 #include <Table.h>
+#include <Table/Core/EntryPoint.h>
 
 #include "imgui/imgui.h"
 #include <GLFW/include/GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <Platform/OpenGL/OpenGLShader.h>
 #include <glm/gtc/type_ptr.hpp>
+#include "Card2D.h"
 
 class ExampleLayer:public Table::Layer
 {	
@@ -12,7 +14,7 @@ public:
 	ExampleLayer()
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
-		m_VertexArray.reset(Table::VertexArray::Create());
+		m_VertexArray = Table::VertexArray::Create();
 		float vertices[3 * 3] =
 		{
 			-0.5f,	-0.5f,	0.0f,
@@ -34,7 +36,7 @@ public:
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 
-		m_SquareVA.reset(Table::VertexArray::Create());
+		m_SquareVA = Table::VertexArray::Create();
 		float squareVertices[3 * 4] =
 		{
 			0.0f, -1.0f, 0.0f,
@@ -55,7 +57,7 @@ public:
 		squareIB.reset(Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
-		m_TextureVA.reset(Table::VertexArray::Create());
+		m_TextureVA = Table::VertexArray::Create();
 		float textureVertices[5 * 4] =
 		{
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
@@ -231,7 +233,8 @@ class Card : public Table::Application
 public:
 	Card()
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new Card2D());
 	}
 
 	~Card()
