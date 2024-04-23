@@ -53,10 +53,6 @@ namespace Table
 			TimeStep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			for (Layer* layer : m_LayerStack)
-			{
-				layer->OnUpdate(timestep);
-			}
 			if (!m_Minimized)
 			{
 				for (Layer* layer : m_LayerStack)
