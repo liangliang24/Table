@@ -12,9 +12,17 @@ int main()
 	TABLE_INFO("Initialized Client log!");
 
 	//printf("Hello Table Engine!")
+	TABLE_PROFILE_BEGIN_SESSION("Startup", "TableProfile_Startup.json");
 	auto app = Table::CreateApplication();
+	TABLE_PROFILE_END_SESSION();
+
+	TABLE_PROFILE_BEGIN_SESSION("Runtime", "TableProfile-Runtime.json");
 	app->Run();
+	TABLE_PROFILE_END_SESSION();
+
+	TABLE_PROFILE_BEGIN_SESSION("Startup", "TableProfile-Shutdown.json");
 	delete app;
+	TABLE_PROFILE_END_SESSION();
 }
 
 #endif // TABLE_PLATFORM_WINDOWS

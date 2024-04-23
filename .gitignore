@@ -9,3 +9,6 @@ bin-int/
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+Card/TableProfile-Runtime.json
+Card/TableProfile-Shutdown.json
+Card/TableProfile_Startup.json

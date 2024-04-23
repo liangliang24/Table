@@ -15,6 +15,8 @@
 
 #include "Table/Core/Log.h"
 
+#include "Table/Debug/Instrumentor.h"
+
 #ifdef TABLE_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

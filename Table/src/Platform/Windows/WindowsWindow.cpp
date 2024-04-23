@@ -24,22 +24,26 @@ namespace Table
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		TABLE_PROFILE_FUNCTION();
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		TABLE_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		TABLE_PROFILE_FUNCTION();
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		TABLE_PROFILE_FUNCTION();
 		if (enabled)
 		{
 			glfwSwapInterval(1);
@@ -59,6 +63,7 @@ namespace Table
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		TABLE_PROFILE_FUNCTION();
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -186,6 +191,7 @@ namespace Table
 
 	void WindowsWindow::Shutdown()
 	{
+		TABLE_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_Window);
 
 		s_GLFWWindowCount--;

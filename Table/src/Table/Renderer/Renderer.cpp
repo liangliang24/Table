@@ -9,6 +9,7 @@ namespace Table
 	
 	void Renderer::Init()
 	{
+		TABLE_PROFILE_FUNCTION();
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

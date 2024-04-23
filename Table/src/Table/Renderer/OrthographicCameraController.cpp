@@ -14,6 +14,7 @@ namespace Table
 
 	void OrthographicCameraController::OnUpdate(TimeStep ts)
 	{
+		TABLE_PROFILE_FUNCTION();
 		if (Table::Input::IsKeyPressed(TABLE_KEY_A))
 		{
 			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
@@ -62,6 +63,7 @@ namespace Table
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		TABLE_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(TABLE_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(TABLE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
@@ -69,6 +71,7 @@ namespace Table
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		TABLE_PROFILE_FUNCTION();
 		m_ZoomLevel -= e.GetYOffset() * 0.25f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -77,6 +80,7 @@ namespace Table
 
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
+		TABLE_PROFILE_FUNCTION();
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;
