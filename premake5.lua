@@ -1,5 +1,5 @@
 workspace "Table"
-	architecture "x64"
+	architecture "x86_64"
 	startproject "Card"
 
 	configurations
