@@ -21,6 +21,7 @@ private:
 	Table::Ref<Table::Shader> m_FlatColorShader;
 
 	Table::Ref<Table::Texture2D> m_CheckerboardTexture;
+	Table::Ref<Table::Texture2D> m_FF0Texture;
 
 	glm::vec4 m_SquareColor = { 0.2f,0.3f,0.8f,1.0f };
 };

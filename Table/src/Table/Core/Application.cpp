@@ -1,16 +1,15 @@
 #include "tpch.h"
 
 
-#include "Application.h"
+#include "Table/Core/Application.h"
 #include "Table/Core/Log.h"
 #include <glad/glad.h>
-#include "Input.h"
+#include "Table/Core/Input.h"
 #include <GLFW/glfw3.h>
 #include "Table/Renderer/Renderer.h"
 
 namespace Table
 {
-#define  BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
 
@@ -19,8 +18,8 @@ namespace Table
 		TABLE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window = Window::Create();
+		m_Window->SetEventCallback(TABLE_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
 
@@ -30,6 +29,11 @@ namespace Table
 		
 	}
 
+
+	Application::~Application()
+	{
+		Renderer::Shutdown();
+	}
 
 	void Application::Run()
 	{	
@@ -73,8 +77,8 @@ namespace Table
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
+		dispatcher.Dispatch<WindowCloseEvent>(TABLE_BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(TABLE_BIND_EVENT_FN(Application::OnWindowResize));
 		
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{

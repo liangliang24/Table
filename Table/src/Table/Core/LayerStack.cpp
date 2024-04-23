@@ -1,14 +1,9 @@
 #include "tpch.h"
-#include "LayerStack.h"
+#include "Table/Core/LayerStack.h"
 
 
 namespace Table
 {
-	
-	LayerStack::LayerStack()
-	{
-
-	}
 
 	LayerStack::~LayerStack()
 	{

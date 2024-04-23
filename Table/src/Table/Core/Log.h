@@ -1,29 +1,29 @@
 #pragma once
 
 
-#include "Core.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/fmt/ostr.h"
+#include "Table/Core/Core.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
 
 namespace Table
 {
-	class TABLE_API Log
+	class Log
 	{
 	public:
 		static void Init();
 
-		static std::shared_ptr<spdlog::logger>& GetCoreLogger()
+		static Ref<spdlog::logger>& GetCoreLogger()
 		{
 			return s_CoreLogger;
 		}
-		static std::shared_ptr<spdlog::logger>& GetCientLogger()
+		static Ref<spdlog::logger>& GetCientLogger()
 		{
 			return s_CientLogger;
 		}
 
 	private:
-		static std::shared_ptr<spdlog::logger> s_CoreLogger;
-		static std::shared_ptr<spdlog::logger> s_CientLogger;
+		static Ref<spdlog::logger> s_CoreLogger;
+		static Ref<spdlog::logger> s_CientLogger;
 	};
 }
 

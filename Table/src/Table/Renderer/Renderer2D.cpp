@@ -1,9 +1,8 @@
 #include "tpch.h"
-#include "Renderer2D.h"
-#include "VertexArray.h"
-#include "Shader.h"
-#include "RenderCommand.h"
-#include "Texture.h"
+#include "Table/Renderer/Renderer2D.h"
+#include "Table/Renderer/VertexArray.h"
+#include "Table/Renderer/Shader.h"
+#include "Table/Renderer/RenderCommand.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Table
@@ -42,7 +41,7 @@ namespace Table
 		s_Data->QuadVertexArray->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0,1,2,2,3,0 };
-		Table::Ref<Table::IndexBuffer> squareIB;
+		Ref<Table::IndexBuffer> squareIB;
 		squareIB = Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		s_Data->QuadVertexArray->SetIndexBuffer(squareIB);
 

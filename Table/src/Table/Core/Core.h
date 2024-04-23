@@ -43,19 +43,19 @@
 #error "Unknown platform!"
 #endif // End of platform detection
 
-#ifdef TABLE_PLATFORM_WINDOWS
-#if TABLE_DYNAMIC_LINK
-	#ifdef TABLE_BUILD_DLL
-		#define TABLE_API __declspec(dllexport)
-	#else	
-		#define TABLE_API __declspec(dllimport)
-	#endif // TABLE_BUILD_DLL
-#else
-	#define TABLE_API
-#endif
-#else
-	#error Table only support Windows!
-#endif // TABLE_PLATFORM_WINDOWS
+//#ifdef TABLE_PLATFORM_WINDOWS
+//#if TABLE_DYNAMIC_LINK
+//	#ifdef TABLE_BUILD_DLL
+//		#define TABLE_API __declspec(dllexport)
+//	#else	
+//		#define TABLE_API __declspec(dllimport)
+//	#endif // TABLE_BUILD_DLL
+//#else
+//	#define TABLE_API
+//#endif
+//#else
+//	#error Table only support Windows!
+//#endif // TABLE_PLATFORM_WINDOWS
 
 #ifdef TABLE_ENABLE_ASSERTS
 #define TABLE_ASSERT(x, ...) { if(!(x)) { TABLE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }

@@ -13,6 +13,7 @@ Card2D::Card2D()
 void Card2D::OnAttach()
 {
 	m_CheckerboardTexture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
+	m_FF0Texture = Table::Texture2D::Create("asset/textures/FF0Suki.png");
 }
 
 void Card2D::OnDetach()
@@ -31,6 +32,7 @@ void Card2D::OnUpdate(Table::TimeStep ts)
 	Table::Renderer2D::DrawQuad({ -1.0f,0.0f }, { 0.8f, 0.8f }, { 0.2f,0.2f,1.0f,1.0f });
 	Table::Renderer2D::DrawQuad({ 0.5f,-0.5f }, { 0.75, 0.75f }, { 0.8f,0.2f,1.0f,1.0f });
 	Table::Renderer2D::DrawQuad({ 0.0f,0.0f,-0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
+	Table::Renderer2D::DrawQuad({ 0.5f,0.5f }, { 1.0f,1.0f }, m_FF0Texture);
 	Table::Renderer2D::EndScene();
 }
 

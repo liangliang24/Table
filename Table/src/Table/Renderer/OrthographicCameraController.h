@@ -1,7 +1,7 @@
 #pragma once
-#include <Table/Core/TimeStep.h>
-#include <Table/Events/Event.h>
-#include <Table/Renderer/OrthographicCamera.h>
+#include "Table/Core/TimeStep.h"
+#include "Table/Events/Event.h"
+#include "Table/Renderer/OrthographicCamera.h"
 #include "Table/Events/MouseEvent.h"
 #include "Table/Events/ApplicationEvent.h"
 

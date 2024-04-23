@@ -1,5 +1,5 @@
 #include "tpch.h"
-#include "OrthographicCameraController.h"
+#include "Table/Renderer/OrthographicCameraController.h"
 #include "Table/Core/Input.h"
 #include "Table/Core/KeyCodes.h"
 namespace Table
@@ -36,7 +36,7 @@ namespace Table
 			m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
 
-		if (true)
+		if (m_Rotation)
 		{
 			if (Input::IsKeyPressed(TABLE_KEY_Q))
 			{

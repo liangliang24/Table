@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Event.h"
+#include "Table/Events/Event.h"
 
 namespace Table {
 
-	class TABLE_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 
 	{
 
@@ -52,7 +52,7 @@ namespace Table {
 
 
 
-	class TABLE_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 
 	{
 
@@ -100,7 +100,7 @@ namespace Table {
 
 
 
-	class TABLE_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 
 	{
 
@@ -129,7 +129,7 @@ namespace Table {
 
 
 
-	class TABLE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 
 	{
 
@@ -164,7 +164,7 @@ namespace Table {
 
 
 
-	class TABLE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 
 	{
 

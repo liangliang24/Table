@@ -1,4 +1,5 @@
 #pragma once
+#include "Table/Core/Core.h"
 
 #ifdef TABLE_PLATFORM_WINDOWS
 

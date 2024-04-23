@@ -1,6 +1,8 @@
 #pragma once
 
 //For use by Table application
+#include "Table/Core/Core.h"
+
 #include "Table/Core/Application.h"
 #include "Table/Core/Layer.h"
 #include "Table/Core/Log.h"

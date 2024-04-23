@@ -1,7 +1,7 @@
 #include "tpch.h"
-#include "Buffer.h"
+#include "Table/Renderer/Buffer.h"
 
-#include "Renderer.h"
+#include "Table/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Table
@@ -15,7 +15,7 @@ namespace Table
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
+			return CreateRef<OpenGLVertexBuffer>(vertices, size);
 		}
 		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
@@ -29,7 +29,7 @@ namespace Table
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLIndexBuffer>(indices, size);
+			return CreateRef<OpenGLIndexBuffer>(indices, size);
 		}
 		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;

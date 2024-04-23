@@ -4,7 +4,6 @@
 #include "imgui/imgui.h"
 #include <GLFW/include/GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include <Platform/OpenGL/OpenGLShader.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "Card2D.h"
 
@@ -22,8 +21,7 @@ public:
 			0.0f,	0.5f,	0.0f,
 		};
 
-		Table::Ref<Table::VertexBuffer> vertexBuffer;
-		vertexBuffer = Table::VertexBuffer::Create(vertices, sizeof(vertices));
+		Table::Ref<Table::VertexBuffer> vertexBuffer = Table::VertexBuffer::Create(vertices, sizeof(vertices));
 		Table::BufferLayout layout = {
 			{Table::ShaderDataType::Float3, "a_Position"}
 		};
@@ -31,8 +29,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0,1,2 };
-		Table::Ref<Table::IndexBuffer> indexBuffer;
-		indexBuffer = Table::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
+		Table::Ref<Table::IndexBuffer> indexBuffer = Table::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 
@@ -44,8 +41,7 @@ public:
 			1.0f,  0.0f, 0.0f,
 			0.0f,  0.0f, 0.0f
 		};
-		Table::Ref<Table::VertexBuffer> squareVB;
-		squareVB = Table::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
+		Table::Ref<Table::VertexBuffer> squareVB = Table::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout
 		({
 			{ Table::ShaderDataType::Float3,"a_Position" }
@@ -53,8 +49,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0,1,2,2,3,0 };
-		Table::Ref<Table::IndexBuffer> squareIB;
-		squareIB = Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
+		Table::Ref<Table::IndexBuffer> squareIB = Table::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		m_TextureVA = Table::VertexArray::Create();
@@ -74,8 +69,7 @@ public:
 			});
 		m_TextureVA->AddVertexBuffer(textureVB);
 		uint32_t textureIndices[6] = { 0,1,2,2,3,0 };
-		Table::Ref<Table::IndexBuffer> textureIB;
-		textureIB = Table::IndexBuffer::Create(textureIndices, sizeof(textureIndices) / sizeof(uint32_t));
+		Table::Ref<Table::IndexBuffer> textureIB = Table::IndexBuffer::Create(textureIndices, sizeof(textureIndices) / sizeof(uint32_t));
 		m_TextureVA->SetIndexBuffer(textureIB);
 		std::string vertexSrc = R"(
 			#version 330 core
@@ -139,8 +133,8 @@ public:
 		m_Texture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
 		m_FF0Texture = Table::Texture2D::Create("asset/textures/FF0Suki.png");
 
-		std::dynamic_pointer_cast<Table::OpenGLShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<Table::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->SetInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Table::TimeStep ts) override
@@ -157,11 +151,11 @@ public:
 		double timeValue = glfwGetTime();
 		float ColorOffsetVal = static_cast<float>(sin(timeValue));
 		ColorOffsetVal = std::clamp(ColorOffsetVal, 0.0f, 1.0f);
-		std::dynamic_pointer_cast<Table::OpenGLShader>(m_BlueShader)->UploadUniformFloat("sinColor", ColorOffsetVal);
+		m_BlueShader->SetFloat("sinColor", ColorOffsetVal);
 		glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-		std::dynamic_pointer_cast<Table::OpenGLShader>(m_Shader)->Bind();
-		std::dynamic_pointer_cast<Table::OpenGLShader>(m_Shader)->UploadUniformFloat3("u_Color", m_SquareColor);
+		m_Shader->Bind();
+		m_Shader->SetFloat3("u_Color", m_SquareColor);
 
 		//m_Shader->Bind();
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));

@@ -1,8 +1,8 @@
 #include "tpch.h"
-#include "Shader.h"
+#include "Table/Renderer/Shader.h"
 
 
-#include "RendererAPI.h"
+#include "Table/Renderer/RendererAPI.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Table
@@ -15,7 +15,7 @@ namespace Table
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLShader>(name,vertexSrc, fragmentSrc);
+			return CreateRef<OpenGLShader>(name,vertexSrc, fragmentSrc);
 		}
 		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
@@ -29,7 +29,7 @@ namespace Table
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLShader>(filepath);
+			return CreateRef<OpenGLShader>(filepath);
 		}
 
 		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");

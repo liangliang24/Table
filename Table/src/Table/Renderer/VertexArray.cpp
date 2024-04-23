@@ -1,7 +1,7 @@
 #include "tpch.h"
-#include "VertexArray.h"
+#include "Table/Renderer/VertexArray.h"
 
-#include "Renderer.h"
+#include "Table/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 namespace Table
 {
@@ -13,7 +13,7 @@ namespace Table
 		case RendererAPI::API::None:
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not suppported!"); return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLVertexArray>();
+			return CreateRef<OpenGLVertexArray>();
 		}
 
 		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core.h"
+#include "Table/Core/Core.h"
 
-#include "Window.h"
+#include "Table/Core/Window.h"
 #include "Table/Core/LayerStack.h"
 #include "Table/Events/Event.h"
 #include "Table/Events/ApplicationEvent.h"
@@ -17,11 +17,11 @@
 
 namespace Table 
 {
-	class TABLE_API Application
+	class Application
 	{
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 
 		void Run();
 

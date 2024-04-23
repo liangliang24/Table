@@ -1,7 +1,7 @@
 #include "tpch.h"
-#include "Texture.h"
+#include "Table/Renderer/Texture.h"
 
-#include "RendererAPI.h"
+#include "Table/Renderer/RendererAPI.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 namespace Table
 {
