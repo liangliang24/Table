@@ -11,7 +11,7 @@
 
 #include "Table/Core/Input.h"
 #include "Table/Core/KeyCodes.h"
-#include "Table/Core/MouseButtonCodes.h"
+#include "Table/Core/MouseCodes.h"
 #include "Table/Renderer/OrthographicCameraController.h"
 
 #include "Table/ImGui/ImGuiLayer.h"
