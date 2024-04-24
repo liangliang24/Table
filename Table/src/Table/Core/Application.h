@@ -15,6 +15,8 @@
 
 #include "Table/Renderer/OrthographicCamera.h"
 
+int main(int argc, char** argv);
+
 namespace Table 
 {
 	class Application
@@ -23,7 +25,7 @@ namespace Table
 		Application();
 		virtual ~Application();
 
-		void Run();
+		
 
 		void OnEvent(Event& e);
 
@@ -35,6 +37,7 @@ namespace Table
 		inline static Application& Get() { return *s_Instance; }
 
 	private:
+		void Run();
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 
@@ -46,6 +49,8 @@ namespace Table
 		float m_LastFrameTime = 0.0f;
 		
 		static Application* s_Instance;
+
+		friend int ::main(int argc, char** argv);
 	};
 
 	Application* CreateApplication();

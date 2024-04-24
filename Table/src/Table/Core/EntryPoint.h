@@ -5,7 +5,7 @@
 
 extern Table::Application* Table::CreateApplication();
 
-int main()
+int main(int argc, char** argv)
 {
 	Table::Log::Init();
 	TABLE_CORE_WARN("Initialized Table log!");
