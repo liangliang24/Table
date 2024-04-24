@@ -18,12 +18,12 @@ namespace Table
 		}
 		static Ref<spdlog::logger>& GetCientLogger()
 		{
-			return s_CientLogger;
+			return s_ClientLogger;
 		}
 
 	private:
 		static Ref<spdlog::logger> s_CoreLogger;
-		static Ref<spdlog::logger> s_CientLogger;
+		static Ref<spdlog::logger> s_ClientLogger;
 	};
 }
 
