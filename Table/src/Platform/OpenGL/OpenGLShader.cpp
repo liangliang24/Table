@@ -156,7 +156,6 @@ namespace Table
 			// The maxLength includes the NULL character
 			std::vector<GLchar> infoLog(maxLength);
 			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
-
 			// We don't need the program anymore.
 			glDeleteProgram(program);
 
@@ -165,6 +164,8 @@ namespace Table
 
 			TABLE_CORE_ERROR("{0}", infoLog.data());
 			TABLE_CORE_ASSERT(false, "Shader link failure!");
+
+			
 			return;
 		}
 

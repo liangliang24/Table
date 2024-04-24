@@ -24,9 +24,9 @@ namespace Table
 			s_RendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& VertexArray)
+		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& VertexArray, uint32_t count = 0)
 		{
-			s_RendererAPI->DrawIndexed(VertexArray);
+			s_RendererAPI->DrawIndexed(VertexArray, count);
 		}
 
 	private:
