@@ -24,16 +24,17 @@ void Card2D::OnDetach()
 void Card2D::OnUpdate(Table::TimeStep ts)
 {
 	TABLE_PROFILE_FUNCTION();
-
+	static float temp = 0;
+	temp += ts * 10.0f;
 	m_CameraController.OnUpdate(ts);
 	Table::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Table::RenderCommand::Clear();
 	Table::Renderer2D::BeginScene(m_CameraController.GetCamera());
 	Table::Renderer2D::DrawQuad({ -1.0f,0.0f }, { 0.8f, 0.8f }, { 0.2f,0.2f,1.0f,1.0f });
-	Table::Renderer2D::DrawQuad({ 0.5f,0.5f }, { 2.0f, 0.5f }, { 0.8f,0.2f,1.0f,1.0f });
-	//Table::Renderer2D::DrawRotatedQuad({ 0.5f,-0.5f }, { 0.75, 0.75f }, glm::radians(45.0f), { 0.8f,0.2f,1.0f,1.0f });
+	//Table::Renderer2D::DrawQuad({ 0.5f,0.5f }, { 2.0f, 0.5f }, { 0.8f,0.2f,1.0f,1.0f });
+	Table::Renderer2D::DrawRotatedQuad({ 0.5f,-0.5f }, { 0.75, 0.75f }, -45.0f, { 0.8f,0.2f,1.0f,1.0f });
 	Table::Renderer2D::DrawQuad({ 0.0f,0.0f,-0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
-	Table::Renderer2D::DrawQuad({ 0.5f,1.0f }, { 1.0f,1.0f }, m_FF0Texture,1.0f,{ 0.8f,0.2f,1.0f,1.0f });
+	Table::Renderer2D::DrawRotatedQuad({ 0.5f,1.0f }, { 1.0f,1.0f },temp , m_FF0Texture,1.0f,{ 0.8f,0.2f,1.0f,1.0f });
 	Table::Renderer2D::EndScene();
 }
 
