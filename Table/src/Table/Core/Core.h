@@ -57,17 +57,28 @@
 //	#error Table only support Windows!
 //#endif // TABLE_PLATFORM_WINDOWS
 
+
+#ifdef TABLE_DEBUG
+#ifdef TABLE_PLATFORM_WINDOWS
+#define TABLE_DEBUGBREAK() __debugbreak()
+#else
+#define TABLE_DEBUGBREAK()
+#endif // TABLE_PLATFORM_WINDOWS
+
+	#define TABLE_ENABLE_ASSERTS
+#endif // TABLE_DEBUG
+
+
+
 #ifdef TABLE_ENABLE_ASSERTS
-#define TABLE_ASSERT(x, ...) { if(!(x)) { TABLE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#define TABLE_CORE_ASSERT(x, ...) { if(!(x)) { TABLE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define TABLE_ASSERT(x, ...) { if(!(x)) { TABLE_ERROR("Assertion Failed: {0}", __VA_ARGS__); TABLE_DEBUGBREAK(); } }
+#define TABLE_CORE_ASSERT(x, ...) { if(!(x)) { TABLE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); TABLE_DEBUGBREAK(); } }
 #else
 #define TABLE_ASSERT(x, ...)
 #define TABLE_CORE_ASSERT(x, ...)
 #endif
 
-#ifdef TABLE_DEBUG
-	#define TABLE_ENABLE_DEBUG
-#endif // TABLE_DEBUG
+
 
 
 #define BIT(x) (1 << x)
