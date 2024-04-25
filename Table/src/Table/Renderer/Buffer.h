@@ -4,7 +4,7 @@ namespace Table
 {
 	enum class ShaderDataType
 	{
-		None = 0, FLoat, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
+		None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
 	};
 
 	static uint32_t ShaderDataTypeSize(ShaderDataType type)
@@ -13,7 +13,7 @@ namespace Table
 		{
 		case ShaderDataType::None:
 			return 0;
-		case ShaderDataType::FLoat:
+		case ShaderDataType::Float:
 			return 4;
 		case ShaderDataType::Float2:
 			return 4*2;
@@ -63,7 +63,7 @@ namespace Table
 			{
 			case ShaderDataType::None:
 				return 0;
-			case ShaderDataType::FLoat:
+			case ShaderDataType::Float:
 				return 1;
 			case ShaderDataType::Float2:
 				return 2;

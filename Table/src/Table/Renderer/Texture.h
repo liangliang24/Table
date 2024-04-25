@@ -12,6 +12,8 @@ namespace Table
 		virtual void SetData(void* datt, uint32_t size) = 0;
 
 		virtual void Bind(uint32_t slot = 0) const = 0;
+
+		virtual bool operator==(const Texture& other) const = 0;
 	};
 
 	class Texture2D : public Texture

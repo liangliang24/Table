@@ -230,7 +230,11 @@ namespace Table
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, int* value, uint32_t count)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform1iv(location, count, value);
+	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
@@ -260,6 +264,12 @@ namespace Table
 	{
 		TABLE_PROFILE_FUNCTION();
 		UploadUniformMat4(name, value);
+	}
+
+	void OpenGLShader::SetIntArray(const std::string& name, int* value, uint32_t count)
+	{
+		TABLE_PROFILE_FUNCTION();
+		UploadUniformIntArray(name, value, count);
 	}
 
 }

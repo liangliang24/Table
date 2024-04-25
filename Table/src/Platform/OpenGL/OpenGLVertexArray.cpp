@@ -11,7 +11,7 @@ namespace Table
 		{
 		case ShaderDataType::None:
 			break;
-		case ShaderDataType::FLoat:
+		case ShaderDataType::Float:
 			return GL_FLOAT;
 		case ShaderDataType::Float2:
 			return GL_FLOAT;
