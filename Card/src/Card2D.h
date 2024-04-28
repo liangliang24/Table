@@ -19,6 +19,7 @@ private:
 
 	Table::Ref<Table::VertexArray> m_SquareVA;
 	Table::Ref<Table::Shader> m_FlatColorShader;
+	Table::Ref<Table::Framebuffer> m_Framebuffer;
 
 	Table::Ref<Table::Texture2D> m_CheckerboardTexture;
 	Table::Ref<Table::Texture2D> m_FF0Texture;

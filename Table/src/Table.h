@@ -22,6 +22,7 @@
 #include "Table/Renderer/RenderCommand.h"
 
 #include "Table/Renderer/Shader.h"
+#include "Table/Renderer/Framebuffer.h"
 #include "Table/Renderer/Buffer.h"
 #include "Table/Renderer/Texture.h"
 #include "Table/Renderer/VertexArray.h"

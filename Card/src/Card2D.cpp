@@ -13,6 +13,11 @@ void Card2D::OnAttach()
 	TABLE_PROFILE_FUNCTION();
 	m_CheckerboardTexture = Table::Texture2D::Create("asset/textures/Checkerboard.png");
 	m_FF0Texture = Table::Texture2D::Create("asset/textures/FF0Suki.png");
+
+	Table::FramebufferSpecification fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_Framebuffer = Table::Framebuffer::Create(fbSpec);
 }
 
 void Card2D::OnDetach()
@@ -30,6 +35,7 @@ void Card2D::OnUpdate(Table::TimeStep ts)
 	static float temp = 0;
 	temp += ts * 10.0f;
 	m_CameraController.OnUpdate(ts);
+	m_Framebuffer->Bind();
 	Table::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Table::RenderCommand::Clear();
 	Table::Renderer2D::BeginScene(m_CameraController.GetCamera());
@@ -50,6 +56,7 @@ void Card2D::OnUpdate(Table::TimeStep ts)
 		}
 	}
 	Table::Renderer2D::EndScene();
+	m_Framebuffer->Unbind();
 }
 
 void Card2D::OnImGuiRender()
@@ -128,8 +135,8 @@ void Card2D::OnImGuiRender()
 
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		ImGui::Image((void*)textureID, ImVec2{ 1280, 720 });
 		ImGui::End();
 
 		ImGui::End();
@@ -148,7 +155,7 @@ void Card2D::OnImGuiRender()
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
 		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		ImGui::Image((void*)textureID, ImVec2{ 1280, 720 });
 		ImGui::End();
 	}
 }
