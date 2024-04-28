@@ -13,7 +13,7 @@ namespace Table
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		TABLE_PROFILE_FUNCTION();
 

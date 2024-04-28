@@ -13,3 +13,4 @@ Card/TableProfile-Runtime.json
 Card/TableProfile-Shutdown.json
 Card/TableProfile_Startup.json
 *.log
+*.json

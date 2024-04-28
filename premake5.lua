@@ -109,7 +109,57 @@ project "Table"
 	--filters { "system:windows", "configurations:Release"}
 	--	buildoptions "/MT"
 
-project "Card"
+project "Table-Editor"
+	location "Table-Editor"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/".. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/".. outputdir .. "/%{prj.name}")
+	
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"Table/vendor/spdlog/include",
+		"Table/src",
+		"Table/vendor",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"Table"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		defines "TABLE_DEBUG"
+		--buildoptions "/MDd"
+		runtime "Debug"
+		symbols "on"
+	
+	filter "configurations:Release"
+		defines "TABLE_RELEASE"
+		--buildoptions "/MD"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "TABLE_DIST"
+		--buildoptions "/MD"
+		runtime "Release"
+		optimize "on"
+
+		project "Card"
 	location "Card"
 	kind "ConsoleApp"
 	language "C++"

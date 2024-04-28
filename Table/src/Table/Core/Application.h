@@ -22,7 +22,7 @@ namespace Table
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Table APP");
 		virtual ~Application();
 
 		
