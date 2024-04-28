@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 	app->Run();
 	TABLE_PROFILE_END_SESSION();
 
-	TABLE_PROFILE_BEGIN_SESSION("Startup", "TableProfile-Shutdown.json");
+	TABLE_PROFILE_BEGIN_SESSION("Shutdown", "TableProfile-Shutdown.json");
 	delete app;
 	TABLE_PROFILE_END_SESSION();
 }
