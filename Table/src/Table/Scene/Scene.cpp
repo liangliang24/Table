@@ -6,6 +6,8 @@
 
 #include "glm/glm.hpp"
 
+#include "Entity.h"
+
 
 namespace Table
 {
@@ -30,9 +32,13 @@ namespace Table
 
 	}
 
-	entt::entity Scene::CreateEntity()
+	Entity Scene::CreateEntity(const std::string& name /*= std::string()*/)
 	{
-		return m_Registry.create();
+		Entity entity = { m_Registry.create(), this };
+		entity.AddComponent<TransformComponent>();
+		auto& tag = entity.AddComponent<TagComponent>();
+		tag.Tag = name.empty() ? "Entity" : name;
+		return entity;
 	}
 
 	void Scene::OnUpdate(TimeStep ts)

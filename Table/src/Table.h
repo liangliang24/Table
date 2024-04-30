@@ -17,6 +17,7 @@
 #include "Table/ImGui/ImGuiLayer.h"
 
 #include "Table/Scene/Scene.h"
+#include "Table/Scene/Entity.h"
 #include "Table/Scene/Components.h"
 
 //--Renderer----------
