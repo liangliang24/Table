@@ -4,6 +4,7 @@
 #include "Table/Renderer/Shader.h"
 #include "Table/Renderer/RenderCommand.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/glm.hpp>
 
 namespace Table
 {
@@ -121,6 +122,20 @@ namespace Table
 		TABLE_PROFILE_FUNCTION();
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+
+		s_Data.QuadIndexCount = 0;
+		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+		s_Data.TextureSlotIndex = 1;
+	}
+
+	void Renderer2D::BeginScene(const Camera& camera, const glm::mat4 & transform)
+	{
+		TABLE_PROFILE_FUNCTION();
+		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
+
+		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
 
 		s_Data.QuadIndexCount = 0;
 		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;

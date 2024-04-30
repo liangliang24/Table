@@ -25,6 +25,10 @@ namespace Table
 
 		Ref<Scene> m_ActiveScene;
 		Entity m_SquareEntity;
+		Entity m_CameraEntity;
+		Entity m_SecondaryCamera;
+
+		bool m_PrimaryCamera = true;
 
 		Ref<Texture2D> m_CheckerboardTexture;
 		Ref<Texture2D> m_FF0Texture;

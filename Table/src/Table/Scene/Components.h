@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include <Table/Renderer/Camera.h>
 
 namespace Table
 {
@@ -12,6 +13,17 @@ namespace Table
 		TagComponent(const TagComponent&) = default;
 		TagComponent(const std::string& tag)
 			:Tag(tag) {}
+	};
+
+	struct CameraComponent
+	{
+		Table::Camera Camera;
+		bool Primary = true;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+		CameraComponent(const glm::mat4& projection)
+			:Camera(projection) {}
 	};
 
 	struct TransformComponent
