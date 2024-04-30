@@ -16,6 +16,9 @@
 
 #include "Table/ImGui/ImGuiLayer.h"
 
+#include "Table/Scene/Scene.h"
+#include "Table/Scene/Components.h"
+
 //--Renderer----------
 #include "Table/Renderer/Renderer.h"
 #include "Table/Renderer/Renderer2D.h"

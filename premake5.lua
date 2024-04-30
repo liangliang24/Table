@@ -22,6 +22,7 @@ IncludeDir["GLAD"] = "Table/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Table/vendor/imgui"
 IncludeDir["glm"] = "Table/vendor/glm"
 IncludeDir["stb_image"] = "Table/vendor/stb_image"
+IncludeDir["entt"] = "Table/vendor/entt/include"
 
 group "Dependencies"
 	include "Table/vendor/GLFW"
@@ -67,7 +68,8 @@ project "Table"
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -130,7 +132,8 @@ project "Table-Editor"
 		"Table/vendor/spdlog/include",
 		"Table/src",
 		"Table/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -159,7 +162,7 @@ project "Table-Editor"
 		runtime "Release"
 		optimize "on"
 
-		project "Card"
+	project "Card"
 	location "Card"
 	kind "ConsoleApp"
 	language "C++"
@@ -180,7 +183,8 @@ project "Table-Editor"
 		"Table/vendor/spdlog/include",
 		"Table/src",
 		"Table/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
