@@ -1,7 +1,7 @@
 #pragma once
 
 #include "glm/glm.hpp"
-#include <Table/Renderer/Camera.h>
+#include "Table/Scene/SceneCamera.h"
 
 namespace Table
 {
@@ -17,13 +17,12 @@ namespace Table
 
 	struct CameraComponent
 	{
-		Table::Camera Camera;
+		SceneCamera Camera;
 		bool Primary = true;
+		bool FixedAspectRatio = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection)
-			:Camera(projection) {}
 	};
 
 	struct TransformComponent
