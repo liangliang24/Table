@@ -1,7 +1,7 @@
 #pragma once
 #include "Table/Core/Core.h"
 #include "Table/Events/Event.h"
-#include "Table/Core/TimeStep.h"
+#include "Table/Core/Timestep.h"
 
 
 namespace Table{
@@ -13,7 +13,7 @@ namespace Table{
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate(TimeStep ts) {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnEvent(Event& event){}
 		virtual void OnImGuiRender() { }
 

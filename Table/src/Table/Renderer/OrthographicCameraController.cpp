@@ -12,7 +12,7 @@ namespace Table
 	{
 	}
 
-	void OrthographicCameraController::OnUpdate(TimeStep ts)
+	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
 		TABLE_PROFILE_FUNCTION();
 		if (Table::Input::IsKeyPressed(TABLE_KEY_A))

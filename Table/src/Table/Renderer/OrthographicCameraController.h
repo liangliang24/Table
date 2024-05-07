@@ -1,5 +1,5 @@
 #pragma once
-#include "Table/Core/TimeStep.h"
+#include "Table/Core/Timestep.h"
 #include "Table/Events/Event.h"
 #include "Table/Renderer/OrthographicCamera.h"
 #include "Table/Events/MouseEvent.h"
@@ -12,7 +12,7 @@ namespace Table
 	public:
 		OrthographicCameraController(float aspectRatio, bool rotation = false);
 
-		void OnUpdate(TimeStep ts);
+		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 
 		void OnResize(float width, float height);

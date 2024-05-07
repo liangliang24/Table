@@ -7,7 +7,7 @@
 #include "Table/Core/Layer.h"
 #include "Table/Core/Log.h"
 
-#include "Table/Core/TimeStep.h"
+#include "Table/Core/Timestep.h"
 
 #include "Table/Core/Input.h"
 #include "Table/Core/KeyCodes.h"
@@ -16,8 +16,10 @@
 
 #include "Table/ImGui/ImGuiLayer.h"
 
+//--Scene-------------
 #include "Table/Scene/Scene.h"
 #include "Table/Scene/Entity.h"
+#include "Table/Scene/ScriptableEntity.h"
 #include "Table/Scene/Components.h"
 
 //--Renderer----------

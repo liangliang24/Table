@@ -55,7 +55,7 @@ namespace Table
 		{
 			TABLE_PROFILE_SCOPE("RunLoop");
 			float time = (float)glfwGetTime();
-			TimeStep timestep = time - m_LastFrameTime;
+			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)

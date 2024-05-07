@@ -2,10 +2,10 @@
 
 namespace Table
 {
-	class TimeStep
+	class Timestep
 	{
 	public:
-		TimeStep(float time = 0.0f)
+		Timestep(float time = 0.0f)
 			:m_Time(time)
 		{}
 

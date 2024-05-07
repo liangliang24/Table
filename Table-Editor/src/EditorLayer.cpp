@@ -34,6 +34,8 @@ namespace Table
 		m_SecondaryCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
 		auto& cc = m_SecondaryCamera.AddComponent<CameraComponent>();
 		cc.Primary = false;
+
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	}
 
 	void EditorLayer::OnDetach()
@@ -42,7 +44,7 @@ namespace Table
 
 	}
 
-	void EditorLayer::OnUpdate(TimeStep ts)
+	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		TABLE_PROFILE_FUNCTION();
 
