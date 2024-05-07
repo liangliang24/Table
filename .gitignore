@@ -1,6 +1,6 @@
 # Binaries
 bin/
-!vendor/bin/premake/premake.exe
+!Build/premake/bin
 bin-int/
 
 # Visual Studio files and folder
