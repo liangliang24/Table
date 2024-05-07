@@ -11,17 +11,6 @@
 
 namespace Table
 {
-
-	static void Domath(const glm::mat4& transform)
-	{
-
-	}
-
-	static void OnTransformConstruct(entt::registry& registry, entt::entity entity)
-	{
-
-	}
-
 	Scene::Scene()
 	{
 
@@ -48,19 +37,12 @@ namespace Table
 				{
 					if (!nsc.Instance)
 					{
-						nsc.InstantiateFunction();
+						nsc.Instance = nsc.InstantiateScript();
 						nsc.Instance->m_Entity = Entity{ entity, this };
-
-						if (nsc.OnCreateFunction)
-						{
-							nsc.OnCreateFunction(nsc.Instance);
-						}
+						nsc.Instance->OnCreate();
 					}
 
-					if (nsc.OnUpdateFunction)
-					{
-						nsc.OnUpdateFunction(nsc.Instance, ts);
-					}
+					nsc.Instance->OnUpdate(ts);
 				}
 			);
 		}
@@ -74,7 +56,7 @@ namespace Table
 
 			for (auto entity:view)
 			{
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
 				if (camera.Primary)
 				{
@@ -93,7 +75,7 @@ namespace Table
 
 			for (auto entity : group)
 			{
-				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				Renderer2D::DrawQuad(transform.Transform, sprite.Color);
 			}

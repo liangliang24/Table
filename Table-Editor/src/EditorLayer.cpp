@@ -36,6 +36,7 @@ namespace Table
 		cc.Primary = false;
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	}
 
 	void EditorLayer::OnDetach()

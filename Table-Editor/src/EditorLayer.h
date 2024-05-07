@@ -42,7 +42,11 @@ namespace Table
 	class CameraController : public ScriptableEntity
 	{
 	public:
-		void OnCreate() {}
+		void OnCreate() 
+		{
+			auto& transform = GetComponent<TransformComponent>().Transform;
+			transform[3][0] = rand() % 10 - 5.0f;
+		}
 		void OnDestroy() {}
 		void OnUpdate(Timestep ts)
 		{
