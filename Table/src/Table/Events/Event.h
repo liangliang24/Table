@@ -1,6 +1,7 @@
 #pragma once
 
-#include "tpch.h"
+#include <functional>
+#include "Table/Debug/Instrumentor.h"
 #include "Table/Core/Core.h"
 
 namespace Table

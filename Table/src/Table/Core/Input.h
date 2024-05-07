@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Table/Core/Core.h"
+#include <glm/glm.hpp>
 #include "Table/Core/KeyCodes.h"
 #include "Table/Core/MouseCodes.h"
 
@@ -12,7 +12,7 @@ namespace Table
 		static bool IsKeyPressed(KeyCode key);
 
 		static bool IsMouseButtonPressed(MouseCode button);
-		static std::pair<float, float> GetMousePosition();
+		static glm::vec2 GetMousePosition();
 		static float GetMouseX();
 		static float GetMouseY();
 	};

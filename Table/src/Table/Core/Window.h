@@ -1,13 +1,13 @@
 #pragma once
 
-#include "tpch.h"
+#include <sstream>
 
 #include "Table/Core/Core.h"
 #include "Table/Events/Event.h"
 
 namespace Table
 {
-
+	
 	struct WindowProps
 	{
 		std::string Title;
