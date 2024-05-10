@@ -93,6 +93,85 @@ namespace Table
 				ImGui::TreePop();
 			}
 		}
+
+		if (entity.HasComponent<CameraComponent>())
+		{
+			if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Camera"))
+			{
+				auto& cameraComponent = entity.GetComponent<CameraComponent>();
+				auto& camera = cameraComponent.Camera;
+
+				ImGui::Checkbox("Primary", &cameraComponent.Primary);
+
+				const char* projectionTypeStrings[] = { "Perspective", "Orthographic" };
+				const char* currentProjectionTypeString = projectionTypeStrings[(int)camera.GetProjectionType()];
+				if (ImGui::BeginCombo("Projection", currentProjectionTypeString))
+				{
+					for (int i = 0; i < 2; i++)
+					{
+						bool isSelected = currentProjectionTypeString == projectionTypeStrings[i];
+						if (ImGui::Selectable(projectionTypeStrings[i], isSelected))
+						{
+							currentProjectionTypeString = projectionTypeStrings[i];
+							camera.SetProjectionType((SceneCamera::ProjectionType)i);
+						}
+
+						if (isSelected)
+						{
+							ImGui::SetItemDefaultFocus();
+						}
+					}
+
+					ImGui::EndCombo();
+				}
+
+				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+				{
+					float verticalFOV = glm::degrees(camera.GetPerspectiveVerticalFOV());
+					if (ImGui::DragFloat("Vertical FOV", &verticalFOV))
+					{
+						camera.SetPerspectiveVerticalFOV(glm::radians(verticalFOV));
+					}
+
+					float orthoNear = glm::degrees(camera.GetPerspectiveNearClip());
+					if (ImGui::DragFloat("Near", &orthoNear))
+					{
+						camera.SetPerspectiveNearClip(glm::radians(orthoNear));
+					}
+
+					float orthoFar = glm::degrees(camera.GetPerspectiveFarClip());
+					if (ImGui::DragFloat("Far", &orthoFar))
+					{
+						camera.SetPerspectiveFarClip(glm::radians(orthoFar));
+					}
+				}
+
+				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
+				{
+					float verticalFOV = glm::degrees(camera.GetOrthographicSize());
+					if (ImGui::DragFloat("Vertical FOV", &verticalFOV))
+					{
+						camera.SetOrthographicSize(glm::radians(verticalFOV));
+					}
+
+					float orthoNear = glm::degrees(camera.GetOrthographicNearClip());
+					if (ImGui::DragFloat("Near", &orthoNear))
+					{
+						camera.SetOrthographicNearClip(glm::radians(orthoNear));
+					}
+
+					float orthoFar = glm::degrees(camera.GetOrthographicFarClip());
+					if (ImGui::DragFloat("Far", &orthoFar))
+					{
+						camera.SetOrthographicFarClip(glm::radians(orthoFar));
+					}
+
+					ImGui::Checkbox("Fixed Aspect Ratio", &cameraComponent.FixedAspectRatio);
+				}
+
+				ImGui::TreePop();
+			}
+		}
 	}
 
 }
