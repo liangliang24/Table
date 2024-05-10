@@ -37,6 +37,8 @@ namespace Table
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+		m_SceneHierachyPanel.SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnDetach()
@@ -141,6 +143,8 @@ namespace Table
 
 			ImGui::EndMenuBar();
 		}
+
+		m_SceneHierachyPanel.OnImGuiRender();
 
 		ImGui::Begin("Settings");
 		auto stats = Renderer2D::GetStats();
