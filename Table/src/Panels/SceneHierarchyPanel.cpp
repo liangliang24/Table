@@ -127,22 +127,22 @@ namespace Table
 
 				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
 				{
-					float verticalFOV = glm::degrees(camera.GetPerspectiveVerticalFOV());
-					if (ImGui::DragFloat("Vertical FOV", &verticalFOV))
+					float perspectiveVerticalFOV = glm::degrees(camera.GetPerspectiveVerticalFOV());
+					if (ImGui::DragFloat("Vertical FOV", &perspectiveVerticalFOV))
 					{
-						camera.SetPerspectiveVerticalFOV(glm::radians(verticalFOV));
+						camera.SetPerspectiveVerticalFOV(glm::radians(perspectiveVerticalFOV));
 					}
 
-					float orthoNear = glm::degrees(camera.GetPerspectiveNearClip());
-					if (ImGui::DragFloat("Near", &orthoNear))
+					float perspectiveNear = glm::degrees(camera.GetPerspectiveNearClip());
+					if (ImGui::DragFloat("Near", &perspectiveNear))
 					{
-						camera.SetPerspectiveNearClip(glm::radians(orthoNear));
+						camera.SetPerspectiveNearClip(glm::radians(perspectiveNear));
 					}
 
-					float orthoFar = glm::degrees(camera.GetPerspectiveFarClip());
-					if (ImGui::DragFloat("Far", &orthoFar))
+					float perspectiveFar = glm::degrees(camera.GetPerspectiveFarClip());
+					if (ImGui::DragFloat("Far", &perspectiveFar))
 					{
-						camera.SetPerspectiveFarClip(glm::radians(orthoFar));
+						camera.SetPerspectiveFarClip(glm::radians(perspectiveFar));
 					}
 				}
 

@@ -6,6 +6,7 @@
 #include "Table/Core/Application.h"
 #include "Table/Core/Layer.h"
 #include "Table/Core/Log.h"
+#include "Table/Core/Assert.h"
 
 #include "Table/Core/Timestep.h"
 

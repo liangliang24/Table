@@ -19,6 +19,7 @@
 //#endif // TABLE_PLATFORM_WINDOWS
 
 
+
 #ifdef TABLE_DEBUG
 #ifdef TABLE_PLATFORM_WINDOWS
 #define TABLE_DEBUGBREAK() __debugbreak()
@@ -30,17 +31,8 @@
 #endif // TABLE_DEBUG
 
 
-
-#ifdef TABLE_ENABLE_ASSERTS
-#define TABLE_ASSERT(x, ...) { if(!(x)) { TABLE_ERROR("Assertion Failed: {0}", __VA_ARGS__); TABLE_DEBUGBREAK(); } }
-#define TABLE_CORE_ASSERT(x, ...) { if(!(x)) { TABLE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); TABLE_DEBUGBREAK(); } }
-#else
-#define TABLE_ASSERT(x, ...)
-#define TABLE_CORE_ASSERT(x, ...)
-#endif
-
-
-
+#define TABLE_EXPAND_MACRO(x) x
+#define TABLE_STRINGIFY_MACRO(x) #x
 
 #define BIT(x) (1 << x)
 
@@ -65,3 +57,7 @@ namespace Table
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 }
+
+
+#include "Table/Core/Log.h"
+#include "Table/Core/Assert.h"

@@ -26,7 +26,7 @@ void Card2D::OnDetach()
 
 }
 
-void Card2D::OnUpdate(Table::TimeStep ts)
+void Card2D::OnUpdate(Table::Timestep ts)
 {
 	TABLE_PROFILE_FUNCTION();
 

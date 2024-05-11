@@ -1,6 +1,6 @@
 #include "tpch.h"
 #include "Table/Renderer/Framebuffer.h"
-#include "Renderer.h"
+#include "Table/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLFramebuffer.h"
 namespace Table
 {

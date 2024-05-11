@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Table/Core/Core.h"
-#include "Table/Core/Log.h"
 #include "Table/Scene/Scene.h"
 #include "Table/Scene/Entity.h"
 
