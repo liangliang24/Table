@@ -2,27 +2,27 @@ Scene: Untitled
 Entities:
   - Entity: 12837192831273
     TagComponent:
-      Tag: Clip-Space Entity
+      Tag: Square
     TransformComponent:
-      Translation: [-4, 0, 0]
-      Rotation: [0, 0, 0]
+      Translation: [3.79999995, 2.5, 0]
+      Rotation: [0.0104719754, 0, 1.22871184]
       Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 1
-        PerspectiveFOV: 0
-        PerspectiveNear: 0
-        PerspectiveFar: 1
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: false
-      FixedAspectRatio: false
+    SpriteRendererComponent:
+      Color: [0, 1, 0, 1]
   - Entity: 12837192831273
     TagComponent:
-      Tag: CamearaEntity
+      Tag: RedSquare
     TransformComponent:
-      Translation: [2, 0, 0]
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Translation: [1.20000005, 0.800000012, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -36,21 +36,3 @@ Entities:
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: RedSquare
-    TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: Square
-    TransformComponent:
-      Translation: [4.5, 2.5, 0]
-      Rotation: [0, 0, 1.22871184]
-      Scale: [1, 1, 1]
-    SpriteRendererComponent:
-      Color: [0, 1, 0, 1]

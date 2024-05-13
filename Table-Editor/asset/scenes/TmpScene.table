@@ -2,6 +2,15 @@ Scene: Untitled
 Entities:
   - Entity: 12837192831273
     TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [1.79999995, 1.70000005, 0]
+      Rotation: [0, 0, -0.965167046]
+      Scale: [1.79999995, 2.5999999, 1]
+    SpriteRendererComponent:
+      Color: [0.16196835, 0.259194225, 0.791505814, 1]
+  - Entity: 12837192831273
+    TagComponent:
       Tag: Square
     TransformComponent:
       Translation: [4.5, 2.5, 0]
@@ -9,6 +18,15 @@ Entities:
       Scale: [1, 1, 1]
     SpriteRendererComponent:
       Color: [0, 1, 0, 1]
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: RedSquare
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
   - Entity: 12837192831273
     TagComponent:
       Tag: CamearaEntity
