@@ -2,6 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui/imgui.h>
 #include <glm/gtc/type_ptr.hpp>
+#include "Table/Scene/SceneSerializer.h"
 
 namespace Table
 {
@@ -23,7 +24,7 @@ namespace Table
 
 		m_ActiveScene = CreateRef<Scene>();
 
-		auto square = m_ActiveScene->CreateEntity("Square");
+		/*auto square = m_ActiveScene->CreateEntity("Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f,1.0f,0.0f,1.0f });
 
 		auto redSquare = m_ActiveScene->CreateEntity("RedSquare");
@@ -39,9 +40,12 @@ namespace Table
 		cc.Primary = false;
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();*/
 
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+
+		SceneSerializer sceneSerializer(m_ActiveScene);
+		sceneSerializer.DeSerialize("asset/scenes/Example.table");
 	}
 
 	void EditorLayer::OnDetach()
@@ -144,6 +148,18 @@ namespace Table
 				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
 				// which we can't undo at the moment without finer window depth/z control.
 				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+				if (ImGui::MenuItem("Serialize"))
+				{
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Serialize("asset/scenes/Example.table");
+				}
+
+				if (ImGui::MenuItem("Deserialize"))
+				{
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.DeSerialize("asset/scenes/Example.table");
+				}
 
 				if (ImGui::MenuItem("Exit")) Application::Get().Close();
 				ImGui::EndMenu();

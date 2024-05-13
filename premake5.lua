@@ -30,13 +30,14 @@ IncludeDir["ImGui"] = "%{wks.location}/Table/vendor/imgui"
 IncludeDir["glm"] = "%{wks.location}/Table/vendor/glm"
 IncludeDir["stb_image"] = "%{wks.location}/Table/vendor/stb_image"
 IncludeDir["entt"] = "%{wks.location}/Table/vendor/entt/include"
+IncludeDir["yaml_cpp"] = "%{wks.location}/Table/vendor/yaml-cpp/include"
 
 group "Dependencies"
 	include "Build/premake"
 	include "Table/vendor/GLFW"
 	include "Table/vendor/GLAD"
 	include "Table/vendor/imgui"
-
+	include "Table/vendor/yaml-cpp"
 group ""
 
 include "Table"
