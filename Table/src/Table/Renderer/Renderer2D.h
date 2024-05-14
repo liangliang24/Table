@@ -3,6 +3,7 @@
 #include "Table/Renderer/OrthographicCamera.h"
 #include "Table/Renderer/Texture.h"
 #include "Table/Renderer/Camera.h"
+#include "Table/Renderer/EditorCamera.h"
 
 namespace Table
 {
@@ -13,6 +14,7 @@ namespace Table
 		static void Shutdown();
 
 		static void BeginScene(const OrthographicCamera& camera);
+		static void BeginScene(const EditorCamera& camera);
 		static void BeginScene(const Camera& camera, const glm::mat4 & transform);
 		static void EndScene();
 		static void Flush();

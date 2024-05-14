@@ -2,6 +2,10 @@
 #include "entt.hpp"
 
 #include "Table/Core/Timestep.h"
+#include "Table/Renderer/EditorCamera.h"
+
+#include "entt.hpp"
+
 namespace Table
 {
 	class Entity;
@@ -15,7 +19,8 @@ namespace Table
 		Entity CreateEntity(const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 
-		void OnUpdate(Timestep ts);
+		void OnUpdateRuntime(Timestep ts);
+		void OnUpdateEditor(Timestep ts,EditorCamera& camera);
 		void OnViewportResize(uint32_t width, uint32_t height);
 
 		Entity GetPrimaryCameraEntity();

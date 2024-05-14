@@ -3,6 +3,8 @@
 #include "Table.h"
 #include "Panels/SceneHierarchyPanel.h"
 
+#include "Table/Renderer/EditorCamera.h"
+
 namespace Table
 {
 	class EditorLayer : public Layer
@@ -36,6 +38,8 @@ namespace Table
 		Entity m_SecondaryCamera;
 
 		bool m_PrimaryCamera = true;
+
+		EditorCamera m_EditorCamera;
 
 		Ref<Texture2D> m_CheckerboardTexture;
 		Ref<Texture2D> m_FF0Texture;
