@@ -17,3 +17,6 @@
 [submodule "Table/vendor/yaml-cpp"]
 	path = Table/vendor/yaml-cpp
 	url = https://github.com/liangliang24/yaml-cpp
+[submodule "Table/vendor/Imguizmo"]
+	path = Table/vendor/Imguizmo
+	url = https://github.com/liangliang24/ImGuizmo

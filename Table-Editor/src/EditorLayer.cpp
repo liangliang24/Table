@@ -6,6 +6,9 @@
 
 #include "Table/Utils/PlatformUtils.h"
 
+#include "ImGuizmo.h"
+#include "Table/Math/Math.h"
+
 namespace Table
 {
 	EditorLayer::EditorLayer()
@@ -191,7 +194,7 @@ namespace Table
 
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
-		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered || !m_ViewportFocused);
+		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered && !m_ViewportFocused);
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		/*if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize) && viewportPanelSize.x > 0 && viewportPanelSize.y > 0)
@@ -204,6 +207,53 @@ namespace Table
 		uint64_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+
+
+		Entity selectedEntity = m_SceneHierachyPanel.GetSelectedEntity();
+		if (selectedEntity && m_GizmoType != -1  )
+		{
+			ImGuizmo::SetOrthographic(false);
+			ImGuizmo::SetDrawlist();
+
+			float windowWidth = (float)ImGui::GetWindowWidth();
+			float windowHeight = (float)ImGui::GetWindowHeight();
+			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+			auto& cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			const glm::mat4& cameraProjection = camera.GetProjection();
+			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+			auto& tc = selectedEntity.GetComponent<TransformComponent>();
+			glm::mat4 transform = tc.GetTransform();
+
+			bool snap = Input::IsKeyPressed(Key::LeftControl);
+			float snapValue = 0.5f;
+			if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+			{
+				snapValue = 45.0f;
+			}
+
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+
+			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+				(ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform),
+				nullptr, snap ? snapValues : nullptr);
+
+			if (ImGuizmo::IsUsing())
+			{
+				glm::vec3 translation, rotation, scale;
+				Math::DecomposeTransform(transform, translation, rotation, scale);
+
+				glm::vec3 deltaRotation = rotation - tc.Rotation;
+				tc.Translation = translation;
+				tc.Rotation += deltaRotation;
+				tc.Scale = scale;
+			}
+
+		}
+
+		
 
 		ImGui::End();
 
@@ -257,6 +307,18 @@ namespace Table
 			}
 			break;
 		}
+		case Key::Q:
+			m_GizmoType = -1;
+			break;
+		case Key::W:
+			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+			break;
+		case Key::E:
+			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+			break;
+		case Key::R:
+			m_GizmoType = ImGuizmo::OPERATION::SCALE;
+			break;
 		}
 	}
 
@@ -265,6 +327,7 @@ namespace Table
 		m_ActiveScene = CreateRef<Scene>();
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		m_GizmoType = -1;
 	}
 
 	void EditorLayer::OpenScene()
@@ -278,6 +341,8 @@ namespace Table
 
 			SceneSerializer serializer(m_ActiveScene);
 			serializer.DeSerialize(*filepath);
+
+			m_GizmoType = -1;
 		}
 	}
 

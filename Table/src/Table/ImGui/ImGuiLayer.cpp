@@ -8,6 +8,7 @@
 
 #include "Table/Core/Application.h"
 
+#include "ImGuizmo.h"
 
 namespace Table
 {
@@ -66,6 +67,7 @@ namespace Table
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
 	}
 
 	void ImGuiLayer::End()

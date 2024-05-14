@@ -10,7 +10,7 @@ workspace "Table"
 		"Release",
 		"Dist"
 	}
-
+	
 	solution_items
 	{
 		".editorconfig"
@@ -31,6 +31,7 @@ IncludeDir["glm"] = "%{wks.location}/Table/vendor/glm"
 IncludeDir["stb_image"] = "%{wks.location}/Table/vendor/stb_image"
 IncludeDir["entt"] = "%{wks.location}/Table/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/Table/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "%{wks.location}/Table/vendor/Imguizmo"
 
 group "Dependencies"
 	include "Build/premake"

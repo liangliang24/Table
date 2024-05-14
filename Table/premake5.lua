@@ -17,7 +17,9 @@ project "Table"
 		"vendor/stb_image/**.h",
 		"vendor/stb_image/**.cpp",
 		"vendor/glm/glm/**.hpp",
-		"vendor/glm/glm/**.inl"
+		"vendor/glm/glm/**.inl",
+		"vendor/Imguizmo/ImGuizmo.h",
+		"vendor/Imguizmo/ImGuizmo.cpp"
 	}
 
 	defines
@@ -37,7 +39,8 @@ project "Table"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links
@@ -49,6 +52,9 @@ project "Table"
 		"yaml-cpp",
 		"dwmapi.lib"
 	}
+
+	filter "files:vendor/Imguizmo/**.cpp"
+	flags {"NoPCH"}
 
 	filter "system:windows"
 		systemversion "latest"
