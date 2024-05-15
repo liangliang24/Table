@@ -37,6 +37,8 @@ namespace Table
 		Entity m_CameraEntity;
 		Entity m_SecondaryCamera;
 
+		Entity m_HoveredEntity;
+
 		bool m_PrimaryCamera = true;
 
 		EditorCamera m_EditorCamera;
