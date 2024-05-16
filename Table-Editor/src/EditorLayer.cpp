@@ -11,6 +11,9 @@
 
 namespace Table
 {
+
+	extern const std::filesystem::path g_AssetPath;
+
 	EditorLayer::EditorLayer()
 		:Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f)
 	{
@@ -246,6 +249,16 @@ namespace Table
 
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
 
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+			{
+				const wchar_t* path = (const wchar_t*)payload->Data;
+				OpenScene(std::filesystem::path(g_AssetPath) / path);
+			}
+			ImGui::EndDragDropTarget();
+		}
+
 		Entity selectedEntity = m_SceneHierachyPanel.GetSelectedEntity();
 		if (selectedEntity && m_GizmoType != -1  )
 		{
@@ -383,18 +396,22 @@ namespace Table
 
 	void EditorLayer::OpenScene()
 	{
-		std::optional<std::string> filepath = FileDialogs::OpenFile("Table Scene (*.table)\0*.table\0");
-		if (filepath)
+		std::string filepath = FileDialogs::OpenFile("Table Scene (*.table)\0*.table\0");
+		if (!filepath.empty())
 		{
-			m_ActiveScene = CreateRef<Scene>();
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_SceneHierachyPanel.SetContext(m_ActiveScene);
-
-			SceneSerializer serializer(m_ActiveScene);
-			serializer.DeSerialize(*filepath);
-
-			m_GizmoType = -1;
+			OpenScene(filepath);
 		}
+	}
+
+	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	{
+			
+		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+
+		SceneSerializer serializer(m_ActiveScene);
+		serializer.DeSerialize(path.string());
 	}
 
 	void EditorLayer::SaveSceneAs()

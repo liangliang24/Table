@@ -26,6 +26,7 @@ namespace Table
 
 		void NewScene();
 		void OpenScene();
+		void OpenScene(const std::filesystem::path& path);
 		void SaveSceneAs();
 
 		OrthographicCameraController m_CameraController;
