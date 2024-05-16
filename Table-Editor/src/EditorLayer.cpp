@@ -52,10 +52,10 @@ namespace Table
 
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
 
-		SceneSerializer sceneSerializer(m_ActiveScene);
-		sceneSerializer.DeSerialize("asset/scenes/Example.table");
+		//SceneSerializer sceneSerializer(m_ActiveScene);
+		//sceneSerializer.DeSerialize("asset/scenes/Example.table");
 	}
-
+	
 	void EditorLayer::OnDetach()
 	{
 		TABLE_PROFILE_FUNCTION();
@@ -200,6 +200,7 @@ namespace Table
 		}
 
 		m_SceneHierachyPanel.OnImGuiRender();
+		m_ContentBrowserPanel.OnImGuiRender();
 
 		ImGui::Begin("Stats");
 

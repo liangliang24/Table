@@ -1,4 +1,8 @@
 #pragma once
+
+#include <string>
+#include "Table/Core/Core.h"
+
 namespace Table
 {
 	class Texture

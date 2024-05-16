@@ -2,6 +2,7 @@
 
 #include "Table.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/ContentBrowserPanel.h"
 
 #include "Table/Renderer/EditorCamera.h"
 
@@ -56,6 +57,7 @@ namespace Table
 		glm::vec4 m_SquareColor = { 0.2f,0.3f,0.8f,1.0f };
 
 		SceneHierarchyPanel m_SceneHierachyPanel;
+		ContentBrowserPanel m_ContentBrowserPanel;
 	};
 
 	class CameraController : public ScriptableEntity

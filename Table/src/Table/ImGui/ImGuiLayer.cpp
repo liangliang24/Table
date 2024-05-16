@@ -31,6 +31,8 @@ namespace Table
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		
+		static float fontSize = 18.0f;
+
 		io.Fonts->AddFontFromFileTTF("asset/fonts/Open_sans/OpenSans-Bold.ttf", 18.0f);
 		io.FontDefault = io.Fonts->AddFontFromFileTTF("asset/fonts/Open_sans/OpenSans-Regular.ttf", 18.0f);
 
