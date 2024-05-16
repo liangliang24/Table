@@ -6,6 +6,7 @@
 
 #include <glfw/glfw3.h>
 
+//#define GLM_FORCE_QUAT_DATA_WXYZ
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 

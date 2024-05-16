@@ -3,7 +3,7 @@
 
 #ifdef TABLE_PLATFORM_WINDOWS
 
-extern Table::Application* Table::CreateApplication();
+extern Table::Application* Table::CreateApplication(ApplicationCommandLineArgs args);
 
 int main(int argc, char** argv)
 {
@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 
 	//printf("Hello Table Engine!")
 	TABLE_PROFILE_BEGIN_SESSION("Startup", "TableProfile_Startup.json");
-	auto app = Table::CreateApplication();
+	auto app = Table::CreateApplication({argc, argv});
 	TABLE_PROFILE_END_SESSION();
 
 	TABLE_PROFILE_BEGIN_SESSION("Runtime", "TableProfile-Runtime.json");

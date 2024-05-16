@@ -30,6 +30,14 @@ namespace Table
 
 		m_ActiveScene = CreateRef<Scene>();
 
+		auto commandLineArgs = Application::Get().GetCommandLineArgs();
+		if (commandLineArgs.Count > 1)
+		{
+			auto sceneFilePath = commandLineArgs[1];
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.DeSerialize(sceneFilePath);
+		}
+
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 		/*auto square = m_ActiveScene->CreateEntity("Square");
@@ -51,9 +59,6 @@ namespace Table
 		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();*/
 
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
-
-		SceneSerializer sceneSerializer(m_ActiveScene);
-		sceneSerializer.DeSerialize("asset/scenes/Example.table");
 	}
 
 	void EditorLayer::OnDetach()
@@ -382,15 +387,15 @@ namespace Table
 
 	void EditorLayer::OpenScene()
 	{
-		std::optional<std::string> filepath = FileDialogs::OpenFile("Table Scene (*.table)\0*.table\0");
-		if (filepath)
+		std::string filepath = FileDialogs::OpenFile("Table Scene (*.table)\0*.table\0");
+		if (!filepath.empty())
 		{
 			m_ActiveScene = CreateRef<Scene>();
 			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_SceneHierachyPanel.SetContext(m_ActiveScene);
 
 			SceneSerializer serializer(m_ActiveScene);
-			serializer.DeSerialize(*filepath);
+			serializer.DeSerialize(filepath);
 
 			m_GizmoType = -1;
 		}
@@ -398,11 +403,11 @@ namespace Table
 
 	void EditorLayer::SaveSceneAs()
 	{
-		std::optional<std::string> filepath = FileDialogs::SaveFile("Table Scene (*.table\0*.table\0");
-		if (filepath)
+		std::string filepath = FileDialogs::SaveFile("Table Scene (*.table\0*.table\0");
+		if (!filepath.empty())
 		{
 			SceneSerializer serializer(m_ActiveScene);
-			serializer.Serialize(*filepath);
+			serializer.Serialize(filepath);
 		}
 	}
 

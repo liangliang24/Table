@@ -2,9 +2,11 @@
 #include "Table/Renderer/Renderer2D.h"
 #include "Table/Renderer/VertexArray.h"
 #include "Table/Renderer/Shader.h"
+#include "Table/Renderer/UniformBuffer.h"
 #include "Table/Renderer/RenderCommand.h"
+
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Table
 {
@@ -43,9 +45,15 @@ namespace Table
 		glm::vec4 QuadVertexPositions[4];
 
 		Renderer2D::Statistics Stats;
+
+		struct CameraData
+		{
+			glm::mat4 VieProjection;
+		};
+		CameraData CameraBuffer;
+		Ref<UniformBuffer> CameraUniformBuffer;
 	};
 	
-
 	static Renderer2DData s_Data;
 
 	void Renderer2D::Init()
@@ -103,8 +111,6 @@ namespace Table
 		}
 
 		s_Data.TextureShader = Shader::Create("asset/shaders/Texture.glsl");
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
 		s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 
@@ -112,6 +118,8 @@ namespace Table
 		s_Data.QuadVertexPositions[1] = {  0.5f,-0.5f,0.0f,1.0f };
 		s_Data.QuadVertexPositions[2] = {  0.5f, 0.5f,0.0f,1.0f };
 		s_Data.QuadVertexPositions[3] = { -0.5f, 0.5f,0.0f,1.0f };
+
+		s_Data.CameraUniformBuffer = UniformBuffer::Create(sizeof(Renderer2DData::CameraData), 0);
 	}
 
 	void Renderer2D::Shutdown()
@@ -124,6 +132,7 @@ namespace Table
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		TABLE_PROFILE_FUNCTION();
+
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
@@ -133,10 +142,9 @@ namespace Table
 	void Renderer2D::BeginScene(const Camera& camera, const glm::mat4 & transform)
 	{
 		TABLE_PROFILE_FUNCTION();
-		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
 
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.CameraBuffer.VieProjection = camera.GetProjection()*glm::inverse(transform);
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		StartBatch();
 	}
@@ -145,10 +153,8 @@ namespace Table
 	{
 		TABLE_PROFILE_FUNCTION();
 
-		glm::mat4 viewProj = camera.GetViewProjection();
-
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.CameraBuffer.VieProjection = camera.GetProjection();
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		StartBatch();
 	}
@@ -175,6 +181,8 @@ namespace Table
 		{
 			s_Data.TextureSlots[i]->Bind(i);
 		}
+
+		s_Data.TextureShader->Bind();
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 		s_Data.Stats.DrawCalls++;
 	}

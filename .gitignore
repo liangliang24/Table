@@ -14,3 +14,7 @@ Card/TableProfile-Shutdown.json
 Card/TableProfile_Startup.json
 *.log
 *.json
+
+Table/vendor/VulkanSDK
+Table-Editor/asset/cache/
+scripts/_pycache_

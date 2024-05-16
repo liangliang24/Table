@@ -8,7 +8,8 @@ namespace Table
 	class TableEditor : public Application
 	{
 	public:
-		TableEditor()
+		TableEditor(ApplicationCommandLineArgs args)
+			: Application("TableEditor", args)
 		{
 			//PushLayer(new ExampleLayer());
 			PushLayer(new EditorLayer());
@@ -21,8 +22,8 @@ namespace Table
 
 	};
 
-	Application* CreateApplication()
+	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
-		return new TableEditor();
+		return new TableEditor(args);
 	}
 }
