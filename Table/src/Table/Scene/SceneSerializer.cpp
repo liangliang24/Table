@@ -122,12 +122,12 @@ namespace Table
 			out << YAML::Key << "Camera" << YAML::Value;
 			out << YAML::BeginMap;
 			out << YAML::Key << "ProjectionType" << YAML::Value << (int)camera.GetProjectionType();
-			out << YAML::Key << "PerspectiveFOV" << YAML::Value << (int)camera.GetPerspectiveVerticalFOV();
-			out << YAML::Key << "PerspectiveNear" << YAML::Value << (int)camera.GetPerspectiveNearClip();
-			out << YAML::Key << "PerspectiveFar" << YAML::Value << (int)camera.GetOrthographicFarClip();
-			out << YAML::Key << "OrthographicSize" << YAML::Value << (int)camera.GetOrthographicSize();
-			out << YAML::Key << "OrthographicNear" << YAML::Value << (int)camera.GetOrthographicNearClip();
-			out << YAML::Key << "OrthographicFar" << YAML::Value << (int)camera.GetOrthographicFarClip();
+			out << YAML::Key << "PerspectiveFOV" << YAML::Value << camera.GetPerspectiveVerticalFOV();
+			out << YAML::Key << "PerspectiveNear" << YAML::Value << camera.GetPerspectiveNearClip();
+			out << YAML::Key << "PerspectiveFar" << YAML::Value << camera.GetPerspectiveFarClip();
+			out << YAML::Key << "OrthographicSize" << YAML::Value << camera.GetOrthographicSize();
+			out << YAML::Key << "OrthographicNear" << YAML::Value << camera.GetOrthographicNearClip();
+			out << YAML::Key << "OrthographicFar" << YAML::Value << camera.GetOrthographicFarClip();
 			out << YAML::EndMap;
 
 			out << YAML::Key << "Primary" << YAML::Value << cameraComponent.Primary;
