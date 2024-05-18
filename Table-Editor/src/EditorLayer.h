@@ -29,6 +29,11 @@ namespace Table
 		void OpenScene(const std::filesystem::path& path);
 		void SaveSceneAs();
 
+		void OnScenePlay();
+		void OnSceneStop();
+
+		void UI_Toolbar();
+
 		OrthographicCameraController m_CameraController;
 
 		Ref<VertexArray> m_SquareVA;
@@ -47,7 +52,6 @@ namespace Table
 		EditorCamera m_EditorCamera;
 
 		Ref<Texture2D> m_CheckerboardTexture;
-		Ref<Texture2D> m_FF0Texture;
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 		glm::vec2 m_ViewportSize = { 0.0f,0.0f };
@@ -55,10 +59,18 @@ namespace Table
 
 		int m_GizmoType = -1;
 
+		enum class SceneState
+		{
+			Edit = 0, Play = 1
+		};
+		SceneState m_SceneState = SceneState::Edit;
+
 		glm::vec4 m_SquareColor = { 0.2f,0.3f,0.8f,1.0f };
 
 		SceneHierarchyPanel m_SceneHierachyPanel;
 		ContentBrowserPanel m_ContentBrowserPanel;
+
+		Ref<Texture2D> m_IconPlay, m_IconStop;
 	};
 
 	class CameraController : public ScriptableEntity
