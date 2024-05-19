@@ -20,3 +20,6 @@
 [submodule "Table/vendor/Imguizmo"]
 	path = Table/vendor/Imguizmo
 	url = https://github.com/liangliang24/ImGuizmo
+[submodule "Table/vendor/Box2D"]
+	path = Table/vendor/Box2D
+	url = https://github.com/liangliang24/box2d
