@@ -67,7 +67,7 @@ namespace Table
 
 		glm::vec4 m_SquareColor = { 0.2f,0.3f,0.8f,1.0f };
 
-		SceneHierarchyPanel m_SceneHierachyPanel;
+		SceneHierarchyPanel m_SceneHierarchyPanel;
 		ContentBrowserPanel m_ContentBrowserPanel;
 
 		Ref<Texture2D> m_IconPlay, m_IconStop;

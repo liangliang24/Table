@@ -55,7 +55,7 @@ namespace Table
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();*/
 
-		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 		//SceneSerializer sceneSerializer(m_ActiveScene);
 		//sceneSerializer.DeSerialize("asset/scenes/Example.table");
@@ -214,7 +214,7 @@ namespace Table
 			ImGui::EndMenuBar();
 		}
 
-		m_SceneHierachyPanel.OnImGuiRender();
+		m_SceneHierarchyPanel.OnImGuiRender();
 		m_ContentBrowserPanel.OnImGuiRender();
 
 		ImGui::Begin("Stats");
@@ -271,7 +271,7 @@ namespace Table
 			ImGui::EndDragDropTarget();
 		}
 
-		Entity selectedEntity = m_SceneHierachyPanel.GetSelectedEntity();
+		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
 		if (selectedEntity && m_GizmoType != -1  )
 		{
 			ImGuizmo::SetOrthographic(false);
@@ -394,7 +394,7 @@ namespace Table
 		{
 			if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt))
 			{
-				m_SceneHierachyPanel.SetSelectedEntity(m_HoveredEntity);
+				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
 			}
 			return false;
 		}
@@ -404,7 +404,7 @@ namespace Table
 	{
 		m_ActiveScene = CreateRef<Scene>();
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 		m_GizmoType = -1;
 	}
 
@@ -419,13 +419,23 @@ namespace Table
 
 	void EditorLayer::OpenScene(const std::filesystem::path& path)
 	{
-			
-		m_ActiveScene = CreateRef<Scene>();
-		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		if (path.extension().string() != ".table")
+		{
+			TABLE_WARN("Could not load {0} - not a scene file", path.filename().string());
+			return;
+		}
 
-		SceneSerializer serializer(m_ActiveScene);
-		serializer.DeSerialize(path.string());
+		Ref<Scene> newScene = CreateRef<Scene>();
+		SceneSerializer serializer(newScene);
+		m_ActiveScene = newScene;
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		if (serializer.DeSerialize(path.string()))
+		{
+			TABLE_INFO("Deserialize {0} Success!", path.filename().string());
+			return;
+		}
+
 	}
 
 	void EditorLayer::SaveSceneAs()

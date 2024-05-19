@@ -11,6 +11,8 @@ int main(int argc, char** argv)
 	TABLE_CORE_WARN("Initialized Table log!");
 	TABLE_INFO("Initialized Client log!");
 
+	
+
 	//printf("Hello Table Engine!")
 	TABLE_PROFILE_BEGIN_SESSION("Startup", "TableProfile_Startup.json");
 	auto app = Table::CreateApplication();
