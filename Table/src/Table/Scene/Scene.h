@@ -1,6 +1,6 @@
 #pragma once
-#include "entt.hpp"
 
+#include "Table/Core/UUID.h"
 #include "Table/Core/Timestep.h"
 #include "Table/Renderer/EditorCamera.h"
 
@@ -19,6 +19,7 @@ namespace Table
 		~Scene();
 
 		Entity CreateEntity(const std::string& name = std::string());
+		Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 
 		void OnRuntimeStart();

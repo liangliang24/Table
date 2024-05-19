@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 #include "Components.h"
+#include "ScriptableEntity.h"
 #include "Table/Renderer/Renderer2D.h"
 
 #include "glm/glm.hpp"
@@ -40,7 +41,13 @@ namespace Table
 
 	Entity Scene::CreateEntity(const std::string& name /*= std::string()*/)
 	{
+		return CreateEntityWithUUID(UUID(), name);
+	}
+
+	Table::Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name /*= std::string()*/)
+	{
 		Entity entity = { m_Registry.create(), this };
+		entity.AddComponent<IDComponent>(uuid);
 		entity.AddComponent<TransformComponent>();
 		auto& tag = entity.AddComponent<TagComponent>();
 		tag.Tag = name.empty() ? "Entity" : name;
@@ -221,7 +228,7 @@ namespace Table
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)
 	{
-		static_assert(false);
+		//static_assert(false);
 	}
 
 	template<>
@@ -241,4 +248,6 @@ namespace Table
 	void Scene::OnComponentAdded<Rigidbody2DComponent>(Entity entity, Rigidbody2DComponent& component) {}
 	template<>
 	void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component) {}
+	template<>
+	void Scene::OnComponentAdded<IDComponent>(Entity entity, IDComponent& component) {}
 }

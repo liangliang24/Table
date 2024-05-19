@@ -1,6 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: 12837192831273
+  - Entity: 17840180144428500597
     TagComponent:
       Tag: Square
     TransformComponent:
@@ -9,7 +9,7 @@ Entities:
       Scale: [1, 1, 1]
     SpriteRendererComponent:
       Color: [0, 1, 0, 1]
-  - Entity: 12837192831273
+  - Entity: 8842613689636544833
     TagComponent:
       Tag: RedSquare
     TransformComponent:
@@ -18,7 +18,7 @@ Entities:
       Scale: [1, 1, 1]
     SpriteRendererComponent:
       Color: [1, 0, 0, 1]
-  - Entity: 12837192831273
+  - Entity: 4818208315689988832
     TagComponent:
       Tag: Camera
     TransformComponent:

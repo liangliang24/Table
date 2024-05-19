@@ -1,18 +1,28 @@
 #pragma once
 
+#include "Table/Scene/SceneCamera.h"
+#include "Table/Renderer/Texture.h"
+#include "Table/Core/UUID.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "Table/Scene/SceneCamera.h"
-#include "Table/Scene/ScriptableEntity.h"
-#include "Table/Renderer/Texture.h"
 
 
 namespace Table
 {
+
+	struct IDComponent
+	{
+		UUID ID;
+
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
+
 	struct TagComponent
 	{
 		std::string Tag;
@@ -63,6 +73,8 @@ namespace Table
 		SpriteRendererComponent(const glm::vec4& color)
 			: Color(color) {}
 	};
+
+	class ScriptableEntity;
 
 	struct NativeScriptComponent
 	{
