@@ -5,6 +5,12 @@
 
 namespace Table
 {
+	class Time
+	{
+	public:
+		static float GetTime();
+	};
+
 	class FileDialogs
 	{
 	public:

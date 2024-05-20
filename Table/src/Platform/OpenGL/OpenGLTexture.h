@@ -21,17 +21,19 @@ namespace Table
 
 		virtual bool IsLoaded() const override { return m_IsLoaded; }
 
+		virtual const std::string& GetPath() const override { return m_Path; }
+
 		void SetData(void* data, uint32_t size) override;
 
 		virtual bool operator==(const Texture& other) const override
 		{
-			return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID;
+			return m_RendererID == other.GetRendererID();
 		}
 
 		uint32_t GetRendererID() const override { return m_RendererID; }
 
 	private:
-		std::string m_path;
+		std::string m_Path;
 		bool m_IsLoaded = false;
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;

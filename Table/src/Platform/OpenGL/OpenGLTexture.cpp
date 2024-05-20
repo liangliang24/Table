@@ -7,7 +7,7 @@ namespace Table
 {
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
-		:m_path(path)
+		:m_Path(path)
 	{
 		TABLE_PROFILE_FUNCTION();
 		

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <xhash>
-
 namespace Table
 {
 	class UUID
@@ -19,12 +17,14 @@ namespace Table
 
 namespace std
 {
+	template<typename T> struct hash;
+
 	template<>
 	struct hash<Table::UUID>
 	{
 		std::size_t operator()(const Table::UUID& uuid) const 
 		{
-			return hash<uint64_t>()((uint64_t)uuid);
+			return (uint64_t)uuid;
 		}
 	};
 }

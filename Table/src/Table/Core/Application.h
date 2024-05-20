@@ -19,14 +19,32 @@ int main(int argc, char** argv);
 
 namespace Table 
 {
+	struct ApplicationCommandLineArgs
+	{
+		int Count = 0;
+		char** Args = nullptr;
+
+		const char* operator[](int index) const
+		{
+			TABLE_CORE_ASSERT(index < Count);
+			return Args[index];
+		}
+	};
+
+	struct ApplicationSpecification
+	{
+		std::string Name = "Table Application";
+		std::string WorkingDirectory;
+		ApplicationCommandLineArgs CommandLineArgs;
+	};
+
 	class Application
 	{
 	public:
-		Application(const std::string& name = "Table APP");
+		Application(const ApplicationSpecification& specification);
+
 		virtual ~Application();
-
 		
-
 		void OnEvent(Event& e);
 
 		void PushLayer(Layer* layer);
@@ -34,17 +52,19 @@ namespace Table
 
 		void Close();
 
-		inline Window& GetWindow() { return *m_Window; }
+		Window& GetWindow() { return *m_Window; }
 
 		ImGuiLayer* GetImGuiLayer() { return m_ImguiLayer; }
 
-		inline static Application& Get() { return *s_Instance; }
+		static Application& Get() { return *s_Instance; }
 
+		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 	private:
 		void Run();
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 
+		ApplicationSpecification m_Specification;
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImguiLayer;
 		bool m_Running = true;
@@ -57,7 +77,7 @@ namespace Table
 		friend int ::main(int argc, char** argv);
 	};
 
-	Application* CreateApplication();
+	Application* CreateApplication(ApplicationCommandLineArgs args);
 }
 
 

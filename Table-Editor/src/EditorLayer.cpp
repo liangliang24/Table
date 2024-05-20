@@ -37,28 +37,20 @@ namespace Table
 		m_EditorScene = CreateRef<Scene>();
 		m_ActiveScene = m_EditorScene;
 
+		
+
+		
+
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
-
-		/*auto square = m_ActiveScene->CreateEntity("Square");
-		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f,1.0f,0.0f,1.0f });
-
-		auto redSquare = m_ActiveScene->CreateEntity("RedSquare");
-		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f,0.0f,0.0f,1.0f });
-
-		m_SquareEntity = square;
-
-		m_CameraEntity = m_ActiveScene->CreateEntity("CamearaEntity");
-		m_CameraEntity.AddComponent<CameraComponent>();
-
-		m_SecondaryCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
-		auto& cc = m_SecondaryCamera.AddComponent<CameraComponent>();
-		cc.Primary = false;
-
-		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-		m_SecondaryCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();*/
-
-		//SceneSerializer sceneSerializer(m_ActiveScene);
-		//sceneSerializer.DeSerialize("asset/scenes/Example.table");
+		Renderer2D::SetLineWidth(4.0f);
+		
+		auto commandLineArgs = Application::Get().GetSpecification().CommandLineArgs;
+		if (commandLineArgs.Count > 1)
+		{
+			auto sceneFilePath = commandLineArgs[1];
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.DeSerialize(sceneFilePath);
+		}
 	}
 	
 	void EditorLayer::OnDetach()
@@ -212,6 +204,9 @@ namespace Table
 					OpenScene();
 				}
 
+				if (ImGui::MenuItem("Save", "Ctrl+S"))
+					SaveScene();
+
 				if (ImGui::MenuItem("Save As...","Ctrl+Shift+S"))
 				{
 					SaveSceneAs();
@@ -340,7 +335,10 @@ namespace Table
 	void EditorLayer::OnEvent(Event& e)
 	{
 		m_CameraController.OnEvent(e);
-		m_EditorCamera.OnEvent(e);
+		if (m_SceneState == SceneState::Edit)
+		{
+			m_EditorCamera.OnEvent(e);
+		}
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(TABLE_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
@@ -349,7 +347,7 @@ namespace Table
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
 	{
-		if (e.GetRepeatCount() > 0)
+		if (e.IsRepeat())
 		{
 			return false;
 		}
@@ -481,6 +479,14 @@ namespace Table
 					Renderer2D::DrawCircle(transform, glm::vec4(0, 1, 0, 1), 0.01f);
 				}
 			}
+		}
+
+		// Draw selected entity outline 
+		if (Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity()) {
+
+			TransformComponent transform = selectedEntity.GetComponent<TransformComponent>();
+
+			Renderer2D::DrawRect(transform.GetTransform(), glm::vec4(1, 1, 1, 1));
 		}
 
 		Renderer2D::EndScene();

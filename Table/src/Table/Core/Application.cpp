@@ -1,26 +1,29 @@
 #include "tpch.h"
-
-
 #include "Table/Core/Application.h"
 #include "Table/Core/Log.h"
 #include <glad/glad.h>
 #include "Table/Core/Input.h"
 #include <GLFW/glfw3.h>
 #include "Table/Renderer/Renderer.h"
+#include "Table/Utils/PlatformUtils.h"
 
 namespace Table
 {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application(const std::string& name)
+	Application::Application(const ApplicationSpecification& specification)
+		: m_Specification(specification)
 	{
 		TABLE_PROFILE_FUNCTION();
 
 		TABLE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		m_Window = Window::Create();
+		if (!m_Specification.WorkingDirectory.empty())
+			std::filesystem::current_path(m_Specification.WorkingDirectory);
+
+		m_Window = Window::Create(WindowProps(m_Specification.Name));
 		m_Window->SetEventCallback(TABLE_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
