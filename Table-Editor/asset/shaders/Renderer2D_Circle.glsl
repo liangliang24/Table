@@ -11,7 +11,6 @@ layout(location = 4) in float a_Fade;
 layout(location = 5) in int a_EntityID;
 
 uniform mat4 u_ViewProjection;
-uniform mat4 u_Transform;
 
 out vec3 v_LocalPosition;
 out vec4 v_Color;
