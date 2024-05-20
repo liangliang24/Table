@@ -42,7 +42,7 @@ Entities:
     TagComponent:
       Tag: Camera
     TransformComponent:
-      Translation: [0, 0, 10]
+      Translation: [0, 0, 20]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -77,12 +77,12 @@ Entities:
       RestitutionThreshold: 0.5
   - Entity: 17379929293285731519
     TagComponent:
-      Tag: Empty Entity
+      Tag: Circle
     TransformComponent:
-      Translation: [-1.44161224, 0, 0]
+      Translation: [-1.44161224, -0.271810532, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CircleRendererComponent:
       Color: [0.938223958, 0.0470923409, 0.8934955, 1]
-      Thickness: 1
+      Thickness: 0.0250000004
       Fade: 0.00499999989
