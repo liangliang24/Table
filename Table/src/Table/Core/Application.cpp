@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 #include "Table/Renderer/Renderer.h"
 #include "Table/Utils/PlatformUtils.h"
+#include "Table/Scripting/ScriptEngine.h"
 
 namespace Table
 {
@@ -27,6 +28,7 @@ namespace Table
 		m_Window->SetEventCallback(TABLE_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
+		ScriptEngine::Init();
 
 		m_ImguiLayer = new ImGuiLayer();
 		PushOverLay(m_ImguiLayer);
@@ -39,6 +41,7 @@ namespace Table
 	{
 		TABLE_PROFILE_FUNCTION();
 		Renderer::Shutdown();
+		ScriptEngine::Shutdown();
 	}
 
 	void Application::Run()

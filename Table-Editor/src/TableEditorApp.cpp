@@ -25,7 +25,7 @@ namespace Table
 	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
 		ApplicationSpecification spec;
-		spec.Name = "Hazelnut";
+		spec.Name = "Table-Editor";
 		spec.CommandLineArgs = args;
 
 		return new TableEditor(spec);

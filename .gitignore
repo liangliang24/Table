@@ -2,6 +2,7 @@
 bin/
 !Build/premake/bin
 bin-int/
+Intermediates/
 
 # Visual Studio files and folder
 .vs/
@@ -9,6 +10,8 @@ bin-int/
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+**.csproj
+**.cache
 Card/TableProfile-Runtime.json
 Card/TableProfile-Shutdown.json
 Card/TableProfile_Startup.json

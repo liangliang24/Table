@@ -2,7 +2,7 @@ project "Table"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 
 	targetdir ("%{wks.location}/bin/".. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/".. outputdir .. "/%{prj.name}")
@@ -40,6 +40,7 @@ project "Table"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
+		"%{IncludeDir.mono}",
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.ImGuizmo}"
 	}
@@ -52,7 +53,8 @@ project "Table"
 		"ImGui",
 		"opengl32.lib",
 		"yaml-cpp",
-		"dwmapi.lib"
+		"dwmapi.lib",
+		"%{Library.mono}"
 	}
 
 	filter "files:vendor/Imguizmo/**.cpp"
@@ -64,6 +66,14 @@ project "Table"
 		defines
 		{
 
+		}
+
+		links
+		{
+			"%{Library.WinSock}",
+			"%{Library.WinMM}",
+			"%{Library.WinVersion}",
+			"%{Library.BCrypt}",
 		}
 
 	filter "configurations:Debug"
