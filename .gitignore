@@ -3,6 +3,7 @@ bin/
 !Build/premake/bin
 bin-int/
 Intermediates/
+Binaries/
 
 # Visual Studio files and folder
 .vs/
