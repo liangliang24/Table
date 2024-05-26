@@ -30,6 +30,10 @@ namespace Table
 
 	void SceneCamera::SetViewportSize(uint32_t width, uint32_t height)
 	{
+		if (height == 0)
+		{
+			height = 1;
+		}
 		m_AspectRatio = (float)width / (float)height;
 		RecalculateProjection();
 	}

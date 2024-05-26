@@ -3,6 +3,7 @@
 
 #include "Components.h"
 #include "ScriptableEntity.h"
+#include "Table/Scripting/ScriptEngine.h"
 #include "Table/Renderer/Renderer2D.h"
 
 #include "glm/glm.hpp"
@@ -115,22 +116,39 @@ namespace Table
 		entity.AddComponent<TransformComponent>();
 		auto& tag = entity.AddComponent<TagComponent>();
 		tag.Tag = name.empty() ? "Entity" : name;
+
+		m_EntityMap[uuid] = entity;
+
 		return entity;
 	}
 
 	void Scene::DestroyEntity(Entity entity)
 	{
 		m_Registry.destroy(entity);
+		m_EntityMap.erase(entity.GetUUID());
 	}
 
 	void Scene::OnRuntimeStart()
 	{
 		OnPhysics2DStart();
+
+		{
+			ScriptEngine::OnRuntimeStart(this);
+			
+			auto view = m_Registry.view<ScriptComponent>();
+			for (auto e : view)
+			{
+				Entity entity = { e, this };
+				ScriptEngine::OnCreateEntity(entity);
+			}
+		}
 	}
 
 	void Scene::OnRuntimeStop()
 	{
 		OnPhysics2DStop();
+
+		ScriptEngine::OnRuntimeStop();
 	}
 
 	void Scene::OnSimulationStart()
@@ -151,6 +169,13 @@ namespace Table
 	void Scene::OnUpdateRuntime(Timestep ts)
 	{
 		{
+			auto view = m_Registry.view<ScriptComponent>();
+			for (auto e : view)
+			{
+				Entity entity = { e, this };
+				ScriptEngine::OnUpdateEntity(entity, ts);
+			}
+
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 				{
 					if (!nsc.Instance)
@@ -289,6 +314,15 @@ namespace Table
 		CopyComponentIfExists(AllComponents{}, newEntity, entity);
 	}
 
+	Table::Entity Scene::GetEntityByUUID(UUID uuid)
+	{
+		if (m_EntityMap.find(uuid) != m_EntityMap.end())
+		{
+			return { m_EntityMap.at(uuid), this };
+		}
+		return {};
+	}
+
 	Entity Scene::GetPrimaryCameraEntity()
 	{
 		auto view = m_Registry.view<CameraComponent>();
@@ -407,6 +441,8 @@ namespace Table
 	{
 		component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
+	template<>
+	void Scene::OnComponentAdded<ScriptComponent>(Entity entity, ScriptComponent& component) {}
 	template<>
 	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component) {}
 	template<>

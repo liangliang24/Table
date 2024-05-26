@@ -84,6 +84,14 @@ namespace Table
 			: Color(color) {}
 	};
 
+	struct ScriptComponent
+	{
+		std::string ClassName;
+
+		ScriptComponent() = default;
+		ScriptComponent(const ScriptComponent&) = default;
+	};
+
 	class ScriptableEntity;
 
 	struct NativeScriptComponent
@@ -154,6 +162,7 @@ namespace Table
 		SpriteRendererComponent,
 		CircleRendererComponent,
 		CameraComponent,
+		ScriptComponent,
 		NativeScriptComponent,
 		Rigidbody2DComponent,
 		BoxCollider2DComponent,

@@ -37,10 +37,6 @@ namespace Table
 		m_EditorScene = CreateRef<Scene>();
 		m_ActiveScene = m_EditorScene;
 
-		
-
-		
-
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 		Renderer2D::SetLineWidth(4.0f);
 		
@@ -48,8 +44,7 @@ namespace Table
 		if (commandLineArgs.Count > 1)
 		{
 			auto sceneFilePath = commandLineArgs[1];
-			SceneSerializer serializer(m_ActiveScene);
-			serializer.DeSerialize(sceneFilePath);
+			OpenScene(sceneFilePath);
 		}
 	}
 	
