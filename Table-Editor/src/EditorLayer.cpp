@@ -414,7 +414,7 @@ namespace Table
 	{
 		if (e.GetMouseButton() == Mouse::ButtonLeft)
 		{
-			if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt))
+			if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt) && m_HoveredEntity)
 			{
 				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
 			}

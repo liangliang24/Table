@@ -70,7 +70,7 @@ namespace Table
 		TABLE_CORE_ASSERT(entity);
 
 		entity.GetComponent<TransformComponent>().Translation = *translation;
-		TABLE_CORE_TRACE("{0}", entity.GetComponent<TransformComponent>().Translation);
+		//TABLE_CORE_TRACE("{0}", entity.GetComponent<TransformComponent>().Translation);
 	}
 
 	static void Rigidbody2DComponent_ApplyLinearImpulse(UUID entityID, glm::vec2* impulse, glm::vec2* point, bool wake)
