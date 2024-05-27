@@ -41,7 +41,7 @@ namespace Sandbox
             else if (Input.IsKeyDown(KeyCode.D))
                 velocity.X = 1.0f;
 
-            velocity *= speed;
+            velocity *= speed * ts;
 
             if(m_Rigidbody != null) 
             {

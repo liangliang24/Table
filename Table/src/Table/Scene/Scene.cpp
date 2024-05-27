@@ -130,6 +130,8 @@ namespace Table
 
 	void Scene::OnRuntimeStart()
 	{
+		m_IsRunning = true;
+
 		OnPhysics2DStart();
 
 		{
@@ -146,6 +148,8 @@ namespace Table
 
 	void Scene::OnRuntimeStop()
 	{
+		m_IsRunning = false;
+
 		OnPhysics2DStop();
 
 		ScriptEngine::OnRuntimeStop();
