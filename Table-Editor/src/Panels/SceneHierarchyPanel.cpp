@@ -256,7 +256,7 @@ namespace Table {
 		{
 			
 			DisplayAddComponentEntry<CameraComponent>("Camera");
-			DisplayAddComponentEntry<ScriptComponent>("Script");
+			DisplayAddComponentEntry<ScriptComponent>("Script Component");
 			DisplayAddComponentEntry<SpriteRendererComponent>("Sprite Renderer");
 			DisplayAddComponentEntry<CircleRendererComponent>("Circle Renderer");
 			DisplayAddComponentEntry<Rigidbody2DComponent>("Rigidbody 2D");

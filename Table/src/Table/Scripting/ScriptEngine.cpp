@@ -192,7 +192,7 @@ namespace Table
 		mono_domain_set(s_Data->AppDomain, true);
 
 		// Move this maybe
-		s_Data->CoreAssembly = Utils::LoadMonoAssembly("Resources/Scripts/Table-ScriptCore.dll");
+		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath);
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
 		//Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
@@ -295,6 +295,12 @@ namespace Table
 	MonoImage* ScriptEngine::GetCoreAssemblyImage()
 	{
 		return s_Data->CoreAssemblyImage;
+	}
+
+	MonoObject* ScriptEngine::GetManagedInstance(UUID uuid)
+	{
+		TABLE_CORE_ASSERT(s_Data->EntityInstances.find(uuid) != s_Data->EntityInstances.end());
+		return s_Data->EntityInstances.at(uuid)->GetManagedObject();
 	}
 
 	void ScriptEngine::InitMono()
