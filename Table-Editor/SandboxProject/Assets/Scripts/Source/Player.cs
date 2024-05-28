@@ -26,7 +26,7 @@ namespace Sandbox
 
         void OnUpdate(float ts)
         {
-            //Console.WriteLine($"Player.OnUpdate: {ts}");
+            Console.WriteLine($"Player.OnUpdate: {ts}");
             Time += ts;
             float speed = Speed;
             Vector3 velocity = Vector3.Zero;

@@ -48,21 +48,15 @@ namespace Table
 	{	
 		TABLE_PROFILE_FUNCTION();
 		WindowResizeEvent e(1280, 720);
-		//TABLE_TRACE(e);
-		if (e.IsInCategory(EventCategoryApplication))
-		{
-			TABLE_TRACE(e);
-		}
-		if (e.IsInCategory(EventCategoryInput))
-		{
-			TABLE_TRACE(e);
-		}
+
 		while (m_Running)
 		{
 			TABLE_PROFILE_SCOPE("RunLoop");
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
+			ExecuteMainThreadQueue();
 
 			if (!m_Minimized)
 			{
@@ -125,6 +119,13 @@ namespace Table
 		m_Running = false;
 	}
 
+	void Application::SubmitToMainThread(const std::function<void()>& function)
+	{
+		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
+
+		m_MainThreadQueue.emplace_back(function);
+	}
+
 	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		m_Running = false;
@@ -144,6 +145,16 @@ namespace Table
 		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
 
 		return false;
+	}
+
+	void Application::ExecuteMainThreadQueue()
+	{
+		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
+
+		for (auto& func : m_MainThreadQueue)
+			func();
+
+		m_MainThreadQueue.clear();
 	}
 
 }

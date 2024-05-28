@@ -19,6 +19,7 @@ project "Table-Editor"
 		"%{wks.location}/Table/src",
 		"%{wks.location}/Table/vendor",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.filewatch}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.ImGuizmo}"
 	}
