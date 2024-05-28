@@ -251,7 +251,7 @@ namespace Table
 
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
-		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered && !m_ViewportFocused);
+		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered);
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		/*if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize) && viewportPanelSize.x > 0 && viewportPanelSize.y > 0)
