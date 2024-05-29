@@ -1,12 +1,33 @@
 Scene: Untitled
 Entities:
-  - Entity: 15843558637043454592
+  - Entity: 17379929293285731519
+    TagComponent:
+      Tag: Circle
+    TransformComponent:
+      Translation: [1.70507812, -0.271810532, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CircleRendererComponent:
+      Color: [0.938223958, 0.0470923409, 0.8934955, 1]
+      Thickness: 1
+      Fade: 0.00499999989
+    Rigidbody2DComponent:
+      BodyType: Dynamic
+      FixedRotation: false
+    CircleCollider2DComponent:
+      Offset: [0, 0]
+      Radius: 0.5
+      Density: 1
+      Friction: 0.5
+      Restitution: 1
+      RestitutionThreshold: 0.5
+  - Entity: 4194574896168299427
     TagComponent:
       Tag: Floor
     TransformComponent:
-      Translation: [-6.67054749, -4.07880974, 0]
+      Translation: [1.73982453, -2.03073359, 0]
       Rotation: [0, 0, 0]
-      Scale: [6.74196339, 0.460677743, 1]
+      Scale: [6.74195766, 0.460677892, 1]
     SpriteRendererComponent:
       Color: [0.949806929, 0.455301404, 0.0660097376, 1]
       TilingFactor: 1
@@ -20,6 +41,30 @@ Entities:
       Friction: 0.829999983
       Restitution: 0
       RestitutionThreshold: 0.5
+  - Entity: 8453837005543446945
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Translation: [0, 0, 20]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+    ScriptComponent:
+      ClassName: Sandbox.Camera
+      ScriptFields:
+        - Name: DistanceFromPlayer
+          Type: Float
+          Data: 20
   - Entity: 9547577167045436992
     TagComponent:
       Tag: Player
@@ -46,35 +91,13 @@ Entities:
         - Name: Speed
           Type: Float
           Data: 5
-  - Entity: 8453837005543446945
-    TagComponent:
-      Tag: Camera
-    TransformComponent:
-      Translation: [0, 0, 20]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 0.785398185
-        PerspectiveNear: 0.00999999978
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      FixedAspectRatio: false
-    ScriptComponent:
-      ClassName: Sandbox.Camera
-      ScriptFields:
-        []
-  - Entity: 4194574896168299427
+  - Entity: 15843558637043454592
     TagComponent:
       Tag: Floor
     TransformComponent:
-      Translation: [1.73982453, -2.03073359, 0]
+      Translation: [-6.67054749, -4.07880974, 0]
       Rotation: [0, 0, 0]
-      Scale: [6.74195766, 0.460677892, 1]
+      Scale: [6.74196339, 0.460677743, 1]
     SpriteRendererComponent:
       Color: [0.949806929, 0.455301404, 0.0660097376, 1]
       TilingFactor: 1
@@ -87,25 +110,4 @@ Entities:
       Density: 1
       Friction: 0.829999983
       Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 17379929293285731519
-    TagComponent:
-      Tag: Circle
-    TransformComponent:
-      Translation: [1.70507812, -0.271810532, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CircleRendererComponent:
-      Color: [0.938223958, 0.0470923409, 0.8934955, 1]
-      Thickness: 1
-      Fade: 0.00499999989
-    Rigidbody2DComponent:
-      BodyType: Dynamic
-      FixedRotation: false
-    CircleCollider2DComponent:
-      Offset: [0, 0]
-      Radius: 0.5
-      Density: 1
-      Friction: 0.5
-      Restitution: 1
       RestitutionThreshold: 0.5

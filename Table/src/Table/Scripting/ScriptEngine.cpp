@@ -160,40 +160,24 @@ namespace Table
 		InitMono();
 		ScriptGlue::RegisterFunction();
 
-		LoadAssembly("Resources/Scripts/Table-ScriptCore.dll");
-		LoadAppAssembly("SandboxProject/Assets/Scripts/Binaries/Sandbox.dll");
+		bool status = LoadAssembly("Resources/Scripts/Table-ScriptCore.dll");
+		if (!status)
+		{
+			TABLE_CORE_ERROR("[ScriptEngine] Could not load Table-ScriptCore assembly.");
+			return;
+		}
+		status = LoadAppAssembly("SandboxProject/Assets/Scripts/Binaries/Sandbox.dll");
+		if (!status)
+		{
+			TABLE_CORE_ERROR("[ScriptEngine] Could not load app assembly.");
+			return;
+		}
+
 		LoadAssemblyClasses();
 
 		ScriptGlue::RegisterComponents();
 
 		s_Data->EntityClass = ScriptClass("Table", "Entity", true);
-
-		/*MonoObject* instance = s_Data->EntityClass.Instantiate();
-
-		MonoMethod* printMessageFunc = s_Data->EntityClass.GetMethod("PrintMessage", 0);
-		s_Data->EntityClass.InvokeMethod(instance, printMessageFunc);
-		
-		MonoMethod* printIntFunc = s_Data->EntityClass.GetMethod("PrintInt", 1);
-
-		int value = 5;
-		void* param = &value;
-
-		s_Data->EntityClass.InvokeMethod(instance, printIntFunc, &param);
-
-		MonoMethod* printIntsFunc = s_Data->EntityClass.GetMethod("PrintInts", 2);
-		int value2 = 508;
-		void* params[2] = {
-			&value,
-			&value2
-		};
-		s_Data->EntityClass.InvokeMethod(instance, printIntsFunc, params);
-
-		MonoString* monoString = mono_string_new(s_Data->AppDomain, "Hello World from C++!");
-		MonoMethod* printCustomMessageFunc = s_Data->EntityClass.GetMethod("PrintCustomMessage", 1);
-		void* stringParam = monoString;
-		s_Data->EntityClass.InvokeMethod(instance, printCustomMessageFunc, &stringParam);
-
-		TABLE_CORE_ASSERT(false);*/
 	}
 
 	void ScriptEngine::Shutdown()
@@ -202,7 +186,7 @@ namespace Table
 		delete s_Data;
 	}
 
-	void ScriptEngine::LoadAssembly(const std::filesystem::path& filepath)
+	bool ScriptEngine::LoadAssembly(const std::filesystem::path& filepath)
 	{
 		// Create an App Domain
 		s_Data->AppDomain = mono_domain_create_appdomain("TableScriptRuntime", nullptr);
@@ -211,22 +195,27 @@ namespace Table
 		// Move this maybe
 		s_Data->CoreAssemblyFilepath = filepath;
 		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
+		if (s_Data->CoreAssembly == nullptr)
+			return false;
+
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
-		//Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
+		return true;
 	}
 
-	void ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
+	bool ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
 	{
 		// Move this maybe
 		s_Data->AppAssemblyFilepath = filepath;
 		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
+		if (s_Data->AppAssembly == nullptr)
+			return false;
+
 		auto assemb = s_Data->AppAssembly;
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
-		auto assembi = s_Data->AppAssemblyImage;
-		// Utils::PrintAssemblyTypes(s_Data->AppAssembly);
 
 		s_Data->AppAssemblyFileWatcher = CreateScope<filewatch::FileWatch<std::string>>(filepath.string(), OnAppAssemblyFileSystemEvent);
 		s_Data->AssemblyReloadPending = false;
+		return true;
 	}
 
 	void ScriptEngine::ReloadAssembly()
@@ -289,10 +278,15 @@ namespace Table
 	void ScriptEngine::OnUpdateEntity(Entity entity, Timestep ts)
 	{
 		UUID entityUUID = entity.GetUUID();
-		TABLE_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
-
-		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
-		instance->InvokeOnUpdate((float)ts);
+		if (s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end())
+		{
+			Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
+			instance->InvokeOnUpdate((float)ts);
+		}
+		else
+		{
+			TABLE_CORE_ERROR("Could not find ScriptInstance for entity {}", entityUUID);
+		}
 	}
 
 	Scene* ScriptEngine::GetSceneContext()
