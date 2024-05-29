@@ -14,6 +14,8 @@
 
 #include "Table/Core/Application.h"
 #include "Table/Core/Timer.h"
+#include "Table/Core/Buffer.h"
+#include "Table/Core/FileSystem.h"
 
 namespace Table
 {
@@ -40,39 +42,12 @@ namespace Table
 
 	namespace Utils
 	{
-		static char* ReadBytes(const std::filesystem::path& filepath, uint32_t* outSize)
-		{
-			std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
-
-			if (!stream)
-			{
-				return nullptr;
-			}
-
-			std::streampos end = stream.tellg();
-			stream.seekg(0, std::ios::beg);
-			uint32_t size = end - stream.tellg();
-
-			if (size == 0)
-			{
-				return nullptr;
-			}
-
-			char* buffer = new char[size];
-			stream.read((char*)buffer, size);
-			stream.close();
-
-			*outSize = size;
-			return buffer;
-		}
-
 		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path & assemblyPath, bool loadPDB = false)
 		{
-			uint32_t fileSize = 0;
-			char* fileData = ReadBytes(assemblyPath, &fileSize);
+			ScopedBuffer fileData = FileSystem::ReadFileBinary(assemblyPath);
 
 			MonoImageOpenStatus status;
-			MonoImage* image = mono_image_open_from_data_full(fileData, fileSize, 1, &status, 0);
+			MonoImage* image = mono_image_open_from_data_full(fileData.As<char>(), fileData.Size(), 1, &status, 0);
 
 			if (status != MONO_IMAGE_OK)
 			{
@@ -87,19 +62,15 @@ namespace Table
 
 				if (std::filesystem::exists(pdbPath))
 				{
-					uint32_t pdbFileSize = 0;
-					char* pdbFileData = ReadBytes(pdbPath, &pdbFileSize);
-					mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData, pdbFileSize);
+					ScopedBuffer pdbFileData = FileSystem::ReadFileBinary(pdbPath);
+					mono_debug_open_image_from_memory(image, pdbFileData.As<const mono_byte>(), pdbFileData.Size());
 					TABLE_CORE_INFO("Loaded PDB {}", pdbPath);
-					delete[] pdbFileData;
 				}
 			}
 
 			std::string pathString = assemblyPath.string();
 			MonoAssembly* assembly = mono_assembly_load_from_full(image, pathString.c_str(), &status, 0);
 			mono_image_close(image);
-
-			delete[] fileData;
 
 			return assembly;
 		}
@@ -374,6 +345,7 @@ namespace Table
 	{
 		mono_set_assemblies_path("mono/lib");
 
+#if TABLE_DEBUG
 		if (s_Data->EnableDebugging)
 		{
 			const char* argv[2] = {
@@ -384,6 +356,8 @@ namespace Table
 			mono_jit_parse_options(2, (char**)argv);
 			mono_debug_init(MONO_DEBUG_FORMAT_MONO);
 		}
+#endif
+		
 		
 		MonoDomain* rootDomain = mono_jit_init("TableJITRuntime");
 		TABLE_CORE_ASSERT(rootDomain);
