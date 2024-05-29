@@ -132,9 +132,11 @@ namespace Table
 		bool AssemblyReloadPending = false;
 
 		Scene* SceneContext = nullptr;
-
+#if TABLE_DEBUG
 		bool EnableDebugging = true;
-
+#else
+		bool EnableDebugging = false;
+#endif
 	};
 
 	static ScriptEngineData* s_Data = nullptr;
@@ -339,7 +341,6 @@ namespace Table
 	{
 		mono_set_assemblies_path("mono/lib");
 
-#if TABLE_DEBUG
 		if (s_Data->EnableDebugging)
 		{
 			const char* argv[2] = {
@@ -350,7 +351,6 @@ namespace Table
 			mono_jit_parse_options(2, (char**)argv);
 			mono_debug_init(MONO_DEBUG_FORMAT_MONO);
 		}
-#endif
 		
 		
 		MonoDomain* rootDomain = mono_jit_init("TableJITRuntime");

@@ -50,7 +50,12 @@ namespace Table
 		}
 		else
 		{
-			NewProject();
+			//NewProject();
+
+			if (!OpenProject())
+			{
+				Application::Get().Close();
+			}
 		}
 	}
 	
@@ -191,27 +196,21 @@ namespace Table
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
-				// which we can't undo at the moment without finer window depth/z control.
-				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+				if (ImGui::MenuItem("Open Project...", "Ctrl+O"))
+					OpenProject();
 
-				if (ImGui::MenuItem("New", "Ctrl+N"))
-				{
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("New Scene", "Ctrl+N"))
 					NewScene();
-				}
 
-				if (ImGui::MenuItem("Open...", "Ctrl+O"))
-				{
-					OpenScene();
-				}
-
-				if (ImGui::MenuItem("Save", "Ctrl+S"))
+				if (ImGui::MenuItem("Save Scene", "Ctrl+S"))
 					SaveScene();
 
-				if (ImGui::MenuItem("Save As...","Ctrl+Shift+S"))
-				{
+				if (ImGui::MenuItem("Save Scene As...", "Ctrl+Shift+S"))
 					SaveSceneAs();
-				}
+
+				ImGui::Separator();
 
 				if (ImGui::MenuItem("Exit"))
 					Application::Get().Close();
@@ -380,7 +379,7 @@ namespace Table
 			{
 				if (control)
 				{
-					OpenScene();
+					OpenProject();
 				}
 				break;
 			}
@@ -525,6 +524,16 @@ namespace Table
 			OpenScene(startScenePath);
 			m_ContentBrowserPanel = CreateScope<ContentBrowserPanel>();
 		}
+	}
+
+	bool EditorLayer::OpenProject()
+	{
+		std::string filepath = FileDialogs::OpenFile("Table Project (*.tproj)\0*.tproj\0");
+		if (filepath.empty())
+			return false;
+
+		OpenProject(filepath);
+		return true;
 	}
 
 	void EditorLayer::SaveProject()
