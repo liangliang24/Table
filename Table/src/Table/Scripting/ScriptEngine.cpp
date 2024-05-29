@@ -16,6 +16,7 @@
 #include "Table/Core/Timer.h"
 #include "Table/Core/Buffer.h"
 #include "Table/Core/FileSystem.h"
+#include "Table/Project/Project.h"
 
 namespace Table
 {
@@ -168,7 +169,8 @@ namespace Table
 			TABLE_CORE_ERROR("[ScriptEngine] Could not load Table-ScriptCore assembly.");
 			return;
 		}
-		status = LoadAppAssembly("SandboxProject/Assets/Scripts/Binaries/Sandbox.dll");
+		auto scriptModulePath = Project::GetAssetDirectory() / Project::GetActive()->GetConfig().ScriptModulePath;
+		status = LoadAppAssembly(scriptModulePath);
 		if (!status)
 		{
 			TABLE_CORE_ERROR("[ScriptEngine] Could not load app assembly.");

@@ -14,22 +14,11 @@
 #include "box2d/b2_polygon_shape.h"
 #include "box2d/b2_fixture.h"
 #include "box2d/b2_circle_shape.h"
+#include "Table/Physics2D/Physics2D.h"
 
 
 namespace Table
 {
-	static b2BodyType Rigidbody2DTypeToBox2DBody(Rigidbody2DComponent::BodyType bodyType)
-	{
-		switch (bodyType)
-		{
-		case Rigidbody2DComponent::BodyType::Static: return b2_staticBody;
-		case Rigidbody2DComponent::BodyType::Dynamic: return b2_dynamicBody;
-		case Rigidbody2DComponent::BodyType::Kinematic: return b2_kinematicBody;
-		}
-
-		TABLE_CORE_ASSERT(false, "Unknown body type");
-		return b2_staticBody;
-	}
 
 	Scene::Scene()
 	{
@@ -124,8 +113,8 @@ namespace Table
 
 	void Scene::DestroyEntity(Entity entity)
 	{
-		m_Registry.destroy(entity);
 		m_EntityMap.erase(entity.GetUUID());
+		m_Registry.destroy(entity);
 	}
 
 	void Scene::OnRuntimeStart()
@@ -323,12 +312,13 @@ namespace Table
 		}
 	}
 
-	void Scene::DuplicateEntity(Entity entity)
+	Entity Scene::DuplicateEntity(Entity entity)
 	{
 		std::string name = entity.GetName();
 		Entity newEntity = CreateEntity(name);
 
 		CopyComponentIfExists(AllComponents{}, newEntity, entity);
+		return newEntity;
 	}
 
 	Entity Scene::FindEntityByName(std::string_view name)
@@ -391,7 +381,7 @@ namespace Table
 			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
 
 			b2BodyDef bodyDef;
-			bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
+			bodyDef.type = Utils::Rigidbody2DTypeToBox2DBody(rb2d.Type);
 			bodyDef.position.Set(transform.Translation.x, transform.Translation.y);
 			bodyDef.angle = transform.Rotation.z;
 

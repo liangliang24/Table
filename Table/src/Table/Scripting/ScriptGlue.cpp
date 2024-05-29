@@ -13,6 +13,7 @@
 #include "mono/metadata/reflection.h"
 
 #include "box2d/b2_body.h"
+#include "../Physics2D/Physics2D.h"
 
 namespace Table
 {
@@ -117,6 +118,43 @@ namespace Table
 		body->ApplyLinearImpulseToCenter(b2Vec2(impulse->x, impulse->y), wake);
 	}
 
+	static void Rigidbody2DComponent_GetLinearVelocity(UUID entityID, glm::vec2* outLinearVelocity)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		TABLE_CORE_ASSERT(scene);
+		Entity entity = scene->GetEntityByUUID(entityID);
+		TABLE_CORE_ASSERT(entity);
+
+		auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+		b2Body* body = (b2Body*)rb2d.RuntimeBody;
+		const b2Vec2& linearVelocity = body->GetLinearVelocity();
+		*outLinearVelocity = glm::vec2(linearVelocity.x, linearVelocity.y);
+	}
+
+	static Rigidbody2DComponent::BodyType Rigidbody2DComponent_GetType(UUID entityID)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		TABLE_CORE_ASSERT(scene);
+		Entity entity = scene->GetEntityByUUID(entityID);
+		TABLE_CORE_ASSERT(entity);
+
+		auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+		b2Body* body = (b2Body*)rb2d.RuntimeBody;
+		return Utils::Rigidbody2DTypeFromBox2DBody(body->GetType());
+	}
+
+	static void Rigidbody2DComponent_SetType(UUID entityID, Rigidbody2DComponent::BodyType bodyType)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		TABLE_CORE_ASSERT(scene);
+		Entity entity = scene->GetEntityByUUID(entityID);
+		TABLE_CORE_ASSERT(entity);
+
+		auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+		b2Body* body = (b2Body*)rb2d.RuntimeBody;
+		body->SetType(Utils::Rigidbody2DTypeToBox2DBody(bodyType));
+	}
+
 	static bool Input_IsKeyDown(KeyCode keycode)
 	{
 		return Input::IsKeyPressed(keycode);
@@ -171,6 +209,9 @@ namespace Table
 
 		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_ApplyLinearImpulse);
 		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_ApplyLinearImpulseToCenter);
+		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_GetLinearVelocity);
+		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_GetType);
+		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_SetType);
 
 		TABLE_ADD_INTERNAL_CALL(Input_IsKeyDown);
 	}

@@ -28,7 +28,6 @@ namespace Table
 		m_Window->SetEventCallback(TABLE_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
-		ScriptEngine::Init();
 
 		m_ImguiLayer = new ImGuiLayer();
 		PushOverLay(m_ImguiLayer);
