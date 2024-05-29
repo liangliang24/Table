@@ -9,11 +9,10 @@
 #include "ImGuizmo.h"
 #include "Table/Math/Math.h"
 #include "Table/Scripting/ScriptEngine.h"
+#include "Table/Project/Project.h"
 
 namespace Table
 {
-
-	extern const std::filesystem::path g_AssetPath;
 
 	EditorLayer::EditorLayer()
 		:Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f)
@@ -47,7 +46,11 @@ namespace Table
 		if (commandLineArgs.Count > 1)
 		{
 			auto sceneFilePath = commandLineArgs[1];
-			OpenScene(sceneFilePath);
+			OpenProject(sceneFilePath);
+		}
+		else
+		{
+			NewProject();
 		}
 	}
 	
@@ -228,7 +231,7 @@ namespace Table
 		}
 
 		m_SceneHierarchyPanel.OnImGuiRender();
-		m_ContentBrowserPanel.OnImGuiRender();
+		m_ContentBrowserPanel->OnImGuiRender();
 
 		ImGui::Begin("Stats");
 
@@ -283,7 +286,7 @@ namespace Table
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
 				const wchar_t* path = (const wchar_t*)payload->Data;
-				OpenScene(std::filesystem::path(g_AssetPath) / path);
+				OpenScene(path);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -507,6 +510,26 @@ namespace Table
 		}
 
 		Renderer2D::EndScene();
+	}
+
+	void EditorLayer::NewProject()
+	{
+		Project::New();
+	}
+
+	void EditorLayer::OpenProject(const std::filesystem::path& path)
+	{
+		if (Project::Load(path))
+		{
+			auto startScenePath = Project::GetAssetFileSystemPath(Project::GetActive()->GetConfig().StartScene);
+			OpenScene(startScenePath);
+			m_ContentBrowserPanel = CreateScope<ContentBrowserPanel>();
+		}
+	}
+
+	void EditorLayer::SaveProject()
+	{
+		// Project::SaveActive();
 	}
 
 	void EditorLayer::NewScene()

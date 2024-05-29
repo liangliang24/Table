@@ -26,6 +26,10 @@ namespace Table
 
 		void OnOverlayRender();
 
+		void NewProject();
+		void OpenProject(const std::filesystem::path& path);
+		void SaveProject();
+
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
@@ -81,7 +85,7 @@ namespace Table
 		glm::vec4 m_SquareColor = { 0.2f,0.3f,0.8f,1.0f };
 
 		SceneHierarchyPanel m_SceneHierarchyPanel;
-		ContentBrowserPanel m_ContentBrowserPanel;
+		Scope<ContentBrowserPanel> m_ContentBrowserPanel;
 
 		Ref<Texture2D> m_IconPlay, m_IconPause, m_IconStep,  m_IconSimulate, m_IconStop;
 	};

@@ -23,6 +23,8 @@
 #include "Table/Scene/ScriptableEntity.h"
 #include "Table/Scene/Components.h"
 
+#include "Table/Project/Project.h"
+
 //--Renderer----------
 #include "Table/Renderer/Renderer.h"
 #include "Table/Renderer/Renderer2D.h"
