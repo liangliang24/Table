@@ -7,6 +7,8 @@
 #include "mono/metadata/assembly.h"
 #include "mono/metadata/object.h"
 #include "mono/metadata/tabledefs.h"
+#include "mono/metadata/mono-debug.h"
+#include "mono/metadata/threads.h"
 
 #include "FileWatch.h"
 
@@ -64,7 +66,7 @@ namespace Table
 			return buffer;
 		}
 
-		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path & assemblyPath)
+		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path & assemblyPath, bool loadPDB = false)
 		{
 			uint32_t fileSize = 0;
 			char* fileData = ReadBytes(assemblyPath, &fileSize);
@@ -76,6 +78,21 @@ namespace Table
 			{
 				const char* errorMessage = mono_image_strerror(status);
 				return nullptr;
+			}
+
+			if (loadPDB)
+			{
+				std::filesystem::path pdbPath = assemblyPath;
+				pdbPath.replace_extension(".pdb");
+
+				if (std::filesystem::exists(pdbPath))
+				{
+					uint32_t pdbFileSize = 0;
+					char* pdbFileData = ReadBytes(pdbPath, &pdbFileSize);
+					mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData, pdbFileSize);
+					TABLE_CORE_INFO("Loaded PDB {}", pdbPath);
+					delete[] pdbFileData;
+				}
 			}
 
 			std::string pathString = assemblyPath.string();
@@ -144,6 +161,9 @@ namespace Table
 		bool AssemblyReloadPending = false;
 
 		Scene* SceneContext = nullptr;
+
+		bool EnableDebugging = true;
+
 	};
 
 	static ScriptEngineData* s_Data = nullptr;
@@ -219,7 +239,7 @@ namespace Table
 
 		// Move this maybe
 		s_Data->CoreAssemblyFilepath = filepath;
-		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath);
+		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
 		//Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
@@ -228,7 +248,7 @@ namespace Table
 	{
 		// Move this maybe
 		s_Data->AppAssemblyFilepath = filepath;
-		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath);
+		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		auto assemb = s_Data->AppAssembly;
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
 		auto assembi = s_Data->AppAssemblyImage;
@@ -354,11 +374,27 @@ namespace Table
 	{
 		mono_set_assemblies_path("mono/lib");
 
+		if (s_Data->EnableDebugging)
+		{
+			const char* argv[2] = {
+				"--debugger-agent=transport=dt_socket,address=127.0.0.1:2550,server=y,suspend=n,loglevel=3,logfile=MonoDebugger.log",
+				"--soft-breakpoints"
+			};
+
+			mono_jit_parse_options(2, (char**)argv);
+			mono_debug_init(MONO_DEBUG_FORMAT_MONO);
+		}
+		
 		MonoDomain* rootDomain = mono_jit_init("TableJITRuntime");
 		TABLE_CORE_ASSERT(rootDomain);
 
 		// Store the root domain pointer
 		s_Data->RootDomain = rootDomain;
+
+		if (s_Data->EnableDebugging)
+			mono_debug_domain_create(s_Data->RootDomain);
+
+		mono_thread_set_main(mono_thread_current());
 	}
 
 	void ScriptEngine::ShutdownMono()
@@ -458,7 +494,8 @@ namespace Table
 
 	MonoObject* ScriptClass::InvokeMethod(MonoObject* instance, MonoMethod* method, void** params /*= nullptr*/)
 	{
-		return mono_runtime_invoke(method, instance, params, nullptr);
+		MonoObject* exception = nullptr;
+		return mono_runtime_invoke(method, instance, params, &exception);
 	}
 
 	ScriptInstance::ScriptInstance(Ref<ScriptClass> scriptClass, Entity entity)
