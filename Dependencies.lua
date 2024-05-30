@@ -10,6 +10,8 @@ IncludeDir["yaml_cpp"] = "%{wks.location}/Table/vendor/yaml-cpp/include"
 IncludeDir["ImGuizmo"] = "%{wks.location}/Table/vendor/Imguizmo"
 IncludeDir["Box2D"] = "%{wks.location}/Table/vendor/Box2D/include"
 IncludeDir["filewatch"] = "%{wks.location}/Table/vendor/filewatch"
+IncludeDir["msdfgen"] = "%{wks.location}/Table/vendor/msdf-atlas-gen/msdfgen"
+IncludeDir["msdf_atlas_gen"] = "%{wks.location}/Table/vendor/msdf-atlas-gen/msdf-atlas-gen"
 
 LibraryDir = {}
 LibraryDir["mono"] = "%{wks.location}/Table/vendor/mono/lib/%{cfg.buildcfg}"

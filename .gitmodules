@@ -23,3 +23,6 @@
 [submodule "Table/vendor/Box2D"]
 	path = Table/vendor/Box2D
 	url = https://github.com/liangliang24/box2d
+[submodule "Table/vendor/msdf-atlas-gen"]
+	path = Table/vendor/msdf-atlas-gen
+	url = https://github.com/liangliang24/msdf-atlas-gen

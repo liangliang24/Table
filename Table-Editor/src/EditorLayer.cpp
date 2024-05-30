@@ -1,5 +1,7 @@
 #include "EditorLayer.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "Table/Renderer/Font.h"
+
 #include <imgui/imgui.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "Table/Scene/SceneSerializer.h"
@@ -17,6 +19,7 @@ namespace Table
 	EditorLayer::EditorLayer()
 		:Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f)
 	{
+		Font font("asset/fonts/Open_Sans/OpenSans-Regular.ttf");
 	}
 
 	void EditorLayer::OnAttach()
