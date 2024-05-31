@@ -5,6 +5,33 @@
 #include "glad/glad.h"
 namespace Table
 {
+	namespace Utils {
+
+		static GLenum HazelImageFormatToGLDataFormat(ImageFormat format)
+		{
+			switch (format)
+			{
+			case ImageFormat::RGB8:  return GL_RGB;
+			case ImageFormat::RGBA8: return GL_RGBA;
+			}
+
+			TABLE_CORE_ASSERT(false);
+			return 0;
+		}
+
+		static GLenum HazelImageFormatToGLInternalFormat(ImageFormat format)
+		{
+			switch (format)
+			{
+			case ImageFormat::RGB8:  return GL_RGB8;
+			case ImageFormat::RGBA8: return GL_RGBA8;
+			}
+
+			TABLE_CORE_ASSERT(false);
+			return 0;
+		}
+
+	}
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 		:m_Path(path)
@@ -58,12 +85,12 @@ namespace Table
 		}
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-		:m_Width(width), m_Height(height)
+	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification)
+		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
 	{
 		TABLE_PROFILE_FUNCTION();
-		m_InternalFormat = GL_RGBA8;
-		m_DataFormat = GL_RGBA;
+		m_InternalFormat = Utils::HazelImageFormatToGLInternalFormat(m_Specification.Format);
+		m_DataFormat = Utils::HazelImageFormatToGLDataFormat(m_Specification.Format);
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);

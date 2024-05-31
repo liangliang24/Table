@@ -20,7 +20,7 @@ namespace Table
 		return nullptr;
 	}
 
-	Table::Ref<Table::Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
+	Table::Ref<Table::Texture2D> Texture2D::Create(const TextureSpecification& specification)
 	{
 		switch (RendererAPI::GetAPI())
 		{
@@ -28,7 +28,7 @@ namespace Table
 			TABLE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return CreateRef<OpenGLTexture2D>(width, height);
+			return CreateRef<OpenGLTexture2D>(specification);
 		}
 		TABLE_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
