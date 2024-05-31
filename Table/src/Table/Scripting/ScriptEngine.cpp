@@ -339,6 +339,11 @@ namespace Table
 		return s_Data->EntityInstances.at(uuid)->GetManagedObject();
 	}
 
+	MonoString* ScriptEngine::CreateString(const char* string)
+	{
+		return mono_string_new(s_Data->AppDomain, string);
+	}
+
 	void ScriptEngine::InitMono()
 	{
 		mono_set_assemblies_path("mono/lib");

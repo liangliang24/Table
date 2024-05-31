@@ -46,6 +46,11 @@ Entities:
         - Name: Speed
           Type: Float
           Data: 5
+    TextComponent:
+      TextString: ggggg
+      Color: [1, 1, 1, 1]
+      Kerning: 0
+      LineSpacing: 0
   - Entity: 8453837005543446945
     TagComponent:
       Tag: Camera
