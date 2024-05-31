@@ -9,6 +9,7 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+#include "Table/Renderer/Font.h"
 
 
 
@@ -153,6 +154,15 @@ namespace Table
 		CircleCollider2DComponent(const CircleCollider2DComponent&) = default;
 	};
 
+	struct TextComponent
+	{
+		std::string TextString;
+		Ref<Font> FontAsset = Font::GetDefault();
+		glm::vec4 Color{ 1.0f };
+		float Kerning = 0.0f;
+		float LineSpacing = 0.0f;
+	};
+
 	template<typename... Component>
 	struct ComponentGroup{};
 
@@ -166,6 +176,7 @@ namespace Table
 		NativeScriptComponent,
 		Rigidbody2DComponent,
 		BoxCollider2DComponent,
-		CircleCollider2DComponent
+		CircleCollider2DComponent,
+		TextComponent
 		>;
 }
