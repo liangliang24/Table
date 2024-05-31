@@ -35,8 +35,8 @@ namespace Table
 		
 		static float fontSize = 18.0f;
 
-		io.Fonts->AddFontFromFileTTF("asset/fonts/Open_sans/OpenSans-Bold.ttf", 18.0f);
-		io.FontDefault = io.Fonts->AddFontFromFileTTF("asset/fonts/Open_sans/OpenSans-Regular.ttf", 18.0f);
+		io.Fonts->AddFontFromFileTTF("asset/fonts/Open_Sans/OpenSans-Bold.ttf", 18.0f);
+		io.FontDefault = io.Fonts->AddFontFromFileTTF("asset/fonts/Open_Sans/OpenSans-Regular.ttf", 18.0f);
 
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();

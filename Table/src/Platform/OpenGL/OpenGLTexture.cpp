@@ -7,7 +7,7 @@ namespace Table
 {
 	namespace Utils {
 
-		static GLenum HazelImageFormatToGLDataFormat(ImageFormat format)
+		static GLenum TableImageFormatToGLDataFormat(ImageFormat format)
 		{
 			switch (format)
 			{
@@ -19,7 +19,7 @@ namespace Table
 			return 0;
 		}
 
-		static GLenum HazelImageFormatToGLInternalFormat(ImageFormat format)
+		static GLenum TableImageFormatToGLInternalFormat(ImageFormat format)
 		{
 			switch (format)
 			{
@@ -89,8 +89,8 @@ namespace Table
 		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
 	{
 		TABLE_PROFILE_FUNCTION();
-		m_InternalFormat = Utils::HazelImageFormatToGLInternalFormat(m_Specification.Format);
-		m_DataFormat = Utils::HazelImageFormatToGLDataFormat(m_Specification.Format);
+		m_InternalFormat = Utils::TableImageFormatToGLInternalFormat(m_Specification.Format);;
+		m_DataFormat = Utils::TableImageFormatToGLDataFormat(m_Specification.Format);;
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);

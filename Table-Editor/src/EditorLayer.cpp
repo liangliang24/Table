@@ -15,12 +15,12 @@
 
 namespace Table
 {
-	static Font* s_Font;
+	static Ref<Font> s_Font;
 
 	EditorLayer::EditorLayer()
 		:Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f)
 	{
-		s_Font = new Font("asset/fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf");
+		s_Font = Font::GetDefault();
 	}
 
 	void EditorLayer::OnAttach()
