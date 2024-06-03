@@ -259,6 +259,10 @@ namespace Table
 
 		ImGui::Begin("Settings");
 		ImGui::Checkbox("Show physics colliders", &m_ShowPhysicsColliders);
+		float gravity = m_ActiveScene->GetGravity();
+		ImGui::DragFloat("Gravity", &gravity);
+		m_ActiveScene->SetGravity(gravity);
+
 
 		ImGui::Image((ImTextureID)s_Font->GetAtlasTexture()->GetRendererID(), { 512,512 }, { 0, 1 }, { 1, 0 });
 

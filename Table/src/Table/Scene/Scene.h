@@ -54,7 +54,12 @@ namespace Table
 		{
 			return m_Registry.view<Components...>();
 		}
+
+		float GetGravity() { return Gravity; }
+		void SetGravity(float gravity) { Gravity = gravity; }
 	private:
+		float Gravity = -9.8f;
+
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
 

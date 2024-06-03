@@ -74,6 +74,7 @@ namespace Table
 
 		newScene->m_ViewportWidth = other->m_ViewportWidth;
 		newScene->m_ViewportHeight = other->m_ViewportHeight;
+		newScene->Gravity = other->Gravity;
 
 		auto& srcSceneRegistry = other->m_Registry;
 		auto& dstSceneRegistry = newScene->m_Registry;
@@ -382,7 +383,7 @@ namespace Table
 
 	void Scene::OnPhysics2DStart()
 	{
-		m_PhysicsWorld = new b2World({ 0.0f,-9.8f });
+		m_PhysicsWorld = new b2World({ 0.0f,Gravity });
 
 		auto view = m_Registry.view<Rigidbody2DComponent>();
 		for (auto e : view)
