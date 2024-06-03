@@ -199,6 +199,8 @@ namespace Table
 			out << YAML::Key << "Rotation" << YAML::Value << tc.Rotation;
 			out << YAML::Key << "Scale" << YAML::Value << tc.Scale;
 
+			out << YAML::Key << "LinearDamping" << YAML::Value << tc.LinearDamping;
+
 			out << YAML::EndMap;
 		}
 
@@ -235,7 +237,12 @@ namespace Table
 			auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
 			out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.Color;
 			if (spriteRendererComponent.Texture)
-				out << YAML::Key << "TexturePath" << YAML::Value << spriteRendererComponent.Texture->GetPath();
+			{
+				std::filesystem::path path(spriteRendererComponent.Texture->GetPath());
+				Project::TranslateToRelativePath(path);
+				out << YAML::Key << "TexturePath" << YAML::Value << path.string();
+			}
+				
 
 			out << YAML::Key << "TilingFactor" << YAML::Value << spriteRendererComponent.TilingFactor;
 
@@ -376,6 +383,10 @@ namespace Table
 		YAML::Emitter out;
 		out << YAML::BeginMap;
 		out << YAML::Key << "Scene" << YAML::Value << "Untitled";
+		out << YAML::Key << "Settings";
+		out << YAML::BeginMap;
+		out << YAML::Key << "Gravity" << YAML::Value << m_Scene->GetGravity();
+		out << YAML::EndMap;
 		out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
 		m_Scene->m_Registry.each([&](auto entityID)
 			{
@@ -388,7 +399,7 @@ namespace Table
 			});
 		out << YAML::EndSeq;
 		out << YAML::EndMap;
-		
+
 		std::ofstream fout(filepath);
 		fout << out.c_str();
 	}
@@ -419,6 +430,9 @@ namespace Table
 		std::string sceneName = data["Scene"].as<std::string>();
 		TABLE_CORE_TRACE("Deserializing scene '{0}'", sceneName);
 
+		auto settings = data["Settings"];
+		m_Scene->Gravity = settings["Gravity"].as<float>();
+
 		auto entities = data["Entities"];
 		if (entities)
 		{
@@ -443,6 +457,8 @@ namespace Table
 					tc.Translation = transformComponent["Translation"].as<glm::vec3>();
 					tc.Rotation = transformComponent["Rotation"].as<glm::vec3>();
 					tc.Scale = transformComponent["Scale"].as<glm::vec3>();
+
+					tc.LinearDamping = transformComponent["LinearDamping"].as<float>();
 				}
 
 				auto cameraComponent = entity["CameraComponent"];

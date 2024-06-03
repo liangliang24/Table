@@ -276,6 +276,7 @@ namespace Table {
 				DrawVec3Control("Rotation", rotation);
 				component.Rotation = glm::radians(rotation);
 				DrawVec3Control("Scale", component.Scale, 1.0f);
+				ImGui::DragFloat("LinearDamping", &component.LinearDamping);
 			});
 
 		DrawComponent<CameraComponent>("Camera", entity, [](auto& component)

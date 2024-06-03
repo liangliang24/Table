@@ -32,6 +32,25 @@ namespace Table {
 			return GetProjectDirectory() / s_ActiveProject->m_Config.AssetDirectory;
 		}
 
+		static void RemoveProjectDirectory(std::filesystem::path& path)
+		{
+			TABLE_CORE_ASSERT(s_ActiveProject);
+			path = path.lexically_relative(s_ActiveProject->m_ProjectDirectory);
+		}
+
+		static void RemoveAssetDirectory(std::filesystem::path& path)
+		{
+			TABLE_CORE_ASSERT(s_ActiveProject);
+			path = path.lexically_relative(s_ActiveProject->m_Config.AssetDirectory);
+		}
+
+		static void TranslateToRelativePath(std::filesystem::path& path)
+		{
+			TABLE_CORE_ASSERT(s_ActiveProject);
+			RemoveProjectDirectory(path);
+			RemoveAssetDirectory(path);
+		}
+
 		// TODO(Yan): move to asset manager when we have one
 		static std::filesystem::path GetAssetFileSystemPath(const std::filesystem::path& path)
 		{

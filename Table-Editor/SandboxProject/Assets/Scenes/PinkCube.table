@@ -1,4 +1,6 @@
 Scene: Untitled
+Settings:
+  Gravity: -9.80000019
 Entities:
   - Entity: 6268254783358308030
     TagComponent:
@@ -7,6 +9,7 @@ Entities:
       Translation: [0, 0, 1]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 0.100000001, 0.100000001]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
       TilingFactor: 1
@@ -23,6 +26,7 @@ Entities:
       Translation: [0, 0.5, 0]
       Rotation: [1.57079637, 0.785398185, 0]
       Scale: [1, 1, 1]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [0.876447856, 0, 0.834712803, 1]
       TexturePath: Textures\ChernoLogo.png
@@ -34,6 +38,7 @@ Entities:
       Translation: [0, 1.70000005, 4]
       Rotation: [-0.404916406, 0, 0]
       Scale: [1, 1, 1]
+      LinearDamping: 0
     CameraComponent:
       Camera:
         ProjectionType: 0
@@ -56,6 +61,7 @@ Entities:
       Translation: [0.351999998, 0, 0.349999994]
       Rotation: [0, 0.785398185, 0]
       Scale: [1, 1, 1]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [0.54842025, 0, 0.586872578, 1]
       TexturePath: Textures\KON.png
@@ -67,6 +73,7 @@ Entities:
       Translation: [-0.354999989, 0, 0.349999994]
       Rotation: [0, -0.785398185, 0]
       Scale: [1, 1, 1]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [1, 0, 0.949807167, 1]
       TexturePath: Textures\FF0Suki.png

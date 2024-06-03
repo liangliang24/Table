@@ -1,4 +1,6 @@
 Scene: Untitled
+Settings:
+  Gravity: -9.80000019
 Entities:
   - Entity: 15843558637043454592
     TagComponent:
@@ -7,6 +9,7 @@ Entities:
       Translation: [-6.67054749, -4.07880974, 0]
       Rotation: [0, 0, 0]
       Scale: [6.74196339, 0.460677743, 1]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [0.949806929, 0.455301404, 0.0660097376, 1]
       TilingFactor: 1
@@ -27,6 +30,7 @@ Entities:
       Translation: [0.0495706163, 0.271503896, 0.0225147791]
       Rotation: [0, 0, -0.235084534]
       Scale: [0.361159712, 0.375572056, 0.848135769]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [0.922779918, 0.0391914323, 0.0391914323, 1]
       TilingFactor: 1
@@ -58,6 +62,7 @@ Entities:
       Translation: [0, 0, 20]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+      LinearDamping: 0
     CameraComponent:
       Camera:
         ProjectionType: 0
@@ -82,6 +87,7 @@ Entities:
       Translation: [1.73982453, -2.03073359, 0]
       Rotation: [0, 0, 0]
       Scale: [6.74195766, 0.460677892, 1]
+      LinearDamping: 0
     SpriteRendererComponent:
       Color: [0.949806929, 0.455301404, 0.0660097376, 1]
       TilingFactor: 1
@@ -102,6 +108,7 @@ Entities:
       Translation: [1.70507812, -0.271810532, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+      LinearDamping: 0
     CircleRendererComponent:
       Color: [0.938223958, 0.0470923409, 0.8934955, 1]
       Thickness: 1
