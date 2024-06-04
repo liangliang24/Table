@@ -56,6 +56,10 @@ namespace Table
             InternalCalls.Rigidbody2DComponent_ApplyLinearImpulseToCenter(Entity.ID, ref impulse, wake);
         }
 
+        public void ApplyAngulerImpulse(float impulse, bool wake)
+        {
+            InternalCalls.Rigidbody2DComponent_ApplyAngulerImpulse(Entity.ID, ref impulse, wake);
+        }
     }
 
     public class TextComponent : Component

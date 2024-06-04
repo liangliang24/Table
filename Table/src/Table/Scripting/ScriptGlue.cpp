@@ -113,7 +113,21 @@ namespace Table
 
 		auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
 		b2Body* body = (b2Body*)rb2d.RuntimeBody;
-		body->ApplyLinearImpulse(b2Vec2(impulse->x, impulse->y), b2Vec2(point->x, point->y), wake);
+		float impulseX = impulse->x * glm::cos(-body->GetAngle()) + impulse->y * glm::sin(-body->GetAngle());
+		float impulseY = -impulse->x * glm::sin(-body->GetAngle()) + impulse->y * glm::cos(-body->GetAngle());
+		body->ApplyLinearImpulse(b2Vec2(impulseX, impulseY), b2Vec2(point->x, point->y), wake);
+	}
+
+	static void Rigidbody2DComponent_ApplyAngulerImpulse(UUID entityID, float impulse, bool wake)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		TABLE_CORE_ASSERT(scene);
+		Entity entity = scene->GetEntityByUUID(entityID);
+		TABLE_CORE_ASSERT(entity);
+
+		auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+		b2Body* body = (b2Body*)rb2d.RuntimeBody;
+		body->ApplyAngularImpulse(impulse, wake);
 	}
 
 	static void Rigidbody2DComponent_ApplyLinearImpulseToCenter(UUID entityID, glm::vec2* impulse, bool wake)
@@ -125,7 +139,9 @@ namespace Table
 
 		auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
 		b2Body* body = (b2Body*)rb2d.RuntimeBody;
-		body->ApplyLinearImpulseToCenter(b2Vec2(impulse->x, impulse->y), wake);
+		float impulseX = impulse->x * glm::cos(-body->GetAngle()) + impulse->y * glm::sin(-body->GetAngle());
+		float impulseY = -impulse->x * glm::sin(-body->GetAngle()) + impulse->y * glm::cos(-body->GetAngle());
+		body->ApplyLinearImpulseToCenter(b2Vec2(impulseX, impulseY), wake);
 	}
 
 	static void Rigidbody2DComponent_GetLinearVelocity(UUID entityID, glm::vec2* outLinearVelocity)
@@ -314,6 +330,7 @@ namespace Table
 		TABLE_ADD_INTERNAL_CALL(TransformComponent_SetTranslation);
 
 		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_ApplyLinearImpulse);
+		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_ApplyAngulerImpulse);
 		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_ApplyLinearImpulseToCenter);
 		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_GetLinearVelocity);
 		TABLE_ADD_INTERNAL_CALL(Rigidbody2DComponent_GetType);

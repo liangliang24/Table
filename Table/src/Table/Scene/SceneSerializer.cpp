@@ -200,6 +200,7 @@ namespace Table
 			out << YAML::Key << "Scale" << YAML::Value << tc.Scale;
 
 			out << YAML::Key << "LinearDamping" << YAML::Value << tc.LinearDamping;
+			out << YAML::Key << "AngularDamping" << YAML::Value << tc.AngularDamping;
 
 			out << YAML::EndMap;
 		}
@@ -459,6 +460,7 @@ namespace Table
 					tc.Scale = transformComponent["Scale"].as<glm::vec3>();
 
 					tc.LinearDamping = transformComponent["LinearDamping"].as<float>();
+					tc.AngularDamping = transformComponent["AngularDamping"].as<float>();
 				}
 
 				auto cameraComponent = entity["CameraComponent"];

@@ -397,6 +397,7 @@ namespace Table
 			bodyDef.position.Set(transform.Translation.x, transform.Translation.y);
 			bodyDef.angle = transform.Rotation.z;
 			bodyDef.linearDamping = transform.LinearDamping;
+			bodyDef.angularDamping = transform.AngularDamping;
 
 			b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
 			body->SetFixedRotation(rb2d.FixedRotation);

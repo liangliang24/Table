@@ -1,20 +1,22 @@
 Scene: Untitled
 Settings:
-  Gravity: 2
+  Gravity: 0
 Entities:
-  - Entity: 11011080790022363875
+  - Entity: 10643118062845515766
     TagComponent:
-      Tag: Wall
+      Tag: PlayerA
     TransformComponent:
-      Translation: [-3.5, 0, 0]
+      Translation: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [0.100000001, 5, 1]
-      LinearDamping: 0
+      Scale: [0.150000006, 0.300000012, 1]
+      LinearDamping: 6
+      AngularDamping: 50
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
+      TexturePath: Textures\Tank.png
       TilingFactor: 1
     Rigidbody2DComponent:
-      BodyType: Static
+      BodyType: Dynamic
       FixedRotation: false
     BoxCollider2DComponent:
       Offset: [0, 0]
@@ -23,14 +25,44 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 4579375850696202934
+    ScriptComponent:
+      ClassName: Sandbox.Player
+      ScriptFields:
+        - Name: AngularSpeed
+          Type: Float
+          Data: 1
+        - Name: Speed
+          Type: Float
+          Data: 1
+  - Entity: 6951621597600209758
+    TagComponent:
+      Tag: CameraWithoutScript
+    TransformComponent:
+      Translation: [0, 0, 6]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+      LinearDamping: 0
+      AngularDamping: 0
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 17078798195892317855
     TagComponent:
       Tag: Wall
     TransformComponent:
-      Translation: [3.5, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [0.100000001, 5, 1]
+      Translation: [-2.97874067e-07, -2.49749756, 0]
+      Rotation: [0, 0, 1.57079637]
+      Scale: [0.0999963731, 7.04976797, 1]
       LinearDamping: 0
+      AngularDamping: 0
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
       TilingFactor: 1
@@ -52,6 +84,7 @@ Entities:
       Rotation: [0, 0, 1.57079637]
       Scale: [0.100000001, 7.05000019, 1]
       LinearDamping: 0
+      AngularDamping: 0
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
       TilingFactor: 1
@@ -65,14 +98,15 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 17078798195892317855
+  - Entity: 4579375850696202934
     TagComponent:
       Tag: Wall
     TransformComponent:
-      Translation: [-2.97874067e-07, -2.49749756, 0]
-      Rotation: [0, 0, 1.57079637]
-      Scale: [0.0999963731, 7.04976797, 1]
+      Translation: [3.5, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 5, 1]
       LinearDamping: 0
+      AngularDamping: 0
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
       TilingFactor: 1
@@ -86,39 +120,20 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 6951621597600209758
+  - Entity: 11011080790022363875
     TagComponent:
-      Tag: CameraWithoutScript
+      Tag: Wall
     TransformComponent:
-      Translation: [0, 0, 6]
+      Translation: [-3.5, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [0.100000001, 5, 1]
       LinearDamping: 0
-    CameraComponent:
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 0.785398185
-        PerspectiveNear: 0.00999999978
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      FixedAspectRatio: false
-  - Entity: 10643118062845515766
-    TagComponent:
-      Tag: PlayerA
-    TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [0.150000006, 0.300000012, 1]
-      LinearDamping: 6
+      AngularDamping: 0
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
-      TexturePath: Textures\Tank.png
       TilingFactor: 1
     Rigidbody2DComponent:
-      BodyType: Dynamic
+      BodyType: Static
       FixedRotation: false
     BoxCollider2DComponent:
       Offset: [0, 0]
@@ -127,9 +142,3 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
-    ScriptComponent:
-      ClassName: Sandbox.Player
-      ScriptFields:
-        - Name: Speed
-          Type: Float
-          Data: 1

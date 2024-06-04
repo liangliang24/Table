@@ -51,6 +51,7 @@ namespace Table
 		glm::vec3 Scale = { 1.0f,1.0f,1.0f };
 
 		float LinearDamping = 0.0f;
+		float AngularDamping = 0.0f;
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
