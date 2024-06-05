@@ -3,9 +3,6 @@
 #include "Scene.h"
 #include "Entity.h"
 
-namespace YAML { class Emitter; }
-
-
 namespace Table
 {
 	class SceneSerializer
@@ -19,6 +16,8 @@ namespace Table
 
 		bool DeSerialize(const std::string& filepath);
 		bool DeSerializeRuntime(const std::string& filepath);
+
+		bool DeSerializeEntityToScene(const std::string& filepath);
 	private:
 		Ref<Scene> m_Scene;
 	};

@@ -11,6 +11,7 @@
 #include "Table/Scripting/ScriptEngine.h"
 #include "Table/UI/UI.h"
 #include "imgui/misc/cpp/imgui_stdlib.h"
+#include "Table/Scene/SceneSerializer.h"
 
 #ifdef _MSVC_LANG
 #define _CRT_SECURE_NO_WARNINGS
@@ -102,6 +103,18 @@ namespace Table {
 			const char* entityName = entity.GetComponent<TagComponent>().Tag.c_str();
 			ImGui::SetDragDropPayload("SCENEHIERARCHY_ENTITY", entityName, sizeof(entityName));
 			ImGui::EndDragDropSource();
+		}
+
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+			{
+				const wchar_t* path = (const wchar_t*)payload->Data;
+				std::filesystem::path filePath(path);
+				SceneSerializer sceneSerializer(m_Context);
+				sceneSerializer.DeSerializeEntityToScene(filePath.string());
+			}
+			ImGui::EndDragDropTarget();
 		}
 
 		bool entityDeleted = false;
