@@ -410,6 +410,15 @@ namespace Table
 		TABLE_CORE_ASSERT(false);
 	}
 
+	void SceneSerializer::SerializeEntityToPath(Entity entity, const std::string& filepath)
+	{
+		YAML::Emitter out;
+		SerializeEntity(out, entity);
+
+		std::ofstream fout(filepath);
+		fout << out.c_str();
+	}
+
 	bool SceneSerializer::DeSerialize(const std::string& filepath)
 	{
 		YAML::Node data;

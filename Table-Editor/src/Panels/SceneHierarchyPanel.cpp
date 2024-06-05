@@ -97,6 +97,13 @@ namespace Table {
 			m_SelectionContext = entity;
 		}
 
+		if (ImGui::BeginDragDropSource())
+		{
+			const char* entityName = entity.GetComponent<TagComponent>().Tag.c_str();
+			ImGui::SetDragDropPayload("SCENEHIERARCHY_ENTITY", entityName, sizeof(entityName));
+			ImGui::EndDragDropSource();
+		}
+
 		bool entityDeleted = false;
 		if (ImGui::BeginPopupContextItem())
 		{
@@ -108,10 +115,12 @@ namespace Table {
 
 		if (opened)
 		{
+#if 0
 			ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 			bool opened = ImGui::TreeNodeEx((void*)9817239, flags, tag.c_str());
 			if (opened)
 				ImGui::TreePop();
+#endif
 			ImGui::TreePop();
 		}
 

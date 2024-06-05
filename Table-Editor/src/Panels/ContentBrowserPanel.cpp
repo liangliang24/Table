@@ -3,6 +3,8 @@
 
 #include <imgui/imgui.h>
 #include "Table/Project/Project.h"
+#include "Table/Scene/Entity.h"
+#include "Table/Scene/SceneSerializer.h"
 
 namespace Table
 {
@@ -56,6 +58,18 @@ namespace Table
 				ImGui::EndDragDropSource();
 			}
 
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("SCENEHIERARCHY_ENTITY"))
+				{
+					const std::string& s((char*)payload->Data);
+					Entity entity = m_Context->FindEntityByName(s);
+					std::string& filename(const_cast<std::string&>(s));
+					filename.append(".prefab");
+					SceneSerializer::SerializeEntityToPath(entity, (m_CurrentDirectory / filename).string());
+				}
+			}
+
 			ImGui::PopStyleColor();
 			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 			{
@@ -63,8 +77,6 @@ namespace Table
 				{
 					m_CurrentDirectory /= path.filename();
 				}
-
-				
 			}
 			
 			ImGui::TextWrapped(filenameString.c_str());
@@ -80,7 +92,14 @@ namespace Table
 
 		ImGui::SliderFloat("Padding", &padding, 0, 32);
 
+		
+
 		ImGui::End();
+	}
+
+	void ContentBrowserPanel::SetContext(const Ref<Scene>& context)
+	{
+		m_Context = context;
 	}
 
 }

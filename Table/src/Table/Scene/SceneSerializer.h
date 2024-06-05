@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Scene.h"
+#include "Entity.h"
+
+namespace YAML { class Emitter; }
+
 
 namespace Table
 {
@@ -10,6 +14,8 @@ namespace Table
 		SceneSerializer(const Ref<Scene>& scene);
 		void Serialize(const std::string& filepath);
 		void SerializeRuntime(const std::string& filepath);
+
+		static void SerializeEntityToPath(Entity entity, const std::string& filepath);
 
 		bool DeSerialize(const std::string& filepath);
 		bool DeSerializeRuntime(const std::string& filepath);

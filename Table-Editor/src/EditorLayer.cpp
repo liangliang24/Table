@@ -574,6 +574,7 @@ namespace Table
 	{
 		m_ActiveScene = CreateRef<Scene>();
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_ContentBrowserPanel->SetContext(m_ActiveScene);
 		
 		m_EditorScenePath = std::filesystem::path();
 	}
@@ -604,6 +605,7 @@ namespace Table
 		SceneSerializer serializer(newScene);
 		m_EditorScene = newScene;
 		m_SceneHierarchyPanel.SetContext(m_EditorScene);
+		m_ContentBrowserPanel->SetContext(m_EditorScene);
 		m_ActiveScene = m_EditorScene;
 		m_EditorScenePath = path;
 		if (serializer.DeSerialize(path.string()))
@@ -651,6 +653,7 @@ namespace Table
 		m_ActiveScene->OnRuntimeStart();
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_ContentBrowserPanel->SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnSceneSimulate()
@@ -664,6 +667,7 @@ namespace Table
 		m_ActiveScene->OnSimulationStart();
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_ContentBrowserPanel->SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnSceneStop()
@@ -680,6 +684,8 @@ namespace Table
 		m_ActiveScene = m_EditorScene;
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_ContentBrowserPanel->SetContext(m_ActiveScene);
+
 	}
 
 	void EditorLayer::OnScenePause()
