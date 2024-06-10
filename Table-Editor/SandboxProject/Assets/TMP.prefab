@@ -1,0 +1,12 @@
+Entity: 3489712411155010602
+TagComponent:
+  Tag: TMP
+TransformComponent:
+  Translation: [-1.29180145, 0, 0]
+  Rotation: [0, 0, 0]
+  Scale: [1, 1, 1]
+  LinearDamping: 0
+  AngularDamping: 0
+SpriteRendererComponent:
+  Color: [1, 1, 1, 1]
+  TilingFactor: 1

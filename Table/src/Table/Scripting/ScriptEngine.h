@@ -27,7 +27,7 @@ namespace Table
 		Bool, Char, Byte, Short, Int, Long,
 		UByte, UShort, UInt, ULong,
 		Vector2, Vector3, Vector4,
-		Entity
+		Entity,Prefab
 	};
 
 	struct ScriptField
@@ -51,18 +51,20 @@ namespace Table
 		template<typename T>
 		T GetValue()
 		{
-			static_assert(sizeof(T) <= 16, "Type too large!");
+			static_assert(sizeof(T) <= 128, "Type too large!");
 			return *(T*)m_Buffer;
 		}
 
 		template<typename T>
 		void SetValue(T value)
 		{
-			static_assert(sizeof(T) <= 16, "Type too large!");
+			static_assert(sizeof(T) <= 128, "Type too large!");
 			memcpy(m_Buffer, &value, sizeof(T));
 		}
+
+
 	private:
-		uint8_t m_Buffer[16];
+		uint8_t m_Buffer[128];
 
 		friend class ScriptEngine;
 		friend class ScriptInstance;
@@ -105,7 +107,7 @@ namespace Table
 		template<typename T>
 		T GetFieldValue(const std::string& name)
 		{
-			static_assert(sizeof(T) <= 16, "Type too large!");
+			static_assert(sizeof(T) <= 128, "Type too large!");
 
 			bool success = GetFieldValueInternal(name, s_FieldValueBuffer);
 			if (!success)
@@ -117,7 +119,7 @@ namespace Table
 		template<typename T>
 		void SetFieldValue(const std::string& name, T value)
 		{
-			static_assert(sizeof(T) <= 16, "Type too large!");
+			static_assert(sizeof(T) <= 128, "Type too large!");
 
 			SetFieldValueInternal(name, &value);
 		}
@@ -135,7 +137,7 @@ namespace Table
 		MonoMethod* m_OnCreateMethod = nullptr;
 		MonoMethod* m_OnUpdateMethod = nullptr;
 
-		inline static char s_FieldValueBuffer[16];
+		inline static char s_FieldValueBuffer[128];
 
 		friend class ScriptEngine;
 		friend struct ScriptFieldInstance;
@@ -205,6 +207,7 @@ namespace Table
 			case ScriptFieldType::Vector3: return "Vector3";
 			case ScriptFieldType::Vector4: return "Vector4";
 			case ScriptFieldType::Entity:  return "Entity";
+			case ScriptFieldType::Prefab:  return "Prefab";
 			}
 			TABLE_CORE_ASSERT(false, "Unknown ScriptFieldType");
 			return "None";
@@ -229,6 +232,7 @@ namespace Table
 			if (fieldType == "Vector3") return ScriptFieldType::Vector3;
 			if (fieldType == "Vector4") return ScriptFieldType::Vector4;
 			if (fieldType == "Entity")  return ScriptFieldType::Entity;
+			if (fieldType == "Prefab")	return ScriptFieldType::Prefab;
 
 			TABLE_CORE_ASSERT(false, "Unknown ScriptFieldType");
 			return ScriptFieldType::None;

@@ -16,7 +16,7 @@ namespace Sandbox
         public float Speed;
         public float AngularSpeed;
         public float Time = 0.0f;
-
+        public Prefab prefab;
         void OnCreate()
         {
             Console.WriteLine($"Player.OnCreate - {ID}");

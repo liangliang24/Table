@@ -1,8 +1,9 @@
 #pragma once
 #include "Table/Core/UUID.h"
+#include "Table/Scene/Scene.h"
 #include "Components.h"
 #include <entt.hpp>
-#include "Table/Scene/Scene.h"
+
 namespace Table
 {
 	class Entity
@@ -68,6 +69,23 @@ namespace Table
 	private:
 		entt::entity m_EntityHandle = entt::null;
 		Scene* m_Scene = nullptr;
+	};
+
+
+	class Prefab
+	{
+	public:
+		Prefab(const std::filesystem::path& path)
+			: m_PrefabEntityPath(new std::filesystem::path(path)) {}
+		Prefab() = default;
+
+		std::filesystem::path GetPrefabEntityPath()
+		{ 
+			return *m_PrefabEntityPath; 
+		}
+
+	private:
+		std::filesystem::path* m_PrefabEntityPath = nullptr;
 	};
 }
 

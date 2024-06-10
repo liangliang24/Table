@@ -114,7 +114,7 @@ namespace Table
 #define WRITE_SCRIPT_FIELD(FieldType, Type)           \
 			case ScriptFieldType::FieldType:          \
 				out << scriptField.GetValue<Type>();  \
-				break
+				break;
 
 #define READ_SCRIPT_FIELD(FieldType, Type)             \
 	case ScriptFieldType::FieldType:                   \
@@ -352,6 +352,12 @@ namespace Table
 						WRITE_SCRIPT_FIELD(Vector3, glm::vec3);
 						WRITE_SCRIPT_FIELD(Vector4, glm::vec4);
 						WRITE_SCRIPT_FIELD(Entity, UUID);
+						case ScriptFieldType::Prefab:
+						{
+							auto path = scriptField.GetValue<Prefab>().GetPrefabEntityPath();
+							Project::TranslateToRelativePath(path);
+							out << path.string();
+						}
 					}
 					out << YAML::EndMap; // ScriptFields
 				}
@@ -541,6 +547,13 @@ namespace Table
 									READ_SCRIPT_FIELD(Vector3, glm::vec3);
 									READ_SCRIPT_FIELD(Vector4, glm::vec4);
 									READ_SCRIPT_FIELD(Entity, UUID);
+									case ScriptFieldType::Prefab:
+									{
+										std::string data = scriptField["Data"].as<std::string>();
+										auto path = Project::GetAssetFileSystemPath(data);
+										fieldInstance.SetValue(Prefab(path));                  
+										break;
+									}
 								}
 							}
 						}
@@ -734,6 +747,13 @@ namespace Table
 							READ_SCRIPT_FIELD(Vector3, glm::vec3);
 							READ_SCRIPT_FIELD(Vector4, glm::vec4);
 							READ_SCRIPT_FIELD(Entity, UUID);
+							case ScriptFieldType::Prefab:
+							{
+								std::string data = scriptField["Data"].as<std::string>();
+								auto path = Project::GetAssetFileSystemPath(data);
+								fieldInstance.SetValue(Prefab(path));
+								break;
+							}
 						}
 					}
 				}

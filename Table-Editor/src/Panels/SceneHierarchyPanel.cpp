@@ -12,6 +12,7 @@
 #include "Table/UI/UI.h"
 #include "imgui/misc/cpp/imgui_stdlib.h"
 #include "Table/Scene/SceneSerializer.h"
+#include "Table/Scene/Prefab.h"
 
 #ifdef _MSVC_LANG
 #define _CRT_SECURE_NO_WARNINGS
@@ -394,6 +395,14 @@ namespace Table {
 									scriptInstance->SetFieldValue(name, data);
 								}
 							}
+							if (field.Type == ScriptFieldType::Prefab)
+							{
+								Prefab data = scriptInstance->GetFieldValue<Prefab>(name);
+								if (ImGui::Button(data.GetPrefabEntityPath().string().c_str(), ImVec2(300.0f, 0.0f)))
+								{
+									
+								}
+							}
 						}
 					}
 				}
@@ -419,6 +428,27 @@ namespace Table {
 									if (ImGui::DragFloat(name.c_str(), &data))
 										scriptField.SetValue(data);
 								}
+								if (field.Type == ScriptFieldType::Prefab)
+								{
+									Prefab data = scriptField.GetValue<Prefab>();
+									ImGui::Button(data.GetPrefabEntityPath().string().c_str(), ImVec2(300.0f, 0.0f));
+									
+									if (ImGui::BeginDragDropTarget())
+									{
+										if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+										{
+											const wchar_t* path = (const wchar_t*)payload->Data;
+											Prefab data(path);
+
+											ScriptFieldInstance& fieldInstance = entityFields[name];
+											fieldInstance.Field = field;
+											fieldInstance.SetValue(data);
+										}
+
+										ImGui::EndDragDropTarget();
+									}
+
+								}
 							}
 							else
 							{
@@ -432,6 +462,25 @@ namespace Table {
 										fieldInstance.Field = field;
 										fieldInstance.SetValue(data);
 									}
+								}
+								if (field.Type == ScriptFieldType::Prefab)
+								{
+									ImGui::Button("", ImVec2(300.0f, 0.0f));
+									
+									if (ImGui::BeginDragDropTarget())
+									{
+										if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+										{
+											const wchar_t* path = (const wchar_t*)payload->Data;
+											Prefab data(path);
+
+											ScriptFieldInstance& fieldInstance = entityFields[name];
+											fieldInstance.Field = field;
+											fieldInstance.SetValue(data);
+										}
+										ImGui::EndDragDropTarget();
+									}
+									
 								}
 							}
 						}
@@ -526,6 +575,8 @@ namespace Table {
 				ImGui::DragFloat("Kerning", &component.Kerning, 0.025f);
 				ImGui::DragFloat("Line Spacing", &component.LineSpacing, 0.025f);
 			});
+
+		//DrawComponent()
 	}
 
 }

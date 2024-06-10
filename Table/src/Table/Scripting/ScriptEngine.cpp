@@ -39,6 +39,7 @@ namespace Table
 		{ "Table.Vector4", ScriptFieldType::Vector4 },
 
 		{ "Table.Entity", ScriptFieldType::Entity },
+		{ "Table.Prefab", ScriptFieldType::Prefab }
 	};
 
 	namespace Utils
@@ -241,6 +242,8 @@ namespace Table
 	void ScriptEngine::OnRuntimeStart(Scene* scene)
 	{
 		s_Data->SceneContext = scene;
+
+		
 	}
 
 	void ScriptEngine::OnRuntimeStop()
