@@ -2,11 +2,12 @@
 
 #include "AssetMetadata.h"
 
-namespace Table {
+namespace Table 
+{
 	class AssetImporter
 	{
 	public:
-		static Ref<Asset> ImportAsset()
+		static Ref<Asset> ImportAsset(AssetHandle handle, const AssetMetadata& metadata);
 	};
 }
 

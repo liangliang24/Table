@@ -32,6 +32,7 @@ namespace Table
 		{
 			return nullptr;
 		}
+
 		Ref<Asset> asset;
 		if (IsAssetLoaded(handle))
 		{
