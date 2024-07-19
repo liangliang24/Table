@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Table/Core/Core.h"
+#include "Table/Asset/Asset.h"
 
 namespace Table
 {
@@ -22,7 +23,7 @@ namespace Table
 		bool GenerateMips = true;
 	};
 
-	class Texture
+	class Texture : public Asset
 	{
 	public:
 		virtual ~Texture() = default;
@@ -50,6 +51,9 @@ namespace Table
 	public:
 		static Ref<Texture2D> Create(const TextureSpecification& specification);
 		static Ref<Texture2D> Create(const std::string& path);
+
+		static AssetType GetStaticType() { return AssetType::Texture2D; }
+		virtual AssetType GetType() const { return AssetType::Texture2D; }
 	};
 }
 

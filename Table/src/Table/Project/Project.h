@@ -4,6 +4,9 @@
 #include <filesystem>
 
 #include "Table/Core/Core.h"
+#include "Table/Asset/AssetManagerBase.h"
+#include "Table/Asset/EditorAssetManager.h"
+#include "Table/Asset/RuntimeAssetManager.h"
 
 namespace Table {
 
@@ -61,6 +64,9 @@ namespace Table {
 		ProjectConfig& GetConfig() { return m_Config; }
 
 		static Ref<Project> GetActive() { return s_ActiveProject; }
+		std::shared_ptr<AssetManagerBase> GetAssetManager() { return m_AssetManager; }
+		std::shared_ptr<RuntimeAssetManager> GetEditorAssetManager() { return std::static_pointer_cast<RuntimeAssetManager>(m_AssetManager); }
+		std::shared_ptr<EditorAssetManager> GetRuntimeAssetManager() { return std::static_pointer_cast<EditorAssetManager>(m_AssetManager); }
 
 		static Ref<Project> New();
 		static Ref<Project> Load(const std::filesystem::path& path);
@@ -68,6 +74,7 @@ namespace Table {
 	private:
 		ProjectConfig m_Config;
 		std::filesystem::path m_ProjectDirectory;
+		std::shared_ptr<AssetManagerBase> m_AssetManager;
 
 		inline static Ref<Project> s_ActiveProject;
 	};
