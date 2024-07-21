@@ -12,6 +12,7 @@
 #include "Table/Math/Math.h"
 #include "Table/Scripting/ScriptEngine.h"
 #include "Table/Project/Project.h"
+#include "Table/Asset/TextureImporter.h"
 
 namespace Table
 {
@@ -26,13 +27,13 @@ namespace Table
 	void EditorLayer::OnAttach()
 	{
 		TABLE_PROFILE_FUNCTION();
-		m_CheckerboardTexture = Texture2D::Create("asset/textures/Checkerboard.png");
+		m_CheckerboardTexture = TextureImporter::LoadTexture2D("asset/textures/Checkerboard.png");
 
-		m_IconPlay = Texture2D::Create("Resources/Icons/PlayButton.png");
-		m_IconPause = Texture2D::Create("Resources/Icons/PauseButton.png");
-		m_IconSimulate = Texture2D::Create("Resources/Icons/SimulateButton.png");
-		m_IconStep = Texture2D::Create("Resources/Icons/StepButton.png");
-		m_IconStop = Texture2D::Create("Resources/Icons/StopButton.png");
+		m_IconPlay = TextureImporter::LoadTexture2D("Resources/Icons/PlayButton.png");
+		m_IconPause = TextureImporter::LoadTexture2D("Resources/Icons/PauseButton.png");
+		m_IconSimulate = TextureImporter::LoadTexture2D("Resources/Icons/SimulateButton.png");
+		m_IconStep = TextureImporter::LoadTexture2D("Resources/Icons/StepButton.png");
+		m_IconStop = TextureImporter::LoadTexture2D("Resources/Icons/StopButton.png");
 
 		FramebufferSpecification fbSpec;
 		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };

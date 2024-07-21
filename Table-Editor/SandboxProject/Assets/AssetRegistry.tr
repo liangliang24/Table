@@ -1,0 +1,4 @@
+AssetRegistry:
+  - Handle: 7598329199659050564
+    FilePath: Textures/FF0Suki.png
+    Type: AssetType::Texture2D

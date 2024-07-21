@@ -17,6 +17,7 @@ namespace Table {
 		std::filesystem::path StartScene;
 
 		std::filesystem::path AssetDirectory;
+		std::filesystem::path AssetRegistryPath;
 		std::filesystem::path ScriptModulePath;
 	};
 
@@ -33,6 +34,12 @@ namespace Table {
 		{
 			TABLE_CORE_ASSERT(s_ActiveProject);
 			return GetProjectDirectory() / s_ActiveProject->m_Config.AssetDirectory;
+		}
+
+		static std::filesystem::path GetAssetRegistryPath()
+		{
+			TABLE_CORE_ASSERT(s_ActiveProject);
+			return GetAssetDirectory() / s_ActiveProject->m_Config.AssetRegistryPath;
 		}
 
 		static void RemoveProjectDirectory(std::filesystem::path& path)
@@ -65,8 +72,8 @@ namespace Table {
 
 		static Ref<Project> GetActive() { return s_ActiveProject; }
 		std::shared_ptr<AssetManagerBase> GetAssetManager() { return m_AssetManager; }
-		std::shared_ptr<RuntimeAssetManager> GetEditorAssetManager() { return std::static_pointer_cast<RuntimeAssetManager>(m_AssetManager); }
-		std::shared_ptr<EditorAssetManager> GetRuntimeAssetManager() { return std::static_pointer_cast<EditorAssetManager>(m_AssetManager); }
+		std::shared_ptr<EditorAssetManager> GetEditorAssetManager() { return std::static_pointer_cast<EditorAssetManager>(m_AssetManager); }
+		std::shared_ptr<RuntimeAssetManager> GetRuntimeAssetManager() { return std::static_pointer_cast<RuntimeAssetManager>(m_AssetManager); }
 
 		static Ref<Project> New();
 		static Ref<Project> Load(const std::filesystem::path& path);

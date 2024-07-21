@@ -495,6 +495,7 @@ namespace Table {
 				ImGui::Button("Texture", ImVec2(100.0f, 0.0f));
 				if (ImGui::BeginDragDropTarget())
 				{
+					/*
 					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 					{
 						const wchar_t* path = (const wchar_t*)payload->Data;
@@ -510,7 +511,10 @@ namespace Table {
 							TABLE_WARN("Coule not load texture{0}", texturePath.filename().string());
 						}
 					}
+					*/
+
 					ImGui::EndDragDropTarget();
+					
 				}
 
 				ImGui::DragFloat("Tiling Factor", &component.TilingFactor, 0.1f, 0.0f, 100.0f);

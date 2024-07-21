@@ -19,16 +19,21 @@
 //#endif // TABLE_PLATFORM_WINDOWS
 
 
-
-#ifdef TABLE_DEBUG
 #ifdef TABLE_PLATFORM_WINDOWS
-#define TABLE_DEBUGBREAK() __debugbreak()
+	#define TABLE_DEBUGBREAK() __debugbreak()
 #else
-#define TABLE_DEBUGBREAK()
+	#define TABLE_DEBUGBREAK()
 #endif // TABLE_PLATFORM_WINDOWS
 
+
+#ifdef TABLE_DEBUG
 	#define TABLE_ENABLE_ASSERTS
 #endif // TABLE_DEBUG
+
+#ifdef TABLE_DIST
+	#define TABLE_ENABLE_VERIFY
+#endif
+
 
 
 #define TABLE_EXPAND_MACRO(x) x

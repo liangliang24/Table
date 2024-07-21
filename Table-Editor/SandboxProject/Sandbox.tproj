@@ -1,5 +1,6 @@
 Project:
   Name: Sandbox
-  StartScene: "Scenes\\TankWar.table"
+  StartScene: "Scenes\\Physics2D.table"
   AssetDirectory: "Assets"
+  AssetRegistryPath: "AssetRegistry.tr"
   ScriptModulePath: "Scripts/Binaries/Sandbox.dll"

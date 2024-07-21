@@ -1,5 +1,6 @@
 #pragma once
 #include "Asset.h"
+#include <map>
 
 namespace Table {
 

@@ -17,7 +17,7 @@ namespace Table
 	{
 		if (s_AssetImportFuncs.find(metadata.Type) == s_AssetImportFuncs.end())
 		{
-			TABLE_CORE_ERROR("No importer available for asset type: {}", metadata.Type);
+			TABLE_CORE_ERROR("No importer available for asset type: {}", (uint16_t)metadata.Type);
 			return nullptr;
 		}
 

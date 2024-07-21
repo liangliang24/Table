@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Table/Core/Core.h"
+#include "Table/Core/Buffer.h"
 #include "Table/Asset/Asset.h"
 
 namespace Table
@@ -35,9 +36,7 @@ namespace Table
 
 		virtual uint32_t GetRendererID() const = 0;
 
-		virtual const std::string& GetPath() const = 0;
-
-		virtual void SetData(void* datt, uint32_t size) = 0;
+		virtual void SetData(Buffer data) = 0;
 
 		virtual void Bind(uint32_t slot = 0) const = 0;
 
@@ -49,8 +48,8 @@ namespace Table
 	class Texture2D : public Texture
 	{
 	public:
-		static Ref<Texture2D> Create(const TextureSpecification& specification);
-		static Ref<Texture2D> Create(const std::string& path);
+		static Ref<Texture2D> Create(const TextureSpecification& specification, Buffer data);
+		//static Ref<Texture2D> Create(const std::string& path);
 
 		static AssetType GetStaticType() { return AssetType::Texture2D; }
 		virtual AssetType GetType() const { return AssetType::Texture2D; }

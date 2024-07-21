@@ -23,6 +23,7 @@
 #include <unordered_set>
 
 #include "Table/Core/Core.h"
+#include "Table/Core/Buffer.h"
 
 #include "Table/Core/Log.h"
 

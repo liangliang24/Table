@@ -3,6 +3,7 @@
 #include "Table/Renderer/VertexArray.h"
 #include "Table/Renderer/Shader.h"
 #include "Table/Renderer/RenderCommand.h"
+#include "Table/Asset/AssetManager.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
 
@@ -192,9 +193,9 @@ namespace Table
 		s_Data.TextVertexArray->SetIndexBuffer(quadIB);
 		s_Data.TextVertexBufferBase = new TextVertex[s_Data.MaxVertices];
 
-		s_Data.WhiteTexture = Texture2D::Create(TextureSpecification());
-		uint32_t whiteTextureData = 0xffffffff;
-		s_Data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+		const uint32_t* whiteTextureData = new uint32_t(0xffffffff);
+		s_Data.WhiteTexture = Texture2D::Create(TextureSpecification(), Buffer(whiteTextureData, sizeof(uint32_t)));
+		//s_Data.WhiteTexture->SetData(Buffer(&whiteTextureData, sizeof(uint32_t)));
 
 		int32_t samplers[s_Data.MaxTextureSlots];
 		for (uint32_t i = 0;i < s_Data.MaxTextureSlots;i++)
@@ -400,6 +401,7 @@ namespace Table
 	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, float tilingFactor /*= 1.0f*/, const glm::vec4 tintColor /*= glm::vec4(1.0f)*/, int entityID)
 	{
 		TABLE_PROFILE_FUNCTION();
+		TABLE_CORE_VERIFY(texture);
 
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 		{
@@ -554,7 +556,8 @@ namespace Table
 	{
 		if (src.Texture)
 		{
-			DrawQuad(transform, src.Texture, src.TilingFactor, src.Color, entityID);
+			Ref<Texture2D> texture = AssetManager::GetAsset<Texture2D>(src.Texture);
+			DrawQuad(transform, texture, src.TilingFactor, src.Color, entityID);
 		} 
 		else
 		{
