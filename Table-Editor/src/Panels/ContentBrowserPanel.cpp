@@ -12,7 +12,7 @@ namespace Table
 	ContentBrowserPanel::ContentBrowserPanel()
 		: m_BaseDirectory(Project::GetAssetDirectory()), m_CurrentDirectory(m_BaseDirectory)
 	{
-		m_TreeNodes.push_back(std::filesystem::path("."));
+		m_TreeNodes.push_back(TreeNode(".", 0));
 
 		m_DirectoryIcon = TextureImporter::LoadTexture2D("Resources/Icons/ContentBrowser/DirectoryIcon.png");
 		m_FileIcon = TextureImporter::LoadTexture2D("Resources/Icons/ContentBrowser/FileIcon.png");
@@ -95,12 +95,18 @@ namespace Table
 
 				if (ImGui::BeginPopupContextItem())
 				{
-					if (ImGui::MenuItem("Import"))
+					if (ImGui::MenuItem("Delete"))
 					{
-						auto relativePath = std::filesystem::relative(item, Project::GetAssetDirectory());
-						Project::GetActive()->GetEditorAssetManager()->ImportAsset(relativePath);
+						TABLE_CORE_ASSERT(false, "Not Implemented");
 					}
 					ImGui::EndPopup();
+				}
+
+				if (ImGui::BeginDragDropSource())
+				{
+					AssetHandle handle = m_TreeNodes[treeNodeIndex].Handle;
+					ImGui::SetDragDropPayload("CONTENT_BROWSER_ITEM", &handle, sizeof(AssetHandle));
+					ImGui::EndDragDropSource();
 				}
 
 				ImGui::PopStyleColor();
@@ -131,20 +137,13 @@ namespace Table
 				ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
 				ImGui::ImageButton((ImTextureID)icon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
 
-				if (ImGui::BeginDragDropSource())
-				{
-					std::filesystem::path relativePath(path);
-					const wchar_t* itemPath = relativePath.c_str();
-					ImGui::SetDragDropPayload("CONTENT_BROWSER_ITEM", itemPath, (wcslen(itemPath) + 1) * sizeof(wchar_t));
-					ImGui::EndDragDropSource();
-				}
-
 				if (ImGui::BeginPopupContextItem())
 				{
 					if (ImGui::MenuItem("Import"))
 					{
 						auto relativePath = std::filesystem::relative(path, Project::GetAssetDirectory());
 						Project::GetActive()->GetEditorAssetManager()->ImportAsset(relativePath);
+						RefreshAssetTree();
 					}
 					ImGui::EndPopup();
 				}
@@ -211,7 +210,7 @@ namespace Table
 				}
 				else
 				{
-					TreeNode newNode(p);
+					TreeNode newNode(p, handle);
 					newNode.Parent = currentNodeIndex;
 					m_TreeNodes.push_back(newNode);
 

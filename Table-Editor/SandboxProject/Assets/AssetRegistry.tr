@@ -1,4 +1,7 @@
 AssetRegistry:
-  - Handle: 7598329199659050564
+  - Handle: 10037648030001101216
+    FilePath: Textures/KON.png
+    Type: AssetType::Texture2D
+  - Handle: 16717585067939935206
     FilePath: Textures/FF0Suki.png
     Type: AssetType::Texture2D

@@ -298,8 +298,9 @@ namespace Table
 		{
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
-				const wchar_t* path = (const wchar_t*)payload->Data;
-				OpenScene(path);
+				TABLE_CORE_ASSERT(false)
+				//const wchar_t* path = (const wchar_t*)payload->Data;
+				//OpenScene(path);
 			}
 			ImGui::EndDragDropTarget();
 		}

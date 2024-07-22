@@ -10,9 +10,11 @@
 
 #include "Table/Scripting/ScriptEngine.h"
 #include "Table/UI/UI.h"
+#include "Table/Asset/AssetManager.h"
 #include "imgui/misc/cpp/imgui_stdlib.h"
 #include "Table/Scene/SceneSerializer.h"
 #include "Table/Scene/Prefab.h"
+
 
 #ifdef _MSVC_LANG
 #define _CRT_SECURE_NO_WARNINGS
@@ -110,10 +112,11 @@ namespace Table {
 		{
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
-				const wchar_t* path = (const wchar_t*)payload->Data;
-				std::filesystem::path filePath(path);
-				SceneSerializer sceneSerializer(m_Context);
-				sceneSerializer.DeSerializeEntityToScene(filePath.string());
+				TABLE_CORE_ASSERT(false)
+				//const wchar_t* path = (const wchar_t*)payload->Data;
+				//std::filesystem::path filePath(path);
+				//SceneSerializer sceneSerializer(m_Context);
+				//sceneSerializer.DeSerializeEntityToScene(filePath.string());
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -437,12 +440,13 @@ namespace Table {
 									{
 										if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 										{
-											const wchar_t* path = (const wchar_t*)payload->Data;
-											Prefab data(path);
+											TABLE_CORE_ASSERT(false)
+											//const wchar_t* path = (const wchar_t*)payload->Data;
+											//Prefab data(path);
 
-											ScriptFieldInstance& fieldInstance = entityFields[name];
-											fieldInstance.Field = field;
-											fieldInstance.SetValue(data);
+											//ScriptFieldInstance& fieldInstance = entityFields[name];
+											//fieldInstance.Field = field;
+											//fieldInstance.SetValue(data);
 										}
 
 										ImGui::EndDragDropTarget();
@@ -471,12 +475,13 @@ namespace Table {
 									{
 										if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 										{
-											const wchar_t* path = (const wchar_t*)payload->Data;
+											TABLE_CORE_ASSERT(false)
+											/*const wchar_t* path = (const wchar_t*)payload->Data;
 											Prefab data(path);
 
 											ScriptFieldInstance& fieldInstance = entityFields[name];
 											fieldInstance.Field = field;
-											fieldInstance.SetValue(data);
+											fieldInstance.SetValue(data);*/
 										}
 										ImGui::EndDragDropTarget();
 									}
@@ -495,23 +500,21 @@ namespace Table {
 				ImGui::Button("Texture", ImVec2(100.0f, 0.0f));
 				if (ImGui::BeginDragDropTarget())
 				{
-					/*
+					
 					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 					{
-						const wchar_t* path = (const wchar_t*)payload->Data;
-						std::filesystem::path texturePath(path);
-						Ref<Texture2D> texture = Texture2D::Create(texturePath.string());
+						AssetHandle handle = *(AssetHandle*)payload->Data;
 
-						if (texture->IsLoaded())
+						if (AssetManager::GetAssetType(handle) == AssetType::Texture2D)
 						{
-							component.Texture = texture;
+							component.Texture = handle;
 						}
 						else
 						{
-							TABLE_WARN("Coule not load texture{0}", texturePath.filename().string());
+							TABLE_CORE_WARN("Wrong Asset Type!");
 						}
 					}
-					*/
+					
 
 					ImGui::EndDragDropTarget();
 					

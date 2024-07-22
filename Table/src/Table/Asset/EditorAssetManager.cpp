@@ -109,6 +109,17 @@ namespace Table
 		return true;
 	}
 
+	AssetType EditorAssetManager::GetAssetType(AssetHandle handle) const
+	{
+		if (!IsAssetHandleValid(handle))
+		{
+			return AssetType::None;
+		}
+
+		return m_AssetRegistry.at(handle).Type;
+		
+	}
+
 	Ref<Asset> EditorAssetManager::GetAsset(AssetHandle handle) const
 	{
 		if (!IsAssetHandleValid(handle))

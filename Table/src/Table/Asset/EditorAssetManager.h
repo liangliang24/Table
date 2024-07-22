@@ -13,6 +13,7 @@ namespace Table
 		virtual Ref<Asset> GetAsset(AssetHandle handle) const override;
 		virtual bool IsAssetHandleValid(AssetHandle handle) const override;
 		virtual bool IsAssetLoaded(AssetHandle handle) const override;
+		AssetType GetAssetType(AssetHandle handle) const override;
 
 		void ImportAsset(const std::filesystem::path& filepath);
 
@@ -22,6 +23,9 @@ namespace Table
 
 		void SerializeAssetRegistry();
 		bool DeserializeAssetRegistry();
+
+		
+
 	private:
 		AssetMap m_LoadedAssets;
 		AssetRegistry m_AssetRegistry;
