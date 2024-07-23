@@ -135,7 +135,7 @@ namespace Table
 		else
 		{
 			const AssetMetadata& metadata = GetMetadata(handle);
-			Ref<Asset> asset = AssetImporter::ImportAsset(handle, metadata);
+			asset = AssetImporter::ImportAsset(handle, metadata);
 			if (!asset)
 			{
 				TABLE_CORE_ERROR("EditorAssetManager::GetAsset - asset importer failed!");

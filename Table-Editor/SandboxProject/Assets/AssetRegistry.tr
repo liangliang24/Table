@@ -1,4 +1,7 @@
 AssetRegistry:
+  - Handle: 1709601720411427428
+    FilePath: Textures/Tank.png
+    Type: AssetType::Texture2D
   - Handle: 10037648030001101216
     FilePath: Textures/KON.png
     Type: AssetType::Texture2D

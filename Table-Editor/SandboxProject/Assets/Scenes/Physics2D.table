@@ -36,6 +36,7 @@ Entities:
       AngularDamping: 0
     SpriteRendererComponent:
       Color: [0.949806929, 0.455301404, 0.0660097376, 1]
+      TextureHandle: 0
       TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Static
@@ -84,6 +85,7 @@ Entities:
       AngularDamping: 0
     SpriteRendererComponent:
       Color: [0.922779918, 0.0391914323, 0.0391914323, 1]
+      TextureHandle: 16717585067939935206
       TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Dynamic
@@ -117,6 +119,7 @@ Entities:
       AngularDamping: 0
     SpriteRendererComponent:
       Color: [0.949806929, 0.455301404, 0.0660097376, 1]
+      TextureHandle: 0
       TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Static
