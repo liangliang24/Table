@@ -7,6 +7,24 @@
 #include <yaml-cpp/yaml.h>
 namespace Table
 {
+	static std::map<std::filesystem::path, AssetType> s_AssetExtensionMap =
+	{
+		{".png", AssetType::Texture2D},
+		{".jpg", AssetType::Texture2D},
+		{".jpeg", AssetType::Texture2D},
+		{".table", AssetType::Scene}
+	};
+
+	static AssetType GetAssetTypeFromFileExtension(const std::filesystem::path& extension)
+	{
+		if (s_AssetExtensionMap.find(extension) == s_AssetExtensionMap.end())
+		{
+			TABLE_CORE_WARN("Could not find AssetType for {}", extension);
+			return AssetType::None;
+		}
+		return s_AssetExtensionMap.at(extension);
+	}
+	
 	YAML::Emitter& operator<<(YAML::Emitter& out, const std::string_view& v)
 	{
 		out << std::string(v.data(), v.size());
@@ -28,11 +46,17 @@ namespace Table
 		AssetHandle handle;
 		AssetMetadata metadata;
 		metadata.FilePath = filepath;
-		metadata.Type = AssetType::Texture2D;
+		metadata.Type = GetAssetTypeFromFileExtension(filepath.extension());
+		TABLE_CORE_ASSERT(metadata.Type != AssetType::None)
+		if (GetAssetTypeFromFileExtension(filepath.extension()) == AssetType::None)
+		{
+
+		}
+		
 		Ref<Asset> asset = AssetImporter::ImportAsset(handle, metadata);
-		asset->Handle = handle;
 		if (asset)
 		{
+			asset->Handle = handle;
 			m_LoadedAssets[handle] = asset;
 			m_AssetRegistry[handle] = metadata;
 			SerializeAssetRegistry();
@@ -49,6 +73,11 @@ namespace Table
 		}
 
 		return it->second;
+	}
+
+	const std::filesystem::path& EditorAssetManager::GetFilePath(AssetHandle handle) const
+	{
+		return GetMetadata(handle).FilePath;
 	}
 
 	void EditorAssetManager::SerializeAssetRegistry()
@@ -120,7 +149,7 @@ namespace Table
 		
 	}
 
-	Ref<Asset> EditorAssetManager::GetAsset(AssetHandle handle) const
+	Ref<Asset> EditorAssetManager::GetAsset(AssetHandle handle)
 	{
 		if (!IsAssetHandleValid(handle))
 		{
@@ -140,6 +169,7 @@ namespace Table
 			{
 				TABLE_CORE_ERROR("EditorAssetManager::GetAsset - asset importer failed!");
 			}
+			m_LoadedAssets[handle] = asset;
 		}
 		return asset;
 	}

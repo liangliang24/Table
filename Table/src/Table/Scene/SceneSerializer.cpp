@@ -379,7 +379,7 @@ namespace Table
 		out << YAML::EndMap;
 	}
 
-	void SceneSerializer::Serialize(const std::string& filepath)
+	void SceneSerializer::Serialize(const std::filesystem::path& filepath)
 	{
 		YAML::Emitter out;
 		out << YAML::BeginMap;
@@ -405,7 +405,7 @@ namespace Table
 		fout << out.c_str();
 	}
 
-	void SceneSerializer::SerializeRuntime(const std::string& filepath)
+	void SceneSerializer::SerializeRuntime(const std::filesystem::path& filepath)
 	{
 		TABLE_CORE_ASSERT(false);
 	}
@@ -419,12 +419,12 @@ namespace Table
 		fout << out.c_str();
 	}
 
-	bool SceneSerializer::DeSerialize(const std::string& filepath)
+	bool SceneSerializer::DeSerialize(const std::filesystem::path& filepath)
 	{
 		YAML::Node data;
 		try
 		{
-			data = YAML::LoadFile(filepath);
+			data = YAML::LoadFile(filepath.string());
 		}
 		catch (YAML::ParserException e)
 		{
@@ -441,7 +441,7 @@ namespace Table
 		TABLE_CORE_TRACE("Deserializing scene '{0}'", sceneName);
 
 		auto settings = data["Settings"];
-		m_Scene->Gravity = settings["Gravity"].as<float>();
+		//m_Scene->Gravity = settings["Gravity"].as<float>();
 
 		auto entities = data["Entities"];
 		if (entities)
@@ -635,18 +635,18 @@ namespace Table
 		return true;
 	}
 
-	bool SceneSerializer::DeSerializeRuntime(const std::string& filepath)
+	bool SceneSerializer::DeSerializeRuntime(const std::filesystem::path& filepath)
 	{
 		TABLE_CORE_ASSERT(false);
 		return false;
 	}
 
-	bool SceneSerializer::DeSerializeEntityToScene(const std::string& filepath)
+	bool SceneSerializer::DeSerializeEntityToScene(const std::filesystem::path& filepath)
 	{
 		YAML::Node entity;
 		try
 		{
-			entity = YAML::LoadFile(filepath);
+			entity = YAML::LoadFile(filepath.string());
 		}
 		catch (YAML::ParserException e)
 		{

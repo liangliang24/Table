@@ -13,6 +13,8 @@
 #include "Table/Scripting/ScriptEngine.h"
 #include "Table/Project/Project.h"
 #include "Table/Asset/TextureImporter.h"
+#include "Table/Asset/AssetManager.h"
+#include "Table/Asset/SceneImporter.h"
 
 namespace Table
 {
@@ -298,9 +300,8 @@ namespace Table
 		{
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
-				TABLE_CORE_ASSERT(false)
-				//const wchar_t* path = (const wchar_t*)payload->Data;
-				//OpenScene(path);
+				AssetHandle handle = *(AssetHandle*)payload->Data;
+				OpenScene(handle);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -551,9 +552,11 @@ namespace Table
 		{
 			ScriptEngine::Init();
 
-			auto startScenePath = Project::GetAssetFileSystemPath(Project::GetActive()->GetConfig().StartScene);
+			//auto startScenePath = Project::GetAssetFileSystemPath(Project::GetActive()->GetConfig().StartScene);
 			m_ContentBrowserPanel = CreateScope<ContentBrowserPanel>();
-			OpenScene(startScenePath);
+			AssetHandle startScene = Project::GetActive()->GetConfig().StartScene;
+			 
+			OpenScene(startScene);
 		}
 	}
 
@@ -583,39 +586,37 @@ namespace Table
 
 	void EditorLayer::OpenScene()
 	{
-		std::string filepath = FileDialogs::OpenFile("Table Scene (*.table)\0*.table\0");
+		/*std::string filepath = FileDialogs::OpenFile("Table Scene (*.table)\0*.table\0");
 		if (!filepath.empty())
 		{
 			OpenScene(filepath);
-		}
+		}*/
 	}
 
-	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	void EditorLayer::OpenScene(AssetHandle handle)
 	{
+		TABLE_CORE_ASSERT(handle);
+
+		if (!handle)
+		{
+			return;
+		}
+
 		if (m_SceneState != SceneState::Edit)
 		{
 			OnSceneStop();
 		}
 
-		if (path.extension().string() != ".table")
-		{
-			TABLE_WARN("Could not load {0} - not a scene file", path.filename().string());
-			return;
-		}
-
-		Ref<Scene> newScene = CreateRef<Scene>();
-		SceneSerializer serializer(newScene);
+		
+		Ref<Scene> readOnlyScene = AssetManager::GetAsset<Scene>(handle);
+		Ref<Scene> newScene = Scene::Copy(readOnlyScene);
+		
 		m_EditorScene = newScene;
 		m_SceneHierarchyPanel.SetContext(m_EditorScene);
 		m_ContentBrowserPanel->SetContext(m_EditorScene);
-		m_ActiveScene = m_EditorScene;
-		m_EditorScenePath = path;
-		if (serializer.DeSerialize(path.string()))
-		{
-			TABLE_INFO("Deserialize {0} Success!", path.filename().string());
-			return;
-		}
 
+		m_ActiveScene = m_EditorScene;
+		m_EditorScenePath = Project::GetActive()->GetEditorAssetManager()->GetFilePath(handle);
 	}
 
 	void EditorLayer::SaveScene()
@@ -638,8 +639,7 @@ namespace Table
 
 	void EditorLayer::SerializeScene(Ref<Scene> scene, const std::filesystem::path& path)
 	{
-		SceneSerializer serializer(scene);
-		serializer.Serialize(path.string());
+		SceneImporter::SaveScene(scene, path);
 	}
 
 	void EditorLayer::OnScenePlay()

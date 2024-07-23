@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Table/Asset/Asset.h"
 #include "Table/Core/UUID.h"
 #include "Table/Core/Timestep.h"
 #include "Table/Renderer/EditorCamera.h"
 
 #include "entt.hpp"
+
 
 class b2World;
 
@@ -13,7 +15,7 @@ namespace Table
 	class Entity;
 	class Prefab;
 
-	class Scene
+	class Scene : public Asset
 	{
 	public:
 		Scene();
@@ -58,6 +60,9 @@ namespace Table
 
 		float GetGravity() { return Gravity; }
 		void SetGravity(float gravity) { Gravity = gravity; }
+
+		AssetType GetType() const override { return AssetType::Scene; };
+
 	private:
 		float Gravity = -9.8f;
 

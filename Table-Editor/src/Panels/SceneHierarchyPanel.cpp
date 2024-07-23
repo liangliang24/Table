@@ -11,6 +11,7 @@
 #include "Table/Scripting/ScriptEngine.h"
 #include "Table/UI/UI.h"
 #include "Table/Asset/AssetManager.h"
+#include "Table/Asset/AssetMetadata.h"
 #include "imgui/misc/cpp/imgui_stdlib.h"
 #include "Table/Scene/SceneSerializer.h"
 #include "Table/Scene/Prefab.h"
@@ -497,7 +498,26 @@ namespace Table {
 			{
 				ImGui::ColorEdit4("Color", glm::value_ptr(component.Color));
 
-				ImGui::Button("Texture", ImVec2(100.0f, 0.0f));
+				std::string label = "None";
+				bool IsTextureValid = false;
+				if (component.Texture != 0)
+				{
+					if (AssetManager::IsAssetHandleValid(component.Texture) && AssetManager::GetAssetType(component.Texture) == AssetType::Texture2D)
+					{
+						const auto& metadata = Project::GetActive()->GetEditorAssetManager()->GetMetadata(component.Texture);
+						label = metadata.FilePath.filename().string();
+						IsTextureValid = true;
+					}
+					else
+					{
+						label = "Invalid";
+					}
+				}
+				ImVec2 buttonSize = ImGui::CalcTextSize(label.c_str());
+				buttonSize.x += 20.0f;
+				float buttonWidth = glm::max<float>(100.0f, buttonSize.x);
+				
+				ImGui::Button(label.c_str(), ImVec2(buttonWidth, 0.0f));
 				if (ImGui::BeginDragDropTarget())
 				{
 					
@@ -519,6 +539,19 @@ namespace Table {
 					ImGui::EndDragDropTarget();
 					
 				}
+
+				if (IsTextureValid)
+				{
+					ImGui::SameLine();
+					ImVec2 xLabelSize = ImGui::CalcTextSize("X");
+					float buttonSize = xLabelSize.y + ImGui::GetStyle().FramePadding.y * 2.0f;
+					if (ImGui::Button("X", ImVec2(buttonSize, buttonSize)))
+					{
+						component.Texture = 0;
+					}
+				}
+				ImGui::SameLine();
+				ImGui::Text("Texture");
 
 				ImGui::DragFloat("Tiling Factor", &component.TilingFactor, 0.1f, 0.0f, 100.0f);
 			});

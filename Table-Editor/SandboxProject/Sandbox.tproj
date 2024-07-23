@@ -1,6 +1,6 @@
 Project:
   Name: Sandbox
-  StartScene: "Scenes\\Physics2D.table"
+  StartScene: 15906465816966606548
   AssetDirectory: "Assets"
   AssetRegistryPath: "AssetRegistry.tr"
   ScriptModulePath: "Scripts/Binaries/Sandbox.dll"
