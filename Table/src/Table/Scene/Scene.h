@@ -13,7 +13,6 @@ class b2World;
 namespace Table
 {
 	class Entity;
-	class Prefab;
 
 	class Scene : public Asset
 	{

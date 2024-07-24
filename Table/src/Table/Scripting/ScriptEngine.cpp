@@ -38,8 +38,7 @@ namespace Table
 		{ "Table.Vector3", ScriptFieldType::Vector3 },
 		{ "Table.Vector4", ScriptFieldType::Vector4 },
 
-		{ "Table.Entity", ScriptFieldType::Entity },
-		{ "Table.Prefab", ScriptFieldType::Prefab }
+		{ "Table.Entity", ScriptFieldType::Entity }
 	};
 
 	namespace Utils

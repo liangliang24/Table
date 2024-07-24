@@ -148,18 +148,6 @@ namespace Table
 					ImGui::EndPopup();
 				}
 
-				if (ImGui::BeginDragDropTarget())
-				{
-					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("SCENEHIERARCHY_ENTITY"))
-					{
-						const std::string& s((char*)payload->Data);
-						Entity entity = m_Context->FindEntityByName(s);
-						std::string& filename(const_cast<std::string&>(s));
-						filename.append(".prefab");
-						SceneSerializer::SerializeEntityToPath(entity, (m_CurrentDirectory / filename).string());
-					}
-				}
-
 				ImGui::PopStyleColor();
 				if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 				{						

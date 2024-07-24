@@ -27,7 +27,7 @@ namespace Table
 		Bool, Char, Byte, Short, Int, Long,
 		UByte, UShort, UInt, ULong,
 		Vector2, Vector3, Vector4,
-		Entity,Prefab
+		Entity
 	};
 
 	struct ScriptField
@@ -207,7 +207,6 @@ namespace Table
 			case ScriptFieldType::Vector3: return "Vector3";
 			case ScriptFieldType::Vector4: return "Vector4";
 			case ScriptFieldType::Entity:  return "Entity";
-			case ScriptFieldType::Prefab:  return "Prefab";
 			}
 			TABLE_CORE_ASSERT(false, "Unknown ScriptFieldType");
 			return "None";
@@ -232,7 +231,6 @@ namespace Table
 			if (fieldType == "Vector3") return ScriptFieldType::Vector3;
 			if (fieldType == "Vector4") return ScriptFieldType::Vector4;
 			if (fieldType == "Entity")  return ScriptFieldType::Entity;
-			if (fieldType == "Prefab")	return ScriptFieldType::Prefab;
 
 			TABLE_CORE_ASSERT(false, "Unknown ScriptFieldType");
 			return ScriptFieldType::None;

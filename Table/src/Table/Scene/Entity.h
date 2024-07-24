@@ -70,22 +70,5 @@ namespace Table
 		entt::entity m_EntityHandle = entt::null;
 		Scene* m_Scene = nullptr;
 	};
-
-
-	class Prefab
-	{
-	public:
-		Prefab(const std::filesystem::path& path)
-			: m_PrefabEntityPath(new std::filesystem::path(path)) {}
-		Prefab() = default;
-
-		std::filesystem::path GetPrefabEntityPath()
-		{ 
-			return *m_PrefabEntityPath; 
-		}
-
-	private:
-		std::filesystem::path* m_PrefabEntityPath = nullptr;
-	};
 }
 
