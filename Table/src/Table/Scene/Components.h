@@ -179,7 +179,6 @@ namespace Table
 		NativeScriptComponent,
 		Rigidbody2DComponent,
 		BoxCollider2DComponent,
-		CircleCollider2DComponent,
-		TextComponent
+		CircleCollider2DComponent
 		>;
 }

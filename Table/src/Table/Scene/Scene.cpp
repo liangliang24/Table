@@ -258,7 +258,7 @@ namespace Table
 			}
 
 			// Draw text
-			{
+			/*{
 				auto view = m_Registry.view<TransformComponent, TextComponent>();
 				for (auto entity : view)
 				{
@@ -266,7 +266,7 @@ namespace Table
 
 					Renderer2D::DrawString(text.TextString, transform.GetTransform(), text, (int)entity);
 				}
-			}
+			}*/
 
 			Renderer2D::EndScene();
 		}
@@ -470,7 +470,7 @@ namespace Table
 		}
 
 		// Draw text
-		{
+		/*{
 			auto view = m_Registry.view<TransformComponent, TextComponent>();
 			for (auto entity : view)
 			{
@@ -478,7 +478,7 @@ namespace Table
 
 				Renderer2D::DrawString(text.TextString, transform.GetTransform(), text, (int)entity);
 			}
-		}
+		}*/
 
 		Renderer2D::EndScene();
 	}
@@ -508,6 +508,6 @@ namespace Table
 	void Scene::OnComponentAdded<CircleCollider2DComponent>(Entity entity, CircleCollider2DComponent& component) {}
 	template<>
 	void Scene::OnComponentAdded<IDComponent>(Entity entity, IDComponent& component) {}
-	template<>
-	void Scene::OnComponentAdded<TextComponent>(Entity entity, TextComponent& component) {}
+	/*template<>
+	void Scene::OnComponentAdded<TextComponent>(Entity entity, TextComponent& component) {}*/
 }

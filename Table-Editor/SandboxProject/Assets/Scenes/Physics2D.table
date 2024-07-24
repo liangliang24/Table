@@ -85,7 +85,7 @@ Entities:
       AngularDamping: 0
     SpriteRendererComponent:
       Color: [0.922779918, 0.0391914323, 0.0391914323, 1]
-      TextureHandle: 10037648030001101216
+      TextureHandle: 16717585067939935206
       TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Dynamic
@@ -103,11 +103,6 @@ Entities:
         - Name: Speed
           Type: Float
           Data: 5
-    TextComponent:
-      TextString: ggggg
-      Color: [1, 1, 1, 1]
-      Kerning: 0
-      LineSpacing: 0
   - Entity: 15843558637043454592
     TagComponent:
       Tag: Floor
