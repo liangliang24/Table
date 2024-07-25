@@ -59,10 +59,11 @@ namespace Table
 		{
 			//NewProject();
 
-			if (!OpenProject())
+			/*if (!OpenProject())
 			{
 				Application::Get().Close();
-			}
+			}*/
+			OpenProject("SandboxProject\\Sandbox.tproj");
 		}
 	}
 	
